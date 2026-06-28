@@ -1,0 +1,1343 @@
+@import "tailwindcss";
+
+/* Suzuki PRO — suzuki-motor.ru */
+@font-face {
+  font-family: 'SuzukiPRO';
+  src: url('/fonts/SuzukiPRORegular.woff2') format('woff2'),
+    url('/fonts/SuzukiPRORegular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SuzukiPRO';
+  src: url('/fonts/SuzukiPROBold.woff2') format('woff2'),
+    url('/fonts/SuzukiPROBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SuzukiHeadline';
+  src: url('/fonts/SuzukiPROHeadline.woff2') format('woff2'),
+    url('/fonts/SuzukiPROHeadline.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #30363a;
+  --suzuki-navy: #002e42;
+  --suzuki-menu: #003145;
+  --suzuki-blue: #00368f;
+  --suzuki-red: #de0039;
+  --suzuki-muted: #636a73;
+  --suzuki-footer-text: #a6b7be;
+  --suzuki-gray: #f4f5f5;
+  --suzuki-border: #e0e6e9;
+  --header-height: 80px;
+  --site-offset: var(--header-height);
+  --font-pro: 'SuzukiPRO', Arial, Helvetica, sans-serif;
+  --font-headline: 'SuzukiHeadline', Arial, Helvetica, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-suzuki-navy: var(--suzuki-navy);
+  --color-suzuki-menu: var(--suzuki-menu);
+  --color-suzuki-blue: var(--suzuki-blue);
+  --color-suzuki-red: var(--suzuki-red);
+  --color-suzuki-muted: var(--suzuki-muted);
+  --color-suzuki-footer-text: var(--suzuki-footer-text);
+  --color-suzuki-gray: var(--suzuki-gray);
+  --color-suzuki-border: var(--suzuki-border);
+  --font-sans: var(--font-pro);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-pro);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.3;
+  padding-top: var(--site-offset);
+}
+
+@media (min-width: 992px) {
+  :root {
+    --header-height: 94px;
+  }
+}
+
+/* Header + Nav (suzuki-motor.ru, simplified) */
+.container-suzuki {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+  height: var(--header-height);
+  background: #fff;
+  box-shadow:
+    0 4px 8px rgba(0, 49, 69, 0.2),
+    0 6px 20px rgba(0, 49, 69, 0.19);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.site-header__logo {
+  display: flex;
+  align-items: center;
+  height: var(--header-height);
+}
+
+.site-header__burger {
+  position: relative;
+  width: 22px;
+  height: 17px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+}
+
+.site-header__burger::before,
+.site-header__burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.site-header__burger::before {
+  top: 0;
+  height: 100%;
+  border: 3px solid var(--suzuki-muted);
+  border-left: 0;
+  border-right: 0;
+}
+
+.site-header__burger::after {
+  top: 7px;
+  border-top: 3px solid var(--suzuki-muted);
+}
+
+.site-header__burger--open::before {
+  top: 5px;
+  left: -5px;
+  border-bottom: 0;
+  transform: rotate(45deg);
+}
+
+.site-header__burger--open::after {
+  left: 4px;
+  top: 5px;
+  transform: rotate(-45deg);
+}
+
+@media (min-width: 992px) {
+  .site-header__burger,
+  .site-nav--mobile-open,
+  .site-nav__backdrop {
+    display: none !important;
+  }
+}
+
+.site-nav--desktop {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .site-nav--desktop {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    margin-left: 25px;
+  }
+
+  .site-nav--desktop .site-nav__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav--desktop .site-nav__item {
+    margin-left: 25px;
+    border: 0;
+  }
+
+  .site-nav--desktop .site-nav__item:first-child {
+    margin-left: 0;
+  }
+
+  .site-nav--desktop .site-nav__link {
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 992px) {
+  .site-header__account.site-nav__link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    align-self: stretch;
+    height: auto;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 991px) {
+  .site-header__account {
+    display: none;
+  }
+}
+
+.site-nav--mobile-open {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.site-nav__backdrop {
+  position: fixed;
+  inset: var(--header-height) 0 0;
+  z-index: 998;
+  border: 0;
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.site-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 35px 20px;
+  max-width: 540px;
+  margin-inline: auto;
+}
+
+.site-nav__item {
+  border-top: 1px solid #e9e9e9;
+}
+
+.site-nav__item:first-child {
+  border-top: 0;
+}
+
+.site-nav__link {
+  display: block;
+  padding: 17px 0 16px;
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--suzuki-menu);
+  transition: color 0.3s ease-in-out;
+}
+
+.site-nav__link:hover {
+  color: var(--suzuki-red);
+}
+
+.font-headline {
+  font-family: var(--font-headline);
+}
+
+.font-suzuki-bold {
+  font-family: var(--font-pro);
+  font-weight: 700;
+}
+
+/* Buttons — suzuki-motor.ru .btn */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-family: var(--font-pro);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--suzuki-navy);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 29px 10px 15px;
+  border: 2px solid transparent;
+  border-radius: 10px 0;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+  background: transparent;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  width: 0;
+  height: 0;
+  margin: auto 0;
+  border-top: 4px solid transparent;
+  border-left: 8px solid var(--suzuki-red);
+  border-bottom: 4px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.btn-secondary {
+  border-color: var(--suzuki-red);
+}
+
+.btn-secondary:hover {
+  background: var(--suzuki-red);
+  color: #fff;
+}
+
+.btn-secondary:hover::after {
+  border-left-color: #fff;
+}
+
+.btn-primary {
+  background: var(--suzuki-blue);
+  border-color: var(--suzuki-blue);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--suzuki-navy);
+  border-color: var(--suzuki-navy);
+}
+
+.btn-primary::after {
+  border-left-color: #fff;
+}
+
+.link-action {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--suzuki-blue);
+  text-decoration: none;
+}
+
+.link-action:hover {
+  color: var(--suzuki-red);
+}
+
+/* Page section title — .web_block_header_center */
+.page-title-center {
+  text-align: center;
+  padding: 40px 0 24px;
+}
+
+.page-title-center h1,
+.page-title-center h2 {
+  display: inline-block;
+  margin: 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: 0.02em;
+}
+
+/* Hero slider — suzuki-motor.ru .web_block_slider-hero + .web_block_media */
+.hero-slider {
+  position: relative;
+  background: #000;
+}
+
+.hero-slide {
+  position: relative;
+  display: none;
+  height: calc(100vh - var(--header-height));
+  max-height: 615px;
+  overflow: hidden;
+}
+
+.hero-slide--active {
+  display: block;
+}
+
+.hero-slide__media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slide__media img {
+  object-fit: cover;
+}
+
+.hero-slide__content-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 50px;
+  pointer-events: none;
+}
+
+.hero-slide__content-wrap .container-suzuki {
+  pointer-events: none;
+}
+
+.hero-slide__content {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding: 12px 20px;
+  color: var(--suzuki-navy);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 2s ease-in-out;
+  pointer-events: auto;
+}
+
+.hero-slide__title {
+  font: 45px/1 var(--font-headline), Arial, Helvetica, sans-serif;
+  color: var(--suzuki-navy);
+  text-transform: uppercase;
+}
+
+.hero-slide__text h2 {
+  margin: -4px 0 5px;
+  font: 20px/1.3 var(--font-pro), Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.hero-slide__note {
+  margin-top: 15px;
+  font-size: 11px;
+  color: var(--suzuki-muted);
+  text-transform: none;
+}
+
+.hero-slide__btn-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hero-slider__pagination {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-slider__pagination .container-suzuki {
+  position: relative;
+}
+
+.hero-slider__pagination-list {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  display: flex;
+  min-width: 225px;
+  margin: 0;
+  padding: 0 0 3px 20px;
+  list-style: none;
+  pointer-events: auto;
+}
+
+.hero-slider__pagination-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.hero-slider__dot {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 1;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.hero-slider__dot--active {
+  background: var(--suzuki-red);
+}
+
+@media (min-width: 576px) {
+  .hero-slide {
+    max-height: 900px;
+  }
+
+  .hero-slide__content-wrap {
+    padding-bottom: 100px;
+  }
+
+  .hero-slide__content {
+    max-width: 405px;
+  }
+
+  .hero-slide__text h2 {
+    font-size: 26px;
+  }
+
+  .hero-slide__title {
+    margin-bottom: 3px;
+  }
+
+  .hero-slider__pagination-list {
+    bottom: 35px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-slide__text h2 {
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-slide {
+    max-height: 674px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-slide {
+    max-height: none;
+  }
+}
+
+/* Model range — .web_block_model_range */
+.model-range {
+  width: 100%;
+  background: url('/images/cars-section-bg.jpg') no-repeat center;
+  background-size: cover;
+  background-position-y: -20vw;
+  padding: 48px 0 56px;
+}
+
+.model-range__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 992px) {
+  .model-range__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+}
+
+.model-range__item {
+  text-align: center;
+}
+
+.model-range__link {
+  display: inline-block;
+  width: min(310px, 100%);
+  text-decoration: none;
+}
+
+.model-range__image {
+  display: block;
+  line-height: 0;
+}
+
+.model-range__title {
+  margin-top: 12px;
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  color: var(--suzuki-blue);
+  text-transform: uppercase;
+}
+
+/* Owners banner — .web_block_media-halfheight */
+.owners-banner {
+  position: relative;
+  height: clamp(320px, 45vw, 495px);
+  max-height: 495px;
+  overflow: hidden;
+  color: #fff;
+  background: var(--suzuki-muted);
+}
+
+.owners-banner__media {
+  position: absolute;
+  inset: 0;
+}
+
+.owners-banner__content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding-top: 60px;
+  text-transform: uppercase;
+}
+
+.owners-banner__title {
+  margin: 0;
+  max-width: 520px;
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 5vw, 50px);
+  line-height: 1.1;
+  text-align: left;
+}
+
+/* Service icon bar — .web_block_text-icon-bar-main */
+.service-bar {
+  padding: 7px 0 55px;
+  background: var(--suzuki-gray);
+}
+
+.service-bar__list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.service-bar__item {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 20px 34px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--suzuki-blue);
+  border-top: 2px solid var(--suzuki-border);
+  transition: color 0.3s linear;
+}
+
+.service-bar__item:hover {
+  color: var(--suzuki-red);
+}
+
+.service-bar__item:hover .service-bar__icon {
+  fill: var(--suzuki-red);
+}
+
+.service-bar__icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  margin-right: 18px;
+  fill: var(--suzuki-blue);
+  transition: fill 0.3s linear;
+}
+
+.service-bar__label {
+  display: block;
+}
+
+@media (min-width: 576px) {
+  .owners-banner__content {
+    padding-top: 99px;
+  }
+
+  .service-bar__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .service-bar__item {
+    flex-direction: column;
+    align-items: center;
+    min-width: 185px;
+    padding: 2px 20px 9px;
+    text-align: center;
+    border-top: 0;
+    border-left: 2px solid var(--suzuki-border);
+  }
+
+  .service-bar__item:first-child {
+    border-left: 0;
+  }
+
+  .service-bar__icon {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .service-bar__item {
+    min-width: 205px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+  }
+
+  .service-bar__icon {
+    margin-bottom: 15px;
+  }
+}
+
+/* News — suzuki-motor.ru .event-list / .web_block_articles */
+.news-section {
+  padding-bottom: 64px;
+}
+
+.news-grid {
+  display: grid;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .news-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+.news-card {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.news-card__image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--suzuki-gray);
+}
+
+.news-card__body {
+  padding: 16px 0 0;
+  line-height: 1.1;
+}
+
+.news-card__date {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #000;
+}
+
+.news-card__title {
+  margin: 10px 0 0;
+  font-family: var(--font-headline);
+  font-size: 25px;
+  line-height: 1.2;
+  color: var(--suzuki-blue);
+}
+
+@media (min-width: 768px) {
+  .news-card__body {
+    padding-top: 20px;
+  }
+
+  .news-card__title {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .news-card {
+    min-height: 265px;
+  }
+
+  .news-card__title {
+    font-size: 25px;
+  }
+}
+
+.news-section__footer {
+  margin-top: 32px;
+  text-align: center;
+}
+
+/* Catalog — suzuki-motor.ru /moto/ */
+.catalog-page {
+  padding-bottom: 64px;
+  background: url('/images/cars-section-bg.jpg') center -320px no-repeat;
+}
+
+.catalog-page__title {
+  margin: 0 0 32px;
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.catalog-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  border-bottom: 2px solid var(--suzuki-border);
+}
+
+.catalog-tabs a {
+  display: block;
+  padding: 14px 20px;
+  font-family: var(--font-headline);
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  color: var(--suzuki-menu);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+.catalog-tabs a[aria-current='page'] {
+  color: var(--suzuki-red);
+  border-bottom-color: var(--suzuki-red);
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+}
+
+.catalog-grid__item {
+  max-width: 245px;
+  margin: 0 auto 50px;
+}
+
+.catalog-grid__link {
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+
+.catalog-grid__image {
+  margin-bottom: 20px;
+  line-height: 0;
+}
+
+.catalog-grid__name {
+  margin: 0 0 4px;
+  font-family: var(--font-headline);
+  font-size: 25px;
+  line-height: 1.2;
+  color: var(--suzuki-menu);
+}
+
+.catalog-grid__price-label {
+  margin: 0 0 2px;
+  font-size: 13px;
+  color: var(--suzuki-muted);
+  text-transform: lowercase;
+}
+
+.catalog-grid__price {
+  margin: 0;
+  font-family: var(--font-pro);
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Car detail — suzuki-motor.ru /auto/new-vitara/ */
+.model-page {
+  padding-bottom: 64px;
+}
+
+.showroom-bg {
+  min-height: 120px;
+  margin-top: 0;
+  padding-bottom: 24px;
+  background: var(--suzuki-gray);
+}
+
+.model-page__title {
+  margin: 8px 0 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--suzuki-blue);
+}
+
+.showroom-model--page {
+  margin: 25px 0 18px;
+}
+
+.showroom-model__row {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 992px) {
+  .showroom-model__row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 48px;
+  }
+
+  .showroom-model__info {
+    order: 1;
+    flex: 1;
+    padding-left: 50px;
+  }
+
+  .showroom-model__pic-block {
+    order: 2;
+    flex-shrink: 0;
+    width: 430px;
+  }
+}
+
+.showroom-model__pic-block {
+  padding-top: 35px;
+  text-align: center;
+}
+
+.showroom-model__pic-image {
+  display: block;
+  width: 100%;
+  max-width: 470px;
+  height: auto;
+  margin-inline: auto;
+}
+
+.showroom-model__info {
+  min-width: 0;
+}
+
+.showroom-model__tech-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  margin-bottom: 24px;
+}
+
+.showroom-model__label {
+  color: #7f7f7f;
+  font-size: 13px;
+  text-transform: lowercase;
+}
+
+.showroom-model__tech {
+  margin-top: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.showroom-model__price-block {
+  display: inline-block;
+  margin: 20px 0 30px;
+}
+
+.showroom-model__offer {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--suzuki-red);
+}
+
+.showroom-model__price-label {
+  margin: 0;
+  font-size: 13px;
+  color: var(--suzuki-muted);
+  text-transform: lowercase;
+}
+
+.showroom-model__price {
+  margin: 8px 0 0;
+  font-size: 25px;
+  font-weight: 700;
+  color: #000;
+}
+
+.showroom-model__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+}
+
+.model-feature {
+  padding: 48px 0;
+}
+
+.model-feature--reverse .model-feature__row {
+  flex-direction: column;
+}
+
+.model-feature__row {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .model-feature__row {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .model-feature--reverse .model-feature__row {
+    flex-direction: row-reverse;
+  }
+
+  .model-feature__media,
+  .model-feature__content {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.model-feature__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.model-feature__title {
+  position: relative;
+  margin: 0 0 20px;
+  padding-bottom: 13px;
+  font-family: var(--font-headline);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--suzuki-blue);
+}
+
+.model-feature__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--suzuki-red);
+}
+
+.model-feature__text {
+  color: var(--suzuki-muted);
+  line-height: 1.5;
+}
+
+.model-feature__text p {
+  margin: 0;
+}
+
+/* Inner pages */
+.page-shell {
+  padding: 32px 0 64px;
+}
+
+.page-shell__header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--suzuki-border);
+}
+
+.page-shell__title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  text-transform: uppercase;
+  color: #000;
+}
+
+.page-shell__desc {
+  margin-top: 12px;
+  max-width: 640px;
+  color: var(--suzuki-muted);
+}
+
+.breadcrumbs {
+  margin-top: 27px;
+}
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  color: var(--suzuki-muted);
+}
+
+.breadcrumbs__list li {
+  position: relative;
+  display: inline-block;
+  margin-right: 6px;
+  padding-right: 15px;
+}
+
+.breadcrumbs__list li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: calc(50% - 5px);
+  border: 5px solid transparent;
+  border-left-color: var(--suzuki-muted);
+}
+
+.breadcrumbs__list a {
+  color: var(--suzuki-menu);
+  text-decoration: none;
+}
+
+.breadcrumbs__list li:last-child span {
+  color: #aaa;
+}
+
+.specs-grid {
+  display: grid;
+  gap: 0;
+}
+
+@media (min-width: 640px) {
+  .specs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.specs-grid dt {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--suzuki-muted);
+}
+
+.specs-grid dd {
+  margin: 4px 0 0;
+  font-weight: 400;
+}
+
+.specs-grid > div {
+  padding: 16px 16px 16px 0;
+  border-bottom: 1px solid var(--suzuki-border);
+}
+
+.price-panel {
+  padding: 24px;
+  background: var(--suzuki-gray);
+  border: 1px solid var(--suzuki-border);
+}
+
+.price-panel__label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--suzuki-muted);
+}
+
+.price-panel__value {
+  margin-top: 4px;
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  color: var(--suzuki-blue);
+}
+
+.placeholder-box {
+  border: 1px dashed var(--suzuki-border);
+  background: var(--suzuki-gray);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--suzuki-muted);
+}
+
+/* Footer — suzuki-motor.ru */
+.site-footer {
+  margin-top: auto;
+  padding-top: 48px;
+  background: var(--suzuki-blue);
+  color: var(--suzuki-footer-text);
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    padding-top: 68px;
+  }
+}
+
+.site-footer__inner {
+  padding-bottom: 40px;
+}
+
+.site-footer__grid {
+  display: grid;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .site-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .site-footer__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.footer-column__title {
+  margin: 0 0 24px;
+  padding-left: 19px;
+  font-family: var(--font-headline);
+  font-size: 24px;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links li + li {
+  margin-top: 12px;
+}
+
+.footer-links__link {
+  display: block;
+  padding-left: 19px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--suzuki-footer-text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links__link:hover {
+  color: #fff;
+}
+
+.footer-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.footer-contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-contacts li + li {
+  margin-top: 12px;
+}
+
+.footer-contacts__link {
+  display: block;
+  padding-left: 19px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-contacts__link:hover {
+  color: var(--suzuki-footer-text);
+}
+
+.footer-contacts__hours {
+  padding-left: 19px;
+  font-size: 13px;
+  line-height: 1.4;
+  text-transform: none;
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 19px;
+}
+
+.footer-social__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.footer-social__item:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.footer-social__icon {
+  fill: #22468a;
+}
+
+.site-footer__copy {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: none;
+}
