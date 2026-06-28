@@ -4,11 +4,16 @@ Public demo: **https://kibou37.github.io/suzu/**
 
 Uses static export + demo catalog data (no backend). Local Docker development is unchanged.
 
-## One-time GitHub setup
+## One-time GitHub setup (required)
 
-1. Open [Kibou37/suzu](https://github.com/Kibou37/suzu) → **Settings** → **Pages**
-2. **Build and deployment** → Source: **GitHub Actions**
-3. Push to `master` or `main` — workflow `.github/workflows/deploy-pages.yml` runs automatically
+Deploy fails with **404** until Pages is enabled manually:
+
+1. Open **Settings → Pages**: https://github.com/Kibou37/suzu/settings/pages
+2. Under **Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”)
+3. Save — no other options needed
+4. Re-run the workflow: **Actions → Deploy GitHub Pages → Re-run all jobs**
+
+Expected URL after success: **https://kibou37.github.io/suzu/**
 
 ## Local development (unchanged)
 
