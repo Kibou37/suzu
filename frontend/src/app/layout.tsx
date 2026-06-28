@@ -1,10 +1,37 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import localFont from 'next/font/local';
 import { brand, dealer } from '@suzuki/shared';
+import { AssetPathStyles } from '@/components/layout/AssetPathStyles';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import './globals.css';
+
+const suzukiPro = localFont({
+  src: [
+    {
+      path: '../../public/fonts/SuzukiPRORegular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/SuzukiPROBold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-suzuki-pro',
+  display: 'swap',
+});
+
+const suzukiHeadline = localFont({
+  src: '../../public/fonts/SuzukiPROHeadline.woff2',
+  weight: '400',
+  style: 'normal',
+  variable: '--font-suzuki-headline',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -20,8 +47,9 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`h-full ${suzukiPro.variable} ${suzukiHeadline.variable}`}>
       <body className="flex min-h-full flex-col antialiased">
+        <AssetPathStyles />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

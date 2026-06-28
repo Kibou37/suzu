@@ -1,3 +1,5 @@
+import { withBasePath } from '@/lib/base-path';
+
 const SLUG_ALIASES: Record<string, string> = {
   'vitara-used': 'vitara',
   'swift-offer': 'swift',
@@ -19,18 +21,18 @@ export function resolveLineupSlug(slug: string): string {
 
 export function getLineupCarImage(slug: string, images?: string[]): string {
   if (images?.[0]?.startsWith('/')) {
-    return images[0];
+    return withBasePath(images[0]);
   }
   const base = resolveLineupSlug(slug);
-  return `/images/cars/${base}.jpg`;
+  return withBasePath(`/images/cars/${base}.jpg`);
 }
 
 export function getLineupLogoImage(slug: string, images?: string[]): string {
   if (images?.[1]?.startsWith('/')) {
-    return images[1];
+    return withBasePath(images[1]);
   }
   const base = resolveLineupSlug(slug);
-  return `/images/cars/${base}-logo.png`;
+  return withBasePath(`/images/cars/${base}-logo.png`);
 }
 
 export function getLineupLogoClass(slug: string): string {

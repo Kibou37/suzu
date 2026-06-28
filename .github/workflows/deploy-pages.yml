@@ -43,6 +43,7 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
           NEXT_PUBLIC_USE_DEMO_DATA: 'true'
+          NEXT_PUBLIC_BASE_PATH: '/suzu'
 
       - name: Add GitHub Pages marker
         run: touch frontend/out/.nojekyll

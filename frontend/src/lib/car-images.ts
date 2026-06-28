@@ -1,4 +1,5 @@
 import { getLineupCarImage } from '@/lib/lineup-assets';
+import { withBasePath } from '@/lib/base-path';
 
 export function getCarImageUrl(images: unknown, fallbackText: string, slug?: string): string {
   if (slug) {
@@ -9,7 +10,7 @@ export function getCarImageUrl(images: unknown, fallbackText: string, slug?: str
   if (Array.isArray(images) && images.length > 0) {
     const first = images[0];
     if (typeof first === 'string' && first.length > 0) {
-      return first;
+      return first.startsWith('/') ? withBasePath(first) : first;
     }
   }
 

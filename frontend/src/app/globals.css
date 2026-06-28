@@ -1,33 +1,5 @@
 @import "tailwindcss";
 
-/* Suzuki PRO — suzuki-motor.ru */
-@font-face {
-  font-family: 'SuzukiPRO';
-  src: url('/fonts/SuzukiPRORegular.woff2') format('woff2'),
-    url('/fonts/SuzukiPRORegular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SuzukiPRO';
-  src: url('/fonts/SuzukiPROBold.woff2') format('woff2'),
-    url('/fonts/SuzukiPROBold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SuzukiHeadline';
-  src: url('/fonts/SuzukiPROHeadline.woff2') format('woff2'),
-    url('/fonts/SuzukiPROHeadline.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --background: #ffffff;
   --foreground: #30363a;
@@ -41,8 +13,9 @@
   --suzuki-border: #e0e6e9;
   --header-height: 80px;
   --site-offset: var(--header-height);
-  --font-pro: 'SuzukiPRO', Arial, Helvetica, sans-serif;
-  --font-headline: 'SuzukiHeadline', Arial, Helvetica, sans-serif;
+  --font-pro: var(--font-suzuki-pro), Arial, Helvetica, sans-serif;
+  --font-headline: var(--font-suzuki-headline), Arial, Helvetica, sans-serif;
+  --asset-bg-cars-section: none;
 }
 
 @theme inline {
@@ -540,7 +513,7 @@ body {
 /* Model range — .web_block_model_range */
 .model-range {
   width: 100%;
-  background: url('/images/cars-section-bg.jpg') no-repeat center;
+  background: var(--asset-bg-cars-section) no-repeat center;
   background-size: cover;
   background-position-y: -20vw;
   padding: 48px 0 56px;
@@ -792,7 +765,7 @@ body {
 /* Catalog — suzuki-motor.ru /moto/ */
 .catalog-page {
   padding-bottom: 64px;
-  background: url('/images/cars-section-bg.jpg') center -320px no-repeat;
+  background: var(--asset-bg-cars-section) center -320px no-repeat;
 }
 
 .catalog-page__title {
