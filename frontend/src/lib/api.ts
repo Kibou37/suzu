@@ -12,6 +12,7 @@ export type CarListItem = {
   bodyType: string;
   fuelType: string;
   transmission: string;
+  horsepower: number | null;
   isFeatured: boolean;
   isOffer: boolean;
   offerLabel: string | null;

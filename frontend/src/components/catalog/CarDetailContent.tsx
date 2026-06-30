@@ -1,32 +1,49 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CarFeatureSection } from '@/components/catalog/CarFeatureSection';
+import { CarSpecsSection } from '@/components/catalog/CarSpecsSection';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import type { CarDetail } from '@/lib/api';
 import { getCarImageUrl } from '@/lib/car-images';
 import {
   formatBodyType,
+  formatCondition,
   formatFuelType,
+  formatMileage,
   formatPrice,
   formatTransmission,
 } from '@/lib/format';
-import { getLineupCarImage } from '@/lib/lineup-assets';
 
 type CarDetailContentProps = {
   car: CarDetail;
 };
 
-const techItems = (car: CarDetail) =>
-  [
+const heroHighlights = (car: CarDetail) => {
+  const items: [string, string][] = [
+    ['Trim', car.trim ?? '—'],
     ['Body type', formatBodyType(car.bodyType)],
     ['Engine', formatFuelType(car.fuelType)],
     ['Transmission', formatTransmission(car.transmission)],
-    ['Model year', String(car.year)],
-  ] as const;
+  ];
+
+  if (car.horsepower) {
+    items.push(['Power', `${car.horsepower} hp`]);
+  }
+
+  items.push(['Model year', String(car.year)]);
+
+  if (car.mileage > 0) {
+    items.push(['Mileage', formatMileage(car.mileage)]);
+  }
+
+  if (car.condition === 'USED') {
+    items.push(['Condition', formatCondition(car.condition)]);
+  }
+
+  return items;
+};
 
 export function CarDetailContent({ car }: CarDetailContentProps) {
   const imageUrl = getCarImageUrl(car.images, car.name, car.slug);
-  const lineupImage = getLineupCarImage(car.slug, car.images);
   const price = Number(car.price);
 
   return (
@@ -61,7 +78,7 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
 
             <div className="showroom-model__info">
               <div className="showroom-model__tech-grid">
-                {techItems(car).map(([label, value]) => (
+                {heroHighlights(car).map(([label, value]) => (
                   <div key={label} className="showroom-model__tech-item">
                     <div className="showroom-model__label">{label}</div>
                     <div className="showroom-model__tech">{value}</div>
@@ -95,15 +112,7 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
         </div>
       </section>
 
-      {car.description && (
-        <CarFeatureSection
-          title={`Overview Suzuki ${car.name}`}
-          image={lineupImage}
-          imageAlt={car.name}
-        >
-          <p>{car.description}</p>
-        </CarFeatureSection>
-      )}
+      <CarSpecsSection car={car} />
     </article>
   );
 }

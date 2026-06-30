@@ -937,6 +937,12 @@ body {
   margin-bottom: 24px;
 }
 
+@media (min-width: 768px) {
+  .showroom-model__tech-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .showroom-model__label {
   color: #7f7f7f;
   font-size: 13px;
@@ -985,73 +991,80 @@ body {
   align-items: center;
 }
 
-.model-feature {
-  padding: 48px 0;
+.car-specs {
+  padding: 40px 0 0;
+  background: var(--suzuki-gray);
 }
 
-.model-feature--reverse .model-feature__row {
-  flex-direction: column;
-}
-
-.model-feature__row {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  align-items: center;
-}
-
-@media (min-width: 992px) {
-  .model-feature__row {
-    flex-direction: row;
-    align-items: center;
-    gap: 48px;
-  }
-
-  .model-feature--reverse .model-feature__row {
-    flex-direction: row-reverse;
-  }
-
-  .model-feature__media,
-  .model-feature__content {
-    flex: 1;
-    min-width: 0;
-  }
-}
-
-.model-feature__image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.model-feature__title {
-  position: relative;
-  margin: 0 0 20px;
-  padding-bottom: 13px;
+.car-specs__title {
+  margin: 0 0 16px;
   font-family: var(--font-headline);
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  line-height: 1.2;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.1;
   text-transform: uppercase;
   color: var(--suzuki-blue);
 }
 
-.model-feature__title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background: var(--suzuki-red);
-}
-
-.model-feature__text {
+.car-specs__intro {
+  max-width: 720px;
+  margin: 0 0 32px;
   color: var(--suzuki-muted);
   line-height: 1.5;
 }
 
-.model-feature__text p {
+.car-specs__groups {
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 992px) {
+  .car-specs__groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 48px;
+  }
+
+  .car-specs__group:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.car-specs__group-title {
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--suzuki-red);
+  font-family: var(--font-headline);
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.car-specs__table {
   margin: 0;
+}
+
+.car-specs__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 12px 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--suzuki-border);
+}
+
+.car-specs__row:last-child {
+  border-bottom: none;
+}
+
+.car-specs__label {
+  margin: 0;
+  font-size: 13px;
+  color: var(--suzuki-muted);
+}
+
+.car-specs__value {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
 }
 
 /* Inner pages */

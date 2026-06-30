@@ -78,3 +78,19 @@ export function formatTransmission(value: string): string {
 
 }
 
+
+
+export function formatCondition(value: string): string {
+
+  return value === 'USED' ? 'Pre-owned' : 'New';
+
+}
+
+
+
+export function formatMileage(km: number): string {
+
+  return `${km.toLocaleString('en-US')} km`;
+
+}
+
