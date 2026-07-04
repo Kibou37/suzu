@@ -1,15 +1,11 @@
+import { Suspense } from 'react';
 import { TestDriveForm } from '@/components/conversion/TestDriveForm';
 import { PageHeader } from '@/components/ui/PageShell';
 import { getCars } from '@/lib/api';
 
-type TestDrivePageProps = {
-  searchParams: Promise<{ model?: string }>;
-};
-
 export const metadata = { title: 'Test Drive' };
 
-export default async function TestDrivePage({ searchParams }: TestDrivePageProps) {
-  const params = await searchParams;
+export default async function TestDrivePage() {
   const cars = await getCars({ condition: 'NEW' });
 
   return (
@@ -23,7 +19,9 @@ export default async function TestDrivePage({ searchParams }: TestDrivePageProps
             { label: 'Test Drive' },
           ]}
         />
-        <TestDriveForm cars={cars} initialModelSlug={params.model} />
+        <Suspense fallback={null}>
+          <TestDriveForm cars={cars} />
+        </Suspense>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import type { CarListItem } from '@/lib/api';
 import {
   formatBookingSlot,
@@ -21,12 +22,15 @@ function minBookingDate(): string {
 }
 
 export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
+  const searchParams = useSearchParams();
+  const modelSlug = initialModelSlug ?? searchParams.get('model') ?? undefined;
+
   const newCars = useMemo(
     () => cars.filter((car) => car.condition === 'NEW'),
     [cars],
   );
 
-  const [carSlug, setCarSlug] = useState(initialModelSlug ?? newCars[0]?.slug ?? '');
+  const [carSlug, setCarSlug] = useState(modelSlug ?? newCars[0]?.slug ?? '');
   const [date, setDate] = useState('');
   const [scheduledAt, setScheduledAt] = useState('');
   const [slots, setSlots] = useState<string[]>([]);

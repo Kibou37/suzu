@@ -2,6 +2,7 @@
 
 import { ConfiguratorExterior360 } from '@/components/conversion/ConfiguratorExterior360';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import type { CarListItem } from '@/lib/api';
 import {
@@ -141,13 +142,16 @@ function SelectionChip({ label, swatch, hex }: { label: string; swatch?: string;
 }
 
 export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormProps) {
+  const searchParams = useSearchParams();
+  const modelSlug = initialModelSlug ?? searchParams.get('model') ?? undefined;
+
   const newCars = useMemo(
     () => cars.filter((car) => car.condition === 'NEW'),
     [cars],
   );
 
-  const selected = initialModelSlug
-    ? newCars.find((car) => car.slug === initialModelSlug)
+  const selected = modelSlug
+    ? newCars.find((car) => car.slug === modelSlug)
     : undefined;
 
   const [step, setStep] = useState(1);
@@ -155,7 +159,7 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
   const [interiorColorId, setInteriorColorId] = useState('');
   const [selectedOptionIds, setSelectedOptionIds] = useState<string[]>([]);
 
-  const configData = getConfiguratorData(initialModelSlug ?? '');
+  const configData = getConfiguratorData(modelSlug ?? '');
   const basePrice = selected ? Number(selected.price) : 0;
 
   const bodyColor = configData.bodyColors.find((color) => color.id === bodyColorId);
@@ -191,7 +195,7 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
     }
   };
 
-  if (!initialModelSlug || !selected) {
+  if (!modelSlug || !selected) {
     return (
       <div className="configurator configurator--empty">
         <div className="configurator__empty">
