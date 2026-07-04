@@ -1,10 +1,25 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CarCondition, Prisma } from '@prisma/client';
+import {
+  BodyType,
+  CarCondition,
+  FuelType,
+  Prisma,
+  Transmission,
+} from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
-type FindAllParams = {
+export type FindAllParams = {
   condition?: CarCondition;
   isOffer?: boolean;
+  minPrice?: number;
+  maxPrice?: number;
+  minYear?: number;
+  maxYear?: number;
+  maxMileage?: number;
+  bodyType?: BodyType;
+  fuelType?: FuelType;
+  transmission?: Transmission;
+  trim?: string;
 };
 
 @Injectable()
@@ -20,6 +35,40 @@ export class CarsService {
 
     if (params.isOffer !== undefined) {
       where.isOffer = params.isOffer;
+    }
+
+    if (params.minPrice !== undefined || params.maxPrice !== undefined) {
+      where.price = {
+        ...(params.minPrice !== undefined ? { gte: params.minPrice } : {}),
+        ...(params.maxPrice !== undefined ? { lte: params.maxPrice } : {}),
+      };
+    }
+
+    if (params.minYear !== undefined || params.maxYear !== undefined) {
+      where.year = {
+        ...(params.minYear !== undefined ? { gte: params.minYear } : {}),
+        ...(params.maxYear !== undefined ? { lte: params.maxYear } : {}),
+      };
+    }
+
+    if (params.maxMileage !== undefined) {
+      where.mileage = { lte: params.maxMileage };
+    }
+
+    if (params.bodyType) {
+      where.bodyType = params.bodyType;
+    }
+
+    if (params.fuelType) {
+      where.fuelType = params.fuelType;
+    }
+
+    if (params.transmission) {
+      where.transmission = params.transmission;
+    }
+
+    if (params.trim) {
+      where.trim = params.trim;
     }
 
     return this.prisma.car.findMany({

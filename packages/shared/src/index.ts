@@ -16,6 +16,7 @@ export const brand = {
 export const apiRoutes = {
   health: '/api/health',
   cars: '/api/cars',
+  bookings: '/api/bookings',
 } as const;
 
 export const navItems = [

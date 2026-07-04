@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img.perxis.ru',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.globalsuzuki.com',
+      },
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',

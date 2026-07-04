@@ -18,7 +18,7 @@
   --asset-bg-cars-section: none;
 }
 
-@theme inline {
+   inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-suzuki-navy: var(--suzuki-navy);
@@ -781,12 +781,154 @@ body {
 .catalog-tabs {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0;
-  margin: 0 0 32px;
+  margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 32px;
+  padding-bottom: 0;
   border-bottom: 2px solid var(--suzuki-border);
+}
+
+.catalog-filter {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.catalog-filter__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 24px;
+  font-family: var(--font-headline);
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--suzuki-red);
+  border: none;
+  cursor: pointer;
+}
+
+.catalog-filter__trigger:hover {
+  background: #c40032;
+}
+
+.catalog-filter__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-family: var(--font-pro);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--suzuki-red);
+  background: #fff;
+  border-radius: 999px;
+}
+
+.catalog-filter__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  width: min(360px, calc(100vw - 32px));
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--suzuki-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.catalog-filter__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.catalog-filter__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.catalog-filter__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.catalog-filter__label {
+  font-size: 12px;
+  color: var(--suzuki-muted);
+  text-transform: lowercase;
+}
+
+.catalog-filter__input,
+.catalog-filter__select {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: #000;
+  background: #fff;
+  border: 1px solid var(--suzuki-border);
+}
+
+.catalog-filter__input:focus,
+.catalog-filter__select:focus {
+  outline: 2px solid var(--suzuki-blue);
+  outline-offset: 0;
+}
+
+.catalog-filter__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--suzuki-border);
+}
+
+.catalog-filter__clear {
+  padding: 0;
+  font-size: 14px;
+  color: var(--suzuki-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.catalog-filter__clear:hover {
+  color: var(--suzuki-red);
+}
+
+.catalog-filter__apply {
+  min-height: 40px;
+  padding: 0 20px;
+  font-family: var(--font-headline);
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--suzuki-red);
+  border: none;
+  cursor: pointer;
+}
+
+.catalog-filter__apply:hover {
+  background: #c40032;
 }
 
 .catalog-tabs a {
@@ -805,6 +947,14 @@ body {
 .catalog-tabs a[aria-current='page'] {
   color: var(--suzuki-red);
   border-bottom-color: var(--suzuki-red);
+}
+
+.catalog-results-count {
+  margin: 0 0 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--suzuki-menu);
+  text-align: center;
 }
 
 .catalog-grid {
@@ -865,17 +1015,17 @@ body {
 /* Car detail — suzuki-motor.ru /auto/new-vitara/ */
 .model-page {
   padding-bottom: 64px;
+  background: var(--asset-bg-cars-section) center -320px no-repeat;
 }
 
 .showroom-bg {
-  min-height: 120px;
+  min-height: auto;
   margin-top: 0;
-  padding-bottom: 24px;
-  background: var(--suzuki-gray);
+  padding-bottom: 16px;
 }
 
 .model-page__title {
-  margin: 8px 0 0;
+  margin: 0 0 24px;
   font-family: var(--font-headline);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.1;
@@ -932,15 +1082,9 @@ body {
 
 .showroom-model__tech-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px 24px;
   margin-bottom: 24px;
-}
-
-@media (min-width: 768px) {
-  .showroom-model__tech-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 .showroom-model__label {
@@ -989,82 +1133,6 @@ body {
   flex-wrap: wrap;
   gap: 12px 20px;
   align-items: center;
-}
-
-.car-specs {
-  padding: 40px 0 0;
-  background: var(--suzuki-gray);
-}
-
-.car-specs__title {
-  margin: 0 0 16px;
-  font-family: var(--font-headline);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.1;
-  text-transform: uppercase;
-  color: var(--suzuki-blue);
-}
-
-.car-specs__intro {
-  max-width: 720px;
-  margin: 0 0 32px;
-  color: var(--suzuki-muted);
-  line-height: 1.5;
-}
-
-.car-specs__groups {
-  display: grid;
-  gap: 32px;
-}
-
-@media (min-width: 992px) {
-  .car-specs__groups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 40px 48px;
-  }
-
-  .car-specs__group:first-child {
-    grid-column: 1 / -1;
-  }
-}
-
-.car-specs__group-title {
-  margin: 0 0 16px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--suzuki-red);
-  font-family: var(--font-headline);
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  color: #000;
-}
-
-.car-specs__table {
-  margin: 0;
-}
-
-.car-specs__row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-  gap: 12px 24px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--suzuki-border);
-}
-
-.car-specs__row:last-child {
-  border-bottom: none;
-}
-
-.car-specs__label {
-  margin: 0;
-  font-size: 13px;
-  color: var(--suzuki-muted);
-}
-
-.car-specs__value {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 700;
-  color: #000;
 }
 
 /* Inner pages */
@@ -1184,6 +1252,1158 @@ body {
   padding: 48px 24px;
   text-align: center;
   color: var(--suzuki-muted);
+}
+
+.conversion-form {
+  max-width: 720px;
+}
+
+.conversion-form__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .conversion-form__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.conversion-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.conversion-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.conversion-form__label {
+  font-size: 12px;
+  color: var(--suzuki-muted);
+  text-transform: lowercase;
+}
+
+.conversion-form__input,
+.conversion-form__select,
+.conversion-form__textarea {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  font-size: 15px;
+  color: #000;
+  background: #fff;
+  border: 1px solid var(--suzuki-border);
+}
+
+.conversion-form__textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.conversion-form__input:focus,
+.conversion-form__select:focus,
+.conversion-form__textarea:focus {
+  outline: 2px solid var(--suzuki-blue);
+  outline-offset: 0;
+}
+
+.conversion-form__actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.conversion-form__message {
+  margin: 16px 0 0;
+  font-size: 14px;
+}
+
+.conversion-form__message--error {
+  color: var(--suzuki-red);
+}
+
+.conversion-form__message--success {
+  color: #1a7f37;
+}
+
+.configurator-page {
+  padding: 0;
+}
+
+@media (min-width: 992px) {
+  .configurator-page {
+    height: calc(100dvh - var(--site-offset));
+    overflow: hidden;
+  }
+}
+
+/* Configurator — premium automotive layout (inspired by globalsuzuki.com) */
+.configurator {
+  --cfg-radius: 12px;
+  --cfg-radius-sm: 8px;
+  --cfg-shadow: 0 8px 32px rgba(0, 46, 66, 0.12);
+  --cfg-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.28);
+  --cfg-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.configurator--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100dvh - var(--site-offset) - 96px);
+  padding: 48px 24px;
+}
+
+.configurator__empty {
+  max-width: 440px;
+  padding: 48px 40px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--suzuki-border);
+  border-radius: var(--cfg-radius);
+  box-shadow: var(--cfg-shadow);
+}
+
+.configurator__empty-eyebrow {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--suzuki-red);
+}
+
+.configurator__empty-title {
+  margin: 12px 0 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  text-transform: uppercase;
+  color: var(--suzuki-navy);
+}
+
+.configurator__empty-desc {
+  margin: 16px 0 28px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--suzuki-muted);
+}
+
+.configurator__shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100dvh - var(--site-offset));
+}
+
+@media (min-width: 992px) {
+  .configurator__shell {
+    grid-template-columns: minmax(0, 1fr) minmax(380px, 460px);
+    max-height: calc(100dvh - var(--site-offset));
+    overflow: hidden;
+  }
+}
+
+/* Dark stage — vehicle showcase */
+.configurator__stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+  padding: clamp(20px, 3vw, 36px);
+  background: linear-gradient(
+    168deg,
+    var(--suzuki-navy) 0%,
+    #001a28 42%,
+    #000810 100%
+  );
+  color: #fff;
+  overflow: hidden;
+}
+
+.configurator__stage-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 75%, rgba(0, 54, 143, 0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(222, 0, 57, 0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.configurator__stage-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.configurator__stage-header {
+  position: relative;
+  z-index: 1;
+}
+
+.configurator__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.configurator__breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color var(--cfg-transition);
+}
+
+.configurator__breadcrumb a:hover {
+  color: #fff;
+}
+
+.configurator__model {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.configurator__model-name {
+  margin: 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.configurator__model-trim {
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.configurator__visual {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0 24px;
+  min-height: clamp(220px, 38vh, 420px);
+}
+
+@media (min-width: 992px) {
+  .configurator__stage {
+    min-height: 0;
+    height: 100%;
+    padding: clamp(20px, 2.5vw, 32px);
+  }
+
+  .configurator__stage-header {
+    flex-shrink: 0;
+  }
+
+  .configurator__visual {
+    flex: 1 1 0;
+    min-height: 0;
+    margin: 12px 0 12px;
+    overflow: hidden;
+  }
+
+  .configurator-360 {
+    max-width: min(920px, 100%);
+    min-height: 0;
+    height: 100%;
+    flex: 1;
+  }
+
+  .configurator-360__frame {
+    max-height: min(52vh, 520px);
+  }
+
+  .configurator-360__iframe {
+    height: min(52vh, 520px);
+  }
+
+  .configurator__stage-footer {
+    flex-shrink: 0;
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px 20px;
+    padding-top: 8px;
+  }
+
+  .configurator__stage-footer .configurator__chips {
+    margin-bottom: 0;
+    flex: 1 1 auto;
+  }
+
+  .configurator__stage-footer .configurator__price-card {
+    flex-shrink: 0;
+    max-width: 300px;
+    margin-left: auto;
+  }
+
+  .configurator__controls {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* stage-footer base — z-index for stacking above bg layers */
+.configurator__stage-footer {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* 360° exterior viewer */
+.configurator-360 {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  min-height: clamp(220px, 36vh, 400px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.configurator-360--loading {
+  opacity: 1;
+}
+
+.configurator-360__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.configurator-360__hint--solo {
+  margin-top: 0;
+}
+
+.configurator-360__spin {
+  width: 100%;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.configurator-360__spin:active {
+  cursor: grabbing;
+}
+
+.configurator-360__frame {
+  display: block;
+  width: 100%;
+  max-height: clamp(220px, 36vh, 380px);
+  margin-inline: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+}
+
+.configurator-360__iframe {
+  width: 100%;
+  height: clamp(280px, 42vh, 460px);
+  border: 0;
+  border-radius: var(--cfg-radius);
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.configurator-360__fallback {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+}
+
+.configurator-360__hint {
+  margin: 12px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.configurator-360__loader {
+  position: absolute;
+  inset: auto 0 40%;
+  width: 36px;
+  height: 36px;
+  margin: auto;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--suzuki-red);
+  border-radius: 50%;
+  animation: configurator-360-spin 0.8s linear infinite;
+}
+
+@keyframes configurator-360-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.configurator__visual-image {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+  transition: transform var(--cfg-transition), filter var(--cfg-transition);
+}
+
+.configurator__stage:hover .configurator__visual-image {
+  transform: scale(1.015);
+}
+
+.configurator__chips {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.configurator-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  animation: configurator-chip-in 0.4s ease;
+}
+
+.configurator-chip__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.configurator-chip__swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@keyframes configurator-chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.configurator__price-card {
+  position: relative;
+  z-index: 1;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--cfg-radius);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--cfg-shadow-lg);
+}
+
+@media (min-width: 992px) {
+  .configurator__price-card {
+    max-width: 320px;
+    margin-left: auto;
+  }
+}
+
+.configurator__price-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.configurator__price-value {
+  margin: 8px 0 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+  transition: color var(--cfg-transition);
+}
+
+.configurator__price-note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Controls panel */
+.configurator__controls {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-top: 1px solid var(--suzuki-border);
+  min-height: 0;
+}
+
+@media (min-width: 992px) {
+  .configurator__controls {
+    height: 100%;
+    overflow: hidden;
+    border-top: none;
+    border-left: 1px solid var(--suzuki-border);
+    box-shadow: -8px 0 32px rgba(0, 46, 66, 0.06);
+  }
+}
+
+.configurator__progress {
+  height: 3px;
+  background: var(--suzuki-gray);
+}
+
+.configurator__progress-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--suzuki-red), var(--suzuki-blue));
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.configurator__tabs {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0;
+  padding: 0 clamp(14px, 3vw, 24px);
+  border-bottom: 1px solid var(--suzuki-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.configurator__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.configurator__tab {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: clamp(14px, 3vw, 18px) clamp(10px, 2vw, 16px);
+  font-family: var(--font-headline);
+  font-size: clamp(10px, 2vw, 12px);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--suzuki-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--cfg-transition);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.configurator__tab:hover:not(:disabled) {
+  color: var(--suzuki-navy);
+}
+
+.configurator__tab--active {
+  color: var(--suzuki-navy);
+}
+
+.configurator__tab--done:not(:disabled) {
+  color: var(--suzuki-blue);
+  cursor: pointer;
+}
+
+.configurator__tab--active::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--suzuki-red);
+  animation: configurator-tab-in 0.3s ease;
+}
+
+.configurator__tab:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+@keyframes configurator-tab-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.configurator__section {
+  flex: 1 1 0;
+  min-height: 0;
+  padding: clamp(16px, 4vw, 28px) clamp(14px, 4vw, 24px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--suzuki-border) transparent;
+}
+
+/* On mobile controls has no fixed height — section grows naturally,
+   page scrolls. Scrollbar only kicks in on desktop (bounded container). */
+
+.configurator__section::-webkit-scrollbar {
+  width: 4px;
+}
+
+.configurator__section::-webkit-scrollbar-thumb {
+  background: var(--suzuki-border);
+  border-radius: 999px;
+}
+
+.configurator__section--options {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+@media (max-width: 991px) {
+  .configurator__section,
+  .configurator__section--options {
+    min-height: 500px;
+  }
+}
+
+
+.configurator__options-scroll {
+  flex: 1;
+  min-height: 0;
+  /* Mobile: constrained inner-scroll since page scroll might not be enough */
+  max-height: min(380px, calc(100dvh - var(--site-offset) - 300px));
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--suzuki-border) transparent;
+}
+
+.configurator__options-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.configurator__options-scroll::-webkit-scrollbar-thumb {
+  background: var(--suzuki-border);
+  border-radius: 999px;
+}
+
+@media (min-width: 992px) {
+  /* On desktop the outer section scrolls — inner scroll is not needed */
+  .configurator__options-scroll {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+  }
+}
+
+.configurator__section-inner {
+  animation: configurator-section-in 0.38s ease;
+}
+
+@keyframes configurator-section-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.configurator__section-head {
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.configurator__section-title {
+  margin: 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.125rem, 3vw, 1.375rem);
+  text-transform: uppercase;
+  color: var(--suzuki-navy);
+}
+
+.configurator__section-desc {
+  margin: 6px 0 0;
+  font-size: clamp(13px, 2vw, 14px);
+  line-height: 1.5;
+  color: var(--suzuki-muted);
+}
+
+/* Colour swatches — circular, automotive style */
+.configurator__colors {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 2vw, 12px);
+}
+
+@media (max-width: 500px) {
+  .configurator__colors {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 801px) {
+  .configurator__colors {
+    grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+    gap: 12px;
+  }
+}
+
+.configurator-color {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 2vw, 10px);
+  padding: clamp(12px, 3vw, 16px) clamp(8px, 2vw, 10px);
+  font: inherit;
+  text-align: center;
+  background: var(--suzuki-gray);
+  border: 2px solid transparent;
+  border-radius: var(--cfg-radius);
+  cursor: pointer;
+  transition:
+    background var(--cfg-transition),
+    border-color var(--cfg-transition),
+    box-shadow var(--cfg-transition),
+    transform var(--cfg-transition);
+}
+
+.configurator-color:hover {
+  background: #fff;
+  border-color: var(--suzuki-border);
+  box-shadow: var(--cfg-shadow);
+  transform: translateY(-2px);
+}
+
+.configurator-color--selected {
+  background: #fff;
+  border-color: var(--suzuki-red);
+  box-shadow: 0 0 0 1px var(--suzuki-red), var(--cfg-shadow);
+}
+
+.configurator-color__ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(44px, 11vw, 52px);
+  height: clamp(44px, 11vw, 52px);
+  border-radius: 50%;
+  border: 2px solid rgba(0, 46, 66, 0.12);
+  transition: border-color var(--cfg-transition), transform var(--cfg-transition);
+}
+
+.configurator-color--selected .configurator-color__ring {
+  border-color: var(--suzuki-red);
+  transform: scale(1.06);
+}
+
+.configurator-color__dot {
+  width: clamp(32px, 8vw, 40px);
+  height: clamp(32px, 8vw, 40px);
+  border-radius: 50%;
+  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.configurator-color__swatch-img {
+  width: clamp(32px, 8vw, 40px);
+  height: clamp(32px, 8vw, 40px);
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.configurator-color__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.configurator-color__name {
+  font-size: clamp(11px, 2.5vw, 13px);
+  font-weight: 600;
+  color: var(--suzuki-navy);
+  line-height: 1.25;
+}
+
+.configurator-color__price {
+  font-size: clamp(10px, 2vw, 11px);
+  color: var(--suzuki-muted);
+}
+
+/* Option cards */
+.configurator__options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.configurator-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--suzuki-gray);
+  border: 2px solid transparent;
+  border-radius: var(--cfg-radius);
+  cursor: pointer;
+  transition:
+    background var(--cfg-transition),
+    border-color var(--cfg-transition),
+    box-shadow var(--cfg-transition),
+    transform var(--cfg-transition);
+}
+
+.configurator-option:hover {
+  background: #fff;
+  border-color: var(--suzuki-border);
+  box-shadow: var(--cfg-shadow);
+  transform: translateY(-1px);
+}
+
+.configurator-option--selected {
+  background: #fff;
+  border-color: var(--suzuki-blue);
+  box-shadow: 0 0 0 1px rgba(0, 54, 143, 0.15), var(--cfg-shadow);
+}
+
+.configurator-option__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.configurator-option__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  color: transparent;
+  background: #fff;
+  border: 2px solid var(--suzuki-border);
+  border-radius: var(--cfg-radius-sm);
+  transition:
+    background var(--cfg-transition),
+    border-color var(--cfg-transition),
+    color var(--cfg-transition);
+}
+
+.configurator-option__indicator svg {
+  width: 12px;
+  height: 10px;
+}
+
+.configurator-option--selected .configurator-option__indicator {
+  color: #fff;
+  background: var(--suzuki-blue);
+  border-color: var(--suzuki-blue);
+}
+
+.configurator-option__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.configurator-option__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.configurator-option__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--suzuki-navy);
+}
+
+.configurator-option__category {
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--suzuki-blue);
+  background: rgba(0, 54, 143, 0.08);
+  border-radius: 4px;
+}
+
+.configurator-option__desc {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--suzuki-muted);
+}
+
+.configurator-option__price {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--suzuki-navy);
+  align-self: center;
+}
+
+/* Summary breakdown */
+.configurator__breakdown {
+  margin: 0;
+  padding: 4px 0;
+}
+
+.configurator__breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--suzuki-border);
+  font-size: 14px;
+}
+
+.configurator__breakdown-row dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 400;
+  color: var(--suzuki-navy);
+}
+
+.configurator__breakdown-row dd {
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--suzuki-navy);
+}
+
+.configurator__breakdown-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--suzuki-border);
+  flex-shrink: 0;
+}
+
+.configurator__breakdown-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--suzuki-border);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.configurator__breakdown-row--base dt {
+  font-weight: 700;
+}
+
+.configurator__breakdown-row--total {
+  margin-top: 8px;
+  padding-top: 18px;
+  border-bottom: none;
+  border-top: 2px solid var(--suzuki-navy);
+}
+
+.configurator__breakdown-row--total dt,
+.configurator__breakdown-row--total dd {
+  font-family: var(--font-headline);
+  font-size: 1.125rem;
+  text-transform: uppercase;
+}
+
+.configurator__breakdown-row--total dd {
+  color: var(--suzuki-red);
+}
+
+/* Footer actions */
+.configurator__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px clamp(16px, 3vw, 24px);
+  border-top: 1px solid var(--suzuki-border);
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.configurator__footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.configurator__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 24px;
+  font-family: var(--font-pro);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--cfg-radius-sm);
+  cursor: pointer;
+  transition:
+    background var(--cfg-transition),
+    border-color var(--cfg-transition),
+    color var(--cfg-transition),
+    box-shadow var(--cfg-transition),
+    transform var(--cfg-transition);
+}
+
+.configurator__btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.configurator__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.configurator__btn--primary {
+  color: #fff;
+  background: var(--suzuki-blue);
+  border-color: var(--suzuki-blue);
+  box-shadow: 0 4px 14px rgba(0, 54, 143, 0.25);
+}
+
+.configurator__btn--primary:hover:not(:disabled) {
+  background: var(--suzuki-navy);
+  border-color: var(--suzuki-navy);
+  box-shadow: 0 6px 20px rgba(0, 46, 66, 0.3);
+}
+
+.configurator__btn--ghost {
+  color: var(--suzuki-muted);
+  background: transparent;
+  border-color: transparent;
+}
+
+.configurator__btn--ghost:hover {
+  color: var(--suzuki-navy);
+  background: var(--suzuki-gray);
+}
+
+.configurator__btn--outline {
+  color: var(--suzuki-navy);
+  background: #fff;
+  border-color: var(--suzuki-border);
+}
+
+.configurator__btn--outline:hover {
+  border-color: var(--suzuki-navy);
+  background: var(--suzuki-gray);
+}
+
+/* Mobile sticky bar */
+.configurator__mobile-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 50;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border-top: 1px solid var(--suzuki-border);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -8px 24px rgba(0, 46, 66, 0.08);
+}
+
+@media (min-width: 992px) {
+  .configurator__mobile-bar {
+    display: none;
+  }
+}
+
+.configurator__mobile-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1140px;
+  margin-inline: auto;
+}
+
+.configurator__mobile-bar-label {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--suzuki-muted);
+}
+
+.configurator__mobile-bar-price {
+  margin: 2px 0 0;
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  color: var(--suzuki-navy);
 }
 
 /* Footer — suzuki-motor.ru */

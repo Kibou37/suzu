@@ -1,28 +1,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CarSpecsSection } from '@/components/catalog/CarSpecsSection';
+import { carTechByModel } from '@/data/car-tech';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import type { CarDetail } from '@/lib/api';
 import { getCarImageUrl } from '@/lib/car-images';
 import {
   formatBodyType,
-  formatCondition,
-  formatFuelType,
   formatMileage,
   formatPrice,
   formatTransmission,
 } from '@/lib/format';
+import { resolveLineupSlug } from '@/lib/lineup-assets';
 
 type CarDetailContentProps = {
   car: CarDetail;
 };
 
-const heroHighlights = (car: CarDetail) => {
+const techItems = (car: CarDetail): [string, string][] => {
+  const modelTech = carTechByModel[resolveLineupSlug(car.slug)];
   const items: [string, string][] = [
-    ['Trim', car.trim ?? '—'],
     ['Body type', formatBodyType(car.bodyType)],
-    ['Engine', formatFuelType(car.fuelType)],
+    ['Engine', modelTech?.engine ?? '—'],
     ['Transmission', formatTransmission(car.transmission)],
+    ['Drive', modelTech?.drive ?? '—'],
   ];
 
   if (car.horsepower) {
@@ -33,10 +33,6 @@ const heroHighlights = (car: CarDetail) => {
 
   if (car.mileage > 0) {
     items.push(['Mileage', formatMileage(car.mileage)]);
-  }
-
-  if (car.condition === 'USED') {
-    items.push(['Condition', formatCondition(car.condition)]);
   }
 
   return items;
@@ -57,7 +53,6 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
               { label: `Suzuki ${car.name}` },
             ]}
           />
-          <h1 className="model-page__title">Suzuki {car.name}</h1>
         </div>
       </div>
 
@@ -77,8 +72,10 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
             </div>
 
             <div className="showroom-model__info">
+              <h1 className="model-page__title">Suzuki {car.name}</h1>
+
               <div className="showroom-model__tech-grid">
-                {heroHighlights(car).map(([label, value]) => (
+                {techItems(car).map(([label, value]) => (
                   <div key={label} className="showroom-model__tech-item">
                     <div className="showroom-model__label">{label}</div>
                     <div className="showroom-model__tech">{value}</div>
@@ -97,10 +94,10 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
               </div>
 
               <div className="showroom-model__actions">
-                <Link href="/configurator" className="btn btn-primary">
+                <Link href={`/configurator?model=${car.slug}`} className="btn btn-primary">
                   Configure
                 </Link>
-                <Link href="/test-drive" className="btn btn-secondary">
+                <Link href={`/test-drive?model=${car.slug}`} className="btn btn-secondary">
                   Test Drive
                 </Link>
                 <Link href="/contacts" className="link-action">
@@ -111,8 +108,6 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
           </div>
         </div>
       </section>
-
-      <CarSpecsSection car={car} />
     </article>
   );
 }

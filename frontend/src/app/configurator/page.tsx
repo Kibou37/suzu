@@ -1,32 +1,19 @@
-import { PlaceholderPage } from '@/components/ui/PageShell';
+import { ConfiguratorForm } from '@/components/conversion/ConfiguratorForm';
+import { getCars } from '@/lib/api';
 
-
+type ConfiguratorPageProps = {
+  searchParams: Promise<{ model?: string }>;
+};
 
 export const metadata = { title: 'Configurator' };
 
-
-
-export default function ConfiguratorPage() {
+export default async function ConfiguratorPage({ searchParams }: ConfiguratorPageProps) {
+  const params = await searchParams;
+  const cars = await getCars({ condition: 'NEW' });
 
   return (
-
-    <PlaceholderPage
-
-      title="Configurator"
-
-      description="Choose trim, colour and options — see pricing updated in real time."
-
-      breadcrumbs={[
-
-        { label: 'Home', href: '/' },
-
-        { label: 'Configurator' },
-
-      ]}
-
-    />
-
+    <div className="configurator-page">
+      <ConfiguratorForm cars={cars} initialModelSlug={params.model} />
+    </div>
   );
-
 }
-

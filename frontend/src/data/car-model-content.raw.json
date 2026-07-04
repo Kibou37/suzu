@@ -1,0 +1,1202 @@
+{
+  "jimny": {
+    "slug": "jimny",
+    "exterior360": [
+      {
+        "id": "color_0",
+        "name": "Kinetic Yellow + Bluish Black Pearl",
+        "hexes": [
+          "#262628",
+          "#a2ac31"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgiqnifss73coup50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sh0anifss73coupjg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coup9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgj2nifss73coupa0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupdg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupe0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjanifss73coupf0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjinifss73coupfg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjinifss73coupg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjinifss73coupgg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjinifss73couph0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjinifss73couphg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch9sgjinifss73coupi0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaa6banifss73couprg/original"
+        ]
+      },
+      {
+        "id": "color_1",
+        "name": "Chiffon Ivory Metallic + Bluish Black Pearl",
+        "hexes": [
+          "#262628",
+          "#c3b689"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefjqnifss73dkad00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefjqnifss73dkad0g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefjqnifss73dkad10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefk2nifss73dkad6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkad70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkad7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkad80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkad8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkad90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkad9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkada0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkadag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkadb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkanifss73dkadbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkaddg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkade0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadf0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadfg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadgg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkinifss73dkadh0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrefkqnifss73dkadhg/original"
+        ]
+      },
+      {
+        "id": "color_2",
+        "name": "Brisk Blue Metallic + Bluish Black Pearl",
+        "hexes": [
+          "#252527",
+          "#2c72a3"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaco2nifss73couq2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaco2nifss73couq30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaco2nifss73couq3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaco2nifss73couq40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaco2nifss73couq4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaco2nifss73couq50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaacoanifss73couq5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddinifss73couqbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqdg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqe0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqf0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqfg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaddqnifss73couqgg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaadmanifss73couqi0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaadmanifss73couqig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaek2nifss73couqr0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaek2nifss73couqrg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaek2nifss73couqs0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaek2nifss73couqsg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaek2nifss73couqt0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73couqtg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73couqu0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73couqug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73couqv0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73couqvg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73cour00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73cour0g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73cour10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekanifss73cour1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekinifss73cour20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaaekinifss73cour2g/original"
+        ]
+      },
+      {
+        "id": "color_3",
+        "name": "White",
+        "hexes": [
+          "#bab9b8",
+          "#d2d2d2"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajgqnifss73cour8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73cour90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73cour9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73coura0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73courag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73courb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73courbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73courc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaajh2nifss73courcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpanifss73courqg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpanifss73courr0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpanifss73courrg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpanifss73cours0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpanifss73coursg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpanifss73court0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpanifss73courtg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73couru0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73courug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73courv0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73courvg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73cous00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73cous0g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73cous10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73cous1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73cous20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73cous2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpinifss73cous30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaanpqnifss73cous7g/original"
+        ]
+      },
+      {
+        "id": "color_4",
+        "name": "Jungle Green",
+        "hexes": [
+          "#3e4537",
+          "#3e4537"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascanifss73cousg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascanifss73cousgg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73coush0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73coushg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73cousi0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73cousig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73cousj0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73cousjg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73cousk0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73couskg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73cousl0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascinifss73couslg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascqnifss73cousm0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaascqnifss73cousmg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs0inifss73cout20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs0qnifss73cout2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs0qnifss73cout30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs0qnifss73cout3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs0qnifss73cout40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs0qnifss73cout4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs0qnifss73cout50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs12nifss73cout9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs1anifss73couta0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs1anifss73coutag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs1anifss73coutb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs1anifss73coutbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs1anifss73coutc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chabs1anifss73coutcg/original"
+        ]
+      },
+      {
+        "id": "color_5",
+        "name": "Silky Silver Metallic",
+        "hexes": [
+          "#8b8b8b",
+          "#8b8b8b"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5canifss73couu00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5canifss73couu0g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5canifss73couu10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5canifss73couu1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cinifss73couu60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couu6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couu70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couu7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couu80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couu8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couu90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couu9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5cqnifss73couua0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couuag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couub0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couubg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couuc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couucg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couud0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couudg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couue0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couueg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couuf0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5d2nifss73couufg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5danifss73couug0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5danifss73couugg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5danifss73couuh0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chac5danifss73couuhg/original"
+        ]
+      },
+      {
+        "id": "color_6",
+        "name": "Medium Gray",
+        "hexes": [
+          "#585656",
+          "#585656"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornanifss73covqj0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornanifss73covqjg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornanifss73covqk0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornanifss73covqkg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornanifss73covql0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornanifss73covqlg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhorninifss73covqm0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhorninifss73covqmg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhorninifss73covqn0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhorninifss73covqng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhorninifss73covqo0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqog/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqp0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqpg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqq0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqqg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqr0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqrg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhornqnifss73covqs0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covqsg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covqt0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covqtg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covqu0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covqug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covqv0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covqvg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covr00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoro2nifss73covr0g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chhoroanifss73covr4g/original"
+        ]
+      },
+      {
+        "id": "color_7",
+        "name": "Bluish Black Pearl",
+        "hexes": [
+          "#242426",
+          "#242426"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejv2nifss73dkae60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejv2nifss73dkae6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejv2nifss73dkae70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejv2nifss73dkae7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkae80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkae8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkae90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkae9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkaea0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkaeag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkaeb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkaebg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkaec0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkaecg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvanifss73dkaed0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaedg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaee0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaeeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaef0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaefg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaeg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaegg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaeh0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaehg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaei0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvinifss73dkaeig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaej0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaejg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaek0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaekg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkael0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaelg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaem0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaemg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaen0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrejvqnifss73dkaeng/original"
+        ]
+      }
+    ],
+    "interiorPanorama": {
+      "imageUrl": "https://platform.suzuki-motor.ru/catalog/3df121c2-fc02-41f5-a344-0b4bcd122e74/pano2_hu0fc53407ae41f92affcacb8e525b6d98_9658650_3000x0_resize_q75_lanczos.jpg",
+      "title": "Простор, стиль и функциональность в 360°"
+    },
+    "sections": [
+      {
+        "title": "Интерьер Suzuki Jimny",
+        "icon": "interior",
+        "imageReverse": true,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/cken6e2nifss73dkau00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken6hanifss73dkau10/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "Подсветка комбинации приборов",
+            "body": "В солнечную погоду и при свете луны, при движении по дороге или\nбездорожью приборы всегда подсвечиваются для легкого считывания показаний. Их функциональный дизайн дополняет лаконичную красоту салона."
+          },
+          {
+            "heading": "Инфракрасный сенсорный экран",
+            "body": "Легко управляйте аудиосистемой и системой навигации с помощью 7-дюймового инфракрасного сенсорного экрана²,\nдаже если руки в перчатках. Аудиосистема с дисплеем и возможностью\nподключения смартфона поддерживает функции Apple CarPlay™, Android Auto™ и MirrorLink™, что позволяет использовать различные приложения смартфона."
+          }
+        ]
+      },
+      {
+        "title": "Экстерьер Suzuki Jimny",
+        "icon": "exterior",
+        "imageReverse": false,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/cken6r2nifss73dkau20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken6sqnifss73dkau30/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "Оптимизированная форма бамперов",
+            "body": "Все готово для приключений: скошенные углы бамперов увеличивают дорожный просвет на уровне колес для уверенного преодоления препятствий. А обвес из литого черного материала защищает кузов от попадания\nосколков камней и царапин."
+          },
+          {
+            "heading": "Светодиодные фары с омывателями",
+            "body": "Вы можете гордиться своим выбором, ведь у Jimny богатое наследие, одним из символов которого являются легко узнаваемые круглые, светодиодные фары. Они стандартно оснащаются омывателями, что дает Вам дополнительную уверенность при движении по пыльной, грязной и заснеженной поверхности."
+          },
+          {
+            "heading": "Практичный водосточный желобок",
+            "body": "Пусть все погодные тяготы достанутся Jimny, а не Вам. Благодаря\nналичию водосточного желоба, расположенного по бокам кузова вдоль крыши, Вам больше не страшны осадки — можно не бояться промокнуть при посадке и высадке из автомобиля."
+          }
+        ]
+      },
+      {
+        "title": "Профессиональное оборудование Suzuki Jimny",
+        "icon": "interior",
+        "imageReverse": true,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/cken752nifss73dkau40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken76anifss73dkau50/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "Практичное багажное отделение",
+            "body": "Возьмите с собой всё необходимое, чтобы быть готовым к любой ситуации. Тщательно продуманное багажное отделение можно расширить, сложив задние сиденья. Пол и тыльные поверхности спинок задних сидений имеют специальное покрытие¹  для облегчения уборки багажника.\nПолностью ровный грузовой пол и увеличенный объём багажного отделения позволяют перевозить широкие предметы, расположив их поперёк. Благодаря резьбовым отверстиям и багажным крючкам можно устанавливать\nдополнительное оборудование, например, различные приспособления для крепления грузов для большей универсальности и практичности.  Электрическая розетка в багажнике²  позволяет подключать электрооборудование со стороны задней части автомобиля."
+          },
+          {
+            "heading": "Легкодоступные вещевые отделения в зоне передних сидений",
+            "body": "Тянуться не придётся. В удобных карманах и нишах можно разместить смартфон, напитки и другие личные вещи, чтобы они всегда были под рукой. Расположенные вблизи USB-разъём и розетка позволяют подключать и заряжать дополнительное оборудование, а также мобильный телефон. Большой и удобный поручень поможет переднему пассажиру при посадке и высадке из автомобиля.\n\nПримечание. Вещи на фотографии показаны только в качестве\nиллюстрации. Все вещи должны быть надежно закреплены во время вождения."
+          }
+        ]
+      },
+      {
+        "title": "Внедорожные характеристики Suzuki Jimny",
+        "icon": "equipment",
+        "imageReverse": false,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/cken812nifss73dkau60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken82anifss73dkau70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken89anifss73dkau80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken8danifss73dkau90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken8einifss73dkaua0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken8g2nifss73dkaub0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cken8hanifss73dkauc0/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "Прочная лонжеронная рама",
+            "body": "Начиная с самого первого поколения, Jimny всегда оснащался\nлонжеронной рамой, которая закладывает прочную основу для обеспечения высоких характеристик проходимости в условиях серьёзного бездорожья."
+          },
+          {
+            "heading": "3-рычажная зависимая подвеска с винтовыми пружинами",
+            "body": "Не соглашайтесь ни на что меньшее, чем неразрезные мосты спереди и сзади, которые гарантируют Jimny превосходное сцепление с любой поверхностью. Когда одно из колёс наезжает на препятствие, поднимаясь вверх, мост прижимает другое колесо вниз для улучшения контакта шины с поверхностью в условиях тяжёлого бездорожья."
+          },
+          {
+            "heading": "Выдающаяся геометрическая проходимость",
+            "body": "Расширяйте границы исследуемых территорий за счёт выдающейся геометрической проходимости: углы въезда, съезда и угол продольной проходимости, а также большой дорожный просвет позволяют преодолевать крутые склоны и каменистые поверхности, не боясь повредить бамперы и днище Jimny."
+          },
+          {
+            "heading": "Полный привод с понижающей передачей",
+            "body": "По вашей команде Jimny адаптируется к любой ситуации. Переведите рычаг управления раздаточной коробкой в режим 4L на самых сложных участках, чтобы обеспечить максимальный крутящий момент. При движении по скользким и заснеженным дорогам выберите режим 4H, чтобы получить\nоптимальное тяговое усилие на более высоких скоростях. А после возвращения на асфальтированные дороги переключитесь в режим 2H (привод на заднюю ось) для более плавного, спокойного и экономичного вождения. С системой ALLGRIP PRO Вы сможете удовлетворить свою страсть к\nприключениям, поскольку она обеспечивает превосходные ходовые характеристики как на асфальте, так и на бездорожье."
+          }
+        ]
+      }
+    ]
+  },
+  "vitara": {
+    "slug": "vitara",
+    "exterior360": [
+      {
+        "id": "color_0",
+        "name": "Solar Yellow Pearl / Black Roof",
+        "hexes": [
+          "#292929",
+          "#9b6c2a"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uinifss73dkafa0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafdg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafe0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkafeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1uqnifss73dkaff0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkaffg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafgg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafh0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafhg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafi0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafj0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafjg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1v2nifss73dkafk0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafkg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafl0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkaflg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafm0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafmg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafn0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafo0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafog/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafp0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vanifss73dkafpg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vinifss73dkafq0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vinifss73dkafqg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vinifss73dkafr0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/cjrf1vinifss73dkafrg/original"
+        ]
+      },
+      {
+        "id": "color_1",
+        "name": "Galactic Gray Metallic",
+        "hexes": [
+          "#5d5d5d",
+          "#5d5d5d"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ch53gs2nifss73coumc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch53gs2nifss73coumcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ch53gs2nifss73coumd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15inifss73cov1cg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15inifss73cov1d0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15inifss73cov1dg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15inifss73cov1e0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15inifss73cov1eg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15qnifss73cov1f0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15qnifss73cov1fg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15qnifss73cov1g0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15qnifss73cov1gg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15qnifss73cov1h0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15qnifss73cov1hg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae15qnifss73cov1i0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1ig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1j0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1jg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1k0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1kg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1l0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1lg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae162nifss73cov1m0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1mg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1n0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1ng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1o0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1og/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1q0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1qg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16anifss73cov1r0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae1d2nifss73cov1tg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16inifss73cov1s0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae16inifss73cov1sg/original"
+        ]
+      },
+      {
+        "id": "color_2",
+        "name": "Cosmic Black Pearl Metallic",
+        "hexes": [
+          "#292929",
+          "#292929"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9qqnifss73cov2h0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9qqnifss73cov2hg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9qqnifss73cov2i0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2ig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2j0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2jg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2k0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2kg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2l0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2lg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2m0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2mg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9r2nifss73cov2n0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2ng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2o0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2og/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2q0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2qg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2r0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2rg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9ranifss73cov2s0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov2sg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov2t0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov2tg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov2u0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov2ug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov2v0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov2vg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov300/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov30g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov310/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rinifss73cov31g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rqnifss73cov320/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chae9rqnifss73cov32g/original"
+        ]
+      },
+      {
+        "id": "color_3",
+        "name": "White",
+        "hexes": [
+          "#d2d2d2",
+          "#d2d2d2"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3jg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3k0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3kg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3l0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3lg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3m0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3mg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3n0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3ng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3o0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0inifss73cov3og/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0qnifss73cov3p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chael0qnifss73cov3pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem1qnifss73cov45g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem1qnifss73cov460/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem1qnifss73cov46g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem1qnifss73cov470/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov47g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov480/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov48g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov490/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov49g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov4a0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov4ag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov4b0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov4bg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem22nifss73cov4c0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4cg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4d0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4dg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4e0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4eg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4f0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4fg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4g0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaem2anifss73cov4gg/original"
+        ]
+      },
+      {
+        "id": "color_4",
+        "name": "Solar Yellow Pearl / White Roof",
+        "hexes": [
+          "#9a6b29"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov540/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov54g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov550/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov55g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov560/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov56g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov570/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov57g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4cqnifss73cov580/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov58g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov590/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov59g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov5a0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov5ag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov5b0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov5bg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4d2nifss73cov5c0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5cg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5d0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5dg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5e0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5eg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5f0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5fg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4danifss73cov5g0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5gg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5h0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5hg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5i0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5ig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5j0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5jg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5k0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5kg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5l0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaf4dinifss73cov5lg/original"
+        ]
+      },
+      {
+        "id": "color_5",
+        "name": "Galactic Grey / Black Roof",
+        "hexes": [
+          "#272727",
+          "#626264"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chafdm2nifss73cov5p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafdm2nifss73cov5pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafdm2nifss73cov5q0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafdmanifss73cov5qg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflanifss73cov6bg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflanifss73cov6c0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6cg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6d0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6dg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6e0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6eg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6f0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6fg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6g0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflinifss73cov6gg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6h0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6hg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6i0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6ig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6j0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6jg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6k0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6kg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6l0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6lg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6m0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafflqnifss73cov6mg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6n0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6ng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6o0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6og/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6q0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6qg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chaffm2nifss73cov6r0/original"
+        ]
+      },
+      {
+        "id": "color_6",
+        "name": "Atlantis Turquoise Pearl / Black Roof",
+        "hexes": [
+          "#292929",
+          "#006e81"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpfqnifss73cov7eg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpfqnifss73cov7f0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpfqnifss73cov7fg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpfqnifss73cov7g0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpfqnifss73cov7gg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpfqnifss73cov7h0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7hg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7i0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7ig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7j0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7jg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7k0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7kg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpg2nifss73cov7l0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpganifss73cov7lg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpganifss73cov7m0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpganifss73cov7mg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpganifss73cov7n0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpganifss73cov7ng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpganifss73cov7o0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpganifss73cov7og/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7q0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7qg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7r0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7rg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7s0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpginifss73cov7sg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpgqnifss73cov7t0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpgqnifss73cov7tg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpgqnifss73cov7u0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpgqnifss73cov7ug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpgqnifss73cov7v0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpgqnifss73cov7vg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chafpgqnifss73cov800/original"
+        ]
+      },
+      {
+        "id": "color_7",
+        "name": "Savannah Ivory Pearl / Black Roof",
+        "hexes": [
+          "#282828",
+          "#8f8376"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0binifss73cov8jg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0binifss73cov8k0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0binifss73cov8kg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0binifss73cov8l0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0binifss73cov8lg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8m0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8mg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8n0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8ng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8o0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8og/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8q0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0bqnifss73cov8qg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8r0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8rg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8s0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8sg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8t0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8tg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8u0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8ug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8v0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0c2nifss73cov8vg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov900/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov90g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov910/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov91g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov920/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov92g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov930/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov93g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov940/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov94g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah0canifss73cov950/original"
+        ]
+      },
+      {
+        "id": "color_8",
+        "name": "Bright Red / Black Roof",
+        "hexes": [
+          "#000000",
+          "#d73a4a"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oinifss73cov9og/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oinifss73cov9p0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oinifss73cov9pg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oinifss73cov9q0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oqnifss73cov9qg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oqnifss73cov9r0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oqnifss73cov9rg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oqnifss73cov9s0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oqnifss73cov9sg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oqnifss73cov9t0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8oqnifss73cov9tg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cov9u0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cov9ug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cov9v0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cov9vg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cova00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cova0g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cova10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8p2nifss73cova1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8panifss73cova70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8pinifss73cova7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8pinifss73cova80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8pinifss73cova8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8pinifss73cova90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8pinifss73cova9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chah8pinifss73covaa0/original"
+        ]
+      },
+      {
+        "id": "color_9",
+        "name": "Ice Greyish Blue / Black Roof",
+        "hexes": [
+          "#282828",
+          "#5d6d72"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfm2nifss73covatg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfm2nifss73covau0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfm2nifss73covaug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfm2nifss73covav0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfm2nifss73covavg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb00/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb0g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb10/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb1g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb20/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb2g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb30/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmanifss73covb4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfuanifss73covbg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covb9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfminifss73covba0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbdg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbe0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chahfmqnifss73covbf0/original"
+        ]
+      },
+      {
+        "id": "color_10",
+        "name": "Bright Red",
+        "hexes": [
+          "#ba241d",
+          "#ba241d"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk122nifss73covc3g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk122nifss73covc40/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk122nifss73covc4g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12anifss73covc50/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12anifss73covc5g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12anifss73covc60/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12anifss73covc6g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12anifss73covc70/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12anifss73covc7g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12anifss73covc80/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covc8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covc90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covc9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covca0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covcag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covcb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covcbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covcc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covccg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covcd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12inifss73covcdg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covce0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covceg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covcf0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covcfg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covcg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covcgg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covch0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covchg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covci0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covcig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk12qnifss73covcj0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk132nifss73covcjg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk132nifss73covck0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk132nifss73covckg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk132nifss73covcl0/original"
+        ]
+      },
+      {
+        "id": "color_11",
+        "name": "Cool White Pearl Metallic",
+        "hexes": [
+          "#a3a3a3",
+          "#a3a3a3"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6v2nifss73covd8g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covd90/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covd9g/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covda0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covdag/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covdb0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covdbg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covdc0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covdcg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vanifss73covdd0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covddg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covde0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covdeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covdf0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covdfg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covdg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covdgg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covdh0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vinifss73covdhg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdi0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdj0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdjg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdk0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdkg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdl0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdlg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk6vqnifss73covdm0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdmg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdn0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdo0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdog/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdp0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdpg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdk702nifss73covdq0/original"
+        ]
+      },
+      {
+        "id": "color_12",
+        "name": "Atlantis Turquoise Pearl Metallic",
+        "hexes": [
+          "#007081",
+          "#007081"
+        ],
+        "frames": [
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj6qnifss73covedg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj6qnifss73covee0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj6qnifss73coveeg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj6qnifss73covef0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj6qnifss73covefg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj6qnifss73coveg0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj6qnifss73covegg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73coveh0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covehg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covei0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73coveig/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covej0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covejg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covek0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covekg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covel0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj72nifss73covelg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73covem0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73covemg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73coven0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73coveng/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73coveo0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73coveog/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73covep0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73covepg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7anifss73coveq0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73coveqg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73cover0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73coverg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73coves0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73covesg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73covet0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73covetg/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73coveu0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73coveug/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/chdkj7inifss73covev0/original"
+        ]
+      }
+    ],
+    "interiorPanorama": {
+      "imageUrl": "https://cdn.perxis.ru/originals/d6c6ha0beucc73ce90c0/original",
+      "title": "Простор, стиль и функциональность в 360°"
+    },
+    "sections": [
+      {
+        "title": "ЭКСТЕРЬЕР Suzuki Vitara",
+        "icon": "exterior",
+        "imageReverse": true,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenc72nifss73dkaud0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenceinifss73dkaue0/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "ОБНОВЛЕННАЯ ОПТИКА",
+            "body": "Современный дизайн головного освещения автомобиля – первое, на что обращают внимание. Дизайнеры с филигранной точностью стремятся выделить фары во внешнем облике модели.\n\nНаправленный пучок яркого света светодиодных фар SUZUKI Vitara освещает путь в любую погоду. А голубая окантовка линзы, как особенный элемент модели, добавит стиля внешнему виду автомобиля.\n\nДерзкий и современный образ Vitara дополнят новые задние фонари, выполненные в виде трёх светодиодных лучей, отсылающих к стилю четких геометрических линий."
+          }
+        ]
+      },
+      {
+        "title": "ИНТЕРЬЕР Suzuki Vitara",
+        "icon": "interior",
+        "imageReverse": false,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenclanifss73dkauf0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckencn2nifss73dkaug0/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "НОВЫЙ 4.2-ДЮЙМОВЫЙ МУЛЬТИИНФОРМАЦИОННЫЙ LCD-ДИСПЛЕЙ",
+            "body": "Многофункциональный мультимедийный 4,2-дюймовый цветной дисплей расположен в центре приборной панели. Он обеспечивает точные и достоверные данные о поведении и состоянии автомобиля. Динамический дисплей наглядно отражает широкий спектр функций: режимы ALLGRIP SELECT, G-Force, показатели работы двигателя и крутящий момент, а также данные об ускорении и торможении. Когда в вашем распоряжении такой широкий выбор опций, вождение никогда не превратится в рутину!"
+          },
+          {
+            "heading": "НОВЫЙ ДИЗАЙН ОБИВКИ",
+            "body": "Стильная замшевая обивка передних и задних сидений обеспечивает максимальную поддержку и комфорт как для водителя, так и для пассажиров."
+          },
+          {
+            "heading": "ПОДРУЛЕВЫЕ ПЕРЕКЛЮЧАТЕЛИ",
+            "body": "Вы можете быстро повышать и понижать передачи с помощью лепестковых переключателей, установленных за рулевым колесом. Они обеспечивают приятное и динамичное вождение в спортивном стиле так же, как механическая коробка передач."
+          }
+        ]
+      },
+      {
+        "title": "МУЛЬТИМЕДИА Suzuki Vitara",
+        "icon": "multimedia",
+        "imageReverse": true,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ckend2inifss73dkauh0/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "7-ДЮЙМОВАЯ МУЛЬТИМЕДИЙНАЯ СИСТЕМА С ВОЗМОЖНОСТЬЮ ПОДКЛЮЧЕНИЯ СМАРТФОНА",
+            "body": "7-дюймовый сенсорный дисплей с интуитивно понятным интерфейсом позволяет использовать множество функций, включая аудиосистему, беспроводное подключение телефона, навигацию и интеграцию смартфона. Функции распределены на четыре логических блока: «Прослушивание музыки», «Навигация», «Телефон» и «Подключение смартфона». Дисплей подключения смартфона работает с Apple CarPlay™ , Android Auto™ и MirrorLink™."
+          }
+        ]
+      },
+      {
+        "title": "ДВИГАТЕЛИ И ТРАНСМИССИЯ  Suzuki Vitara",
+        "icon": "engine",
+        "imageReverse": false,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ckendo2nifss73dkaui0/original"
+        ],
+        "paragraphs": []
+      },
+      {
+        "title": "ALLGRIP SELECT Suzuki Vitara",
+        "icon": "tech",
+        "imageReverse": true,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ckeneqanifss73dkauj0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenerinifss73dkauk0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenesqnifss73dkaul0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenevqnifss73dkaum0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenf1inifss73dkaun0/original"
+        ],
+        "paragraphs": []
+      },
+      {
+        "title": "БЕЗОПАСНОСТЬ Suzuki Vitara",
+        "icon": "safety",
+        "imageReverse": false,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenfh2nifss73dkauo0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenfianifss73dkaup0/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "КОНСТРУКЦИЯ КУЗОВА ТЕСТ",
+            "body": "В кузове автомобиля реализована запатентованная SUZUKI технология Total Effective Control Technology (TECT), благодаря которой кузов автомобиля эффективно отводит энергию удара в специальные зоны поглощения для защиты водителя и пассажиров в случае столкновения."
+          },
+          {
+            "heading": "7 ПОДУШЕК БЕЗОПАСНОСТИ",
+            "body": "Удовольствие от вождения дополняют многочисленные защитные системы, в том числе стандартные подушки безопасности для водителя и переднего пассажира, передние боковые подушки безопасности, снижающие нагрузку на грудную клетку при боковом столкновении, шторки безопасности, защищающие голову, и подушки безопасности для коленей водителя."
+          },
+          {
+            "heading": "ESP®",
+            "body": "Если колёса теряют сцепление с дорогой, электронная программа стабилизации ESP®¹ автоматически адаптирует двигатель и тормоза, чтобы помочь водителю сохранить управление автомобилем."
+          },
+          {
+            "heading": "ПЕРЕДНИЕ И ЗАДНИЕ ДАТЧИКИ ПАРКОВКИ",
+            "body": "Обнаружив препятствия, ультразвуковые сенсоры на переднем и заднем бамперах автомобиля подают водителю звуковые сигналы и передают указания."
+          }
+        ]
+      },
+      {
+        "title": "КОМФОРТ Suzuki Vitara",
+        "icon": "light",
+        "imageReverse": true,
+        "images": [
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenfqqnifss73dkauq0/original",
+          "https://img.perxis.ru/unsafe/prxs/originals/ckenfsanifss73dkaur0/original"
+        ],
+        "paragraphs": [
+          {
+            "heading": "КЛИМАТ-КОНТРОЛЬ",
+            "body": "Легко регулируемые настройки всегда обеспечивают комфортную температуру в салоне."
+          },
+          {
+            "heading": "ВМЕСТИТЕЛЬНОЕ БАГАЖНОЕ ОТДЕЛЕНИЕ",
+            "body": "Благодаря широкому проёму багажника, низкой высоте погрузки и внушительному 710-литровому багажному пространству (при сложенных спинках задних сидений)², Suzuki Vitara гарантирует, что вы легко сможете взять с собой всё самое необходимое."
+          }
+        ]
+      }
+    ]
+  }
+}

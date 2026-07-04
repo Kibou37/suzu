@@ -1,4 +1,5 @@
 import { demoCars } from '@/data/demo-cars';
+import { applyCarQueryFilters, type CarQueryFilters } from '@/lib/catalog-filters';
 
 export type CarListItem = {
   id: string;
@@ -32,24 +33,23 @@ function getApiBaseUrl(): string {
   return process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 }
 
-export async function getCars(params?: {
-  condition?: string;
-  isOffer?: boolean;
-}): Promise<CarListItem[]> {
+export async function getCars(params?: CarQueryFilters): Promise<CarListItem[]> {
   if (isDemoDataMode()) {
-    let cars = [...demoCars];
-    if (params?.condition) {
-      cars = cars.filter((car) => car.condition === params.condition);
-    }
-    if (params?.isOffer !== undefined) {
-      cars = cars.filter((car) => car.isOffer === params.isOffer);
-    }
-    return cars;
+    return applyCarQueryFilters(demoCars, params);
   }
 
   const search = new URLSearchParams();
   if (params?.condition) search.set('condition', params.condition);
   if (params?.isOffer !== undefined) search.set('isOffer', String(params.isOffer));
+  if (params?.minPrice !== undefined) search.set('minPrice', String(params.minPrice));
+  if (params?.maxPrice !== undefined) search.set('maxPrice', String(params.maxPrice));
+  if (params?.minYear !== undefined) search.set('minYear', String(params.minYear));
+  if (params?.maxYear !== undefined) search.set('maxYear', String(params.maxYear));
+  if (params?.maxMileage !== undefined) search.set('maxMileage', String(params.maxMileage));
+  if (params?.bodyType) search.set('bodyType', params.bodyType);
+  if (params?.fuelType) search.set('fuelType', params.fuelType);
+  if (params?.transmission) search.set('transmission', params.transmission);
+  if (params?.trim) search.set('trim', params.trim);
 
   const query = search.toString();
   const url = `${getApiBaseUrl()}/api/cars${query ? `?${query}` : ''}`;

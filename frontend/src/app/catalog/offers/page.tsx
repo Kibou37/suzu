@@ -1,38 +1,22 @@
 import { CatalogLayout } from '@/components/catalog/CatalogLayout';
-
-
+import { CatalogWithFilters } from '@/components/catalog/CatalogWithFilters';
+import { getCars } from '@/lib/api';
 
 export const metadata = { title: 'Special Offers' };
 
-
-
-export default function OffersCatalogPage() {
+export default async function OffersCatalogPage() {
+  const cars = await getCars({ isOffer: true });
 
   return (
-
     <CatalogLayout
-
       title="Offers"
-
-      activeTab="/catalog/offers"
-
       breadcrumbs={[
-
         { label: 'Home', href: '/' },
-
         { label: 'Automobiles', href: '/catalog' },
-
         { label: 'Offers' },
-
       ]}
-
     >
-
-      <p className="placeholder-box">Special offers will be available soon.</p>
-
+      <CatalogWithFilters cars={cars} activeTab="/catalog/offers" />
     </CatalogLayout>
-
   );
-
 }
-

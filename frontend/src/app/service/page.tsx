@@ -1,32 +1,22 @@
-import { PlaceholderPage } from '@/components/ui/PageShell';
-
-
+import { PageHeader } from '@/components/ui/PageShell';
+import { ServiceForm } from '@/components/conversion/ServiceForm';
 
 export const metadata = { title: 'Service & Maintenance' };
 
-
-
 export default function ServicePage() {
-
   return (
-
-    <PlaceholderPage
-
-      title="Service & Maintenance"
-
-      description="Service promotions and online booking for scheduled maintenance."
-
-      breadcrumbs={[
-
-        { label: 'Home', href: '/' },
-
-        { label: 'Service' },
-
-      ]}
-
-    />
-
+    <div className="page-shell">
+      <div className="container-suzuki">
+        <PageHeader
+          title="Service & Maintenance"
+          description="Book scheduled maintenance, diagnostics or warranty work at our authorised service centre."
+          breadcrumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Service' },
+          ]}
+        />
+        <ServiceForm />
+      </div>
+    </div>
   );
-
 }
-
