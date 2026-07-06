@@ -1,5 +1,6 @@
-import { PageHeader } from '@/components/ui/PageShell';
+import { ServiceAside } from '@/components/conversion/ServiceAside';
 import { ServiceForm } from '@/components/conversion/ServiceForm';
+import { PageHeader } from '@/components/ui/PageShell';
 
 export const metadata = { title: 'Service & Maintenance' };
 
@@ -15,7 +16,13 @@ export default function ServicePage() {
             { label: 'Service' },
           ]}
         />
-        <ServiceForm />
+
+        <div className="service-page">
+          <div className="service-page__form">
+            <ServiceForm />
+          </div>
+          <ServiceAside />
+        </div>
       </div>
     </div>
   );

@@ -1,21 +1,24 @@
 'use client';
 
+import { dealer } from '@suzuki/shared';
 import { useState } from 'react';
+import { BookingDateField } from '@/components/conversion/BookingDateField';
+import { ConversionFormSection } from '@/components/conversion/ConversionFormSection';
+import { SERVICE_VEHICLES, getServiceVehicleLabel } from '@/data/service-vehicles';
 import {
   SERVICE_TYPES,
   formatBookingSlot,
   formatSlotTime,
   getBookingSlots,
+  isValidPhone,
+  isValidVin,
   submitService,
 } from '@/lib/bookings';
 
-function minBookingDate(): string {
-  const date = new Date();
-  date.setDate(date.getDate() + 1);
-  return date.toISOString().slice(0, 10);
-}
+const OTHER_VEHICLE = '__other__';
 
 export function ServiceForm() {
+  const [vehicleId, setVehicleId] = useState('');
   const [date, setDate] = useState('');
   const [scheduledAt, setScheduledAt] = useState('');
   const [slots, setSlots] = useState<string[]>([]);
@@ -53,13 +56,44 @@ export function ServiceForm() {
     const customerPhone = String(form.get('customerPhone') ?? '').trim();
     const customerEmail = String(form.get('customerEmail') ?? '').trim();
     const serviceType = String(form.get('serviceType') ?? '').trim();
-    const vin = String(form.get('vin') ?? '').trim();
+    const vin = String(form.get('vin') ?? '').trim().toUpperCase();
     const mileageRaw = String(form.get('mileage') ?? '').trim();
+    const otherVehicle = String(form.get('otherVehicle') ?? '').trim();
     const notes = String(form.get('notes') ?? '').trim();
     const mileage = mileageRaw ? Number(mileageRaw) : undefined;
 
     if (!scheduledAt || !serviceType) {
       setError('Please choose a service type, date and time.');
+      return;
+    }
+
+    if (!vehicleId) {
+      setError('Please select your vehicle.');
+      return;
+    }
+
+    const vehicleLabel =
+      vehicleId === OTHER_VEHICLE
+        ? otherVehicle
+        : getServiceVehicleLabel(vehicleId);
+
+    if (!vehicleLabel) {
+      setError('Please select your vehicle or describe it under Other.');
+      return;
+    }
+
+    if (!isValidPhone(customerPhone)) {
+      setError('Please enter a valid phone number.');
+      return;
+    }
+
+    if (vin && !isValidVin(vin)) {
+      setError('VIN must be 17 characters (letters and digits, no I, O or Q).');
+      return;
+    }
+
+    if (mileage != null && (Number.isNaN(mileage) || mileage < 0)) {
+      setError('Please enter a valid mileage.');
       return;
     }
 
@@ -72,6 +106,7 @@ export function ServiceForm() {
         customerPhone,
         customerEmail: customerEmail || undefined,
         serviceType,
+        vehicle: vehicleLabel,
         vin: vin || undefined,
         mileage: mileage != null && !Number.isNaN(mileage) ? mileage : undefined,
         notes: notes || undefined,
@@ -83,6 +118,7 @@ export function ServiceForm() {
       setDate('');
       setScheduledAt('');
       setSlots([]);
+      setVehicleId('');
       event.currentTarget.reset();
     } catch {
       setError('Unable to complete the booking. Please try again or call the service centre.');
@@ -92,8 +128,8 @@ export function ServiceForm() {
   };
 
   return (
-    <form className="conversion-form" onSubmit={handleSubmit}>
-      <div className="conversion-form__grid">
+    <form className="conversion-form conversion-form--sections" onSubmit={handleSubmit}>
+      <ConversionFormSection title="Your vehicle">
         <label className="conversion-form__field conversion-form__field--full">
           <span className="conversion-form__label">Service type</span>
           <select name="serviceType" className="conversion-form__select" required defaultValue="">
@@ -108,17 +144,73 @@ export function ServiceForm() {
           </select>
         </label>
 
+        <label className="conversion-form__field conversion-form__field--full">
+          <span className="conversion-form__label">Your vehicle</span>
+          <select
+            name="vehicleId"
+            className="conversion-form__select"
+            value={vehicleId}
+            onChange={(event) => setVehicleId(event.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select model and specification
+            </option>
+            {SERVICE_VEHICLES.map((vehicle) => (
+              <option key={vehicle.id} value={vehicle.id}>
+                {vehicle.label}
+              </option>
+            ))}
+            <option value={OTHER_VEHICLE}>Other — specify below</option>
+          </select>
+        </label>
+
+        {vehicleId === OTHER_VEHICLE && (
+          <label className="conversion-form__field conversion-form__field--full">
+            <span className="conversion-form__label">Vehicle description</span>
+            <input
+              type="text"
+              name="otherVehicle"
+              className="conversion-form__input"
+              placeholder="e.g. Vitara 1.4 AT"
+              required
+            />
+          </label>
+        )}
+
+        <label className="conversion-form__field">
+          <span className="conversion-form__label">VIN (optional)</span>
+          <input
+            type="text"
+            name="vin"
+            className="conversion-form__input"
+            placeholder="17-character VIN"
+            maxLength={17}
+            autoCapitalize="characters"
+            spellCheck={false}
+          />
+        </label>
+
+        <label className="conversion-form__field">
+          <span className="conversion-form__label">Mileage, km</span>
+          <input
+            type="number"
+            name="mileage"
+            className="conversion-form__input"
+            min={0}
+            step={1}
+            placeholder="Current odometer reading"
+          />
+        </label>
+      </ConversionFormSection>
+
+      <ConversionFormSection
+        title="Dealer & appointment"
+        subtitle={`${dealer.name} · ${dealer.address}`}
+      >
         <label className="conversion-form__field">
           <span className="conversion-form__label">Preferred date</span>
-          <input
-            type="date"
-            name="date"
-            className="conversion-form__input"
-            min={minBookingDate()}
-            value={date}
-            onChange={(event) => void handleDateChange(event.target.value)}
-            required
-          />
+          <BookingDateField key={date} value={date} onChange={(nextDate) => void handleDateChange(nextDate)} required />
         </label>
 
         <label className="conversion-form__field">
@@ -147,30 +239,9 @@ export function ServiceForm() {
             ))}
           </select>
         </label>
+      </ConversionFormSection>
 
-        <label className="conversion-form__field">
-          <span className="conversion-form__label">VIN (optional)</span>
-          <input
-            type="text"
-            name="vin"
-            className="conversion-form__input"
-            placeholder="17-character VIN"
-            maxLength={17}
-          />
-        </label>
-
-        <label className="conversion-form__field">
-          <span className="conversion-form__label">Mileage, km</span>
-          <input
-            type="number"
-            name="mileage"
-            className="conversion-form__input"
-            min={0}
-            step={1}
-            placeholder="Current odometer reading"
-          />
-        </label>
-
+      <ConversionFormSection title="Your details">
         <label className="conversion-form__field">
           <span className="conversion-form__label">Full name</span>
           <input
@@ -193,7 +264,7 @@ export function ServiceForm() {
           />
         </label>
 
-        <label className="conversion-form__field">
+        <label className="conversion-form__field conversion-form__field--full">
           <span className="conversion-form__label">Email</span>
           <input
             type="email"
@@ -212,7 +283,7 @@ export function ServiceForm() {
             placeholder="Describe symptoms, preferred contact method…"
           />
         </label>
-      </div>
+      </ConversionFormSection>
 
       {error && <p className="conversion-form__message conversion-form__message--error">{error}</p>}
       {success && (

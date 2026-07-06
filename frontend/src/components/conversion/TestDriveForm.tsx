@@ -2,12 +2,14 @@
 
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { BookingDateField } from '@/components/conversion/BookingDateField';
 import type { CarListItem } from '@/lib/api';
 import { getConfiguratorData } from '@/data/demo-configurator';
 import {
   formatBookingSlot,
   formatSlotTime,
   getBookingSlots,
+  isValidPhone,
   submitTestDrive,
 } from '@/lib/bookings';
 
@@ -15,12 +17,6 @@ type TestDriveFormProps = {
   cars: CarListItem[];
   initialModelSlug?: string;
 };
-
-function minBookingDate(): string {
-  const date = new Date();
-  date.setDate(date.getDate() + 1);
-  return date.toISOString().slice(0, 10);
-}
 
 export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
   const searchParams = useSearchParams();
@@ -102,6 +98,11 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
       return;
     }
 
+    if (!isValidPhone(customerPhone)) {
+      setError('Please enter a valid phone number.');
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -150,15 +151,7 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
 
         <label className="conversion-form__field">
           <span className="conversion-form__label">Preferred date</span>
-          <input
-            type="date"
-            name="date"
-            className="conversion-form__input"
-            min={minBookingDate()}
-            value={date}
-            onChange={(event) => void handleDateChange(event.target.value)}
-            required
-          />
+          <BookingDateField key={date} value={date} onChange={(nextDate) => void handleDateChange(nextDate)} required />
         </label>
 
         <label className="conversion-form__field">

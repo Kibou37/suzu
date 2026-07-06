@@ -17,6 +17,7 @@ export type CreateServiceInput = {
   customerPhone: string;
   customerEmail?: string;
   serviceType: string;
+  vehicle?: string;
   vin?: string;
   mileage?: number;
   notes?: string;
@@ -167,6 +168,9 @@ export class BookingsService {
     }
 
     const notesParts = [`Service: ${serviceType}`];
+    if (input.vehicle?.trim()) {
+      notesParts.push(`Vehicle: ${input.vehicle.trim()}`);
+    }
     if (input.vin?.trim()) notesParts.push(`VIN: ${input.vin.trim()}`);
     if (input.mileage != null && input.mileage >= 0) {
       notesParts.push(`Mileage: ${input.mileage} km`);

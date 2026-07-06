@@ -242,6 +242,17 @@ body {
   color: var(--suzuki-red);
 }
 
+/* Shared with section headings — matches .site-nav__link typography */
+.heading-nav {
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--suzuki-menu);
+}
+
 .font-headline {
   font-family: var(--font-headline);
 }
@@ -1258,6 +1269,29 @@ body {
   max-width: 720px;
 }
 
+.conversion-form--sections {
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.conversion-form__section + .conversion-form__section {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--suzuki-border);
+}
+
+.conversion-form__section-title {
+  margin: 0 0 20px;
+}
+
+.conversion-form__section-subtitle {
+  margin: -12px 0 20px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--suzuki-muted);
+}
+
 .conversion-form__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1278,6 +1312,12 @@ body {
 
 .conversion-form__field--full {
   grid-column: 1 / -1;
+}
+
+.conversion-form__date-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr) minmax(0, 0.7fr);
+  gap: 8px;
 }
 
 .conversion-form__label {
@@ -1328,6 +1368,106 @@ body {
 
 .conversion-form__message--success {
   color: #1a7f37;
+}
+
+/* Service booking page */
+.service-page {
+  display: grid;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 960px) {
+  .service-page {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+    align-items: start;
+    gap: 40px;
+  }
+}
+
+.service-page__form {
+  min-width: 0;
+}
+
+.service-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.service-aside__card {
+  padding: 20px 22px;
+  background: #fff;
+  border: 1px solid rgba(0, 46, 66, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 46, 66, 0.06);
+}
+
+.service-aside__card--muted {
+  background: var(--suzuki-gray, #f4f5f6);
+  box-shadow: none;
+}
+
+.service-aside__title {
+  margin: 0 0 12px;
+}
+
+.service-aside__subtitle {
+  margin: 0 0 12px;
+}
+
+.service-aside__name {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.service-aside__text {
+  margin: 0 0 6px;
+  font-size: 0.875rem;
+  color: var(--suzuki-gray-dark, #5a6570);
+  line-height: 1.5;
+}
+
+.service-aside__links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 12px 0 0;
+}
+
+.service-aside__link {
+  font-size: 0.875rem;
+  color: var(--suzuki-blue, #00368f);
+  text-decoration: none;
+}
+
+.service-aside__link:hover {
+  text-decoration: underline;
+}
+
+.service-aside__list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.875rem;
+  color: var(--suzuki-gray-dark, #5a6570);
+  line-height: 1.55;
+}
+
+.service-aside__list li + li {
+  margin-top: 8px;
+}
+
+.service-aside__cta {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--suzuki-blue, #00368f);
+  text-decoration: none;
+}
+
+.service-aside__cta:hover {
+  text-decoration: underline;
 }
 
 .configurator-page {
