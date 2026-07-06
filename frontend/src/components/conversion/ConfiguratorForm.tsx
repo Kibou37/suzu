@@ -33,25 +33,18 @@ const STEPS = [
 
 function SwatchDot({ color }: { color: ConfigColor }) {
   if (color.hexSecondary && color.hex) {
-    const clipId = `swatch-${color.id}`;
+    const gradientId = `swatch-grad-${color.id}`;
     return (
       <svg className="configurator-color__dot-svg" viewBox="0 0 40 40" aria-hidden="true">
         <defs>
-          <clipPath id={`${clipId}-left`}>
-            <rect x="0" y="0" width="20" height="40" />
-          </clipPath>
-          <clipPath id={`${clipId}-right`}>
-            <rect x="20" y="0" width="20" height="40" />
-          </clipPath>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={color.hex} />
+            <stop offset="50%" stopColor={color.hex} />
+            <stop offset="50%" stopColor={color.hexSecondary} />
+            <stop offset="100%" stopColor={color.hexSecondary} />
+          </linearGradient>
         </defs>
-        <circle cx="20" cy="20" r="18" fill={color.hex} clipPath={`url(#${clipId}-left)`} />
-        <circle
-          cx="20"
-          cy="20"
-          r="18"
-          fill={color.hexSecondary}
-          clipPath={`url(#${clipId}-right)`}
-        />
+        <circle cx="20" cy="20" r="20" fill={`url(#${gradientId})`} />
       </svg>
     );
   }
@@ -64,14 +57,8 @@ function SwatchDot({ color }: { color: ConfigColor }) {
   );
 }
 
-function ringStyle(color: ConfigColor): CSSProperties | undefined {
-  if (color.hexSecondary && color.hex) {
-    return { background: `linear-gradient(135deg, ${color.hex} 50%, ${color.hexSecondary} 50%)` };
-  }
-  if (color.hex) {
-    return { backgroundColor: color.hex };
-  }
-  return undefined;
+function twoToneBackground(hex: string, hexSecondary: string): string {
+  return `linear-gradient(135deg, ${hex} 50%, ${hexSecondary} 50%)`;
 }
 
 function ColorSwatch({
@@ -95,7 +82,7 @@ function ColorSwatch({
       aria-pressed={selected}
       aria-label={`${color.name}${color.price > 0 ? `, +${formatPrice(color.price)}` : ', included'}`}
     >
-      <span className="configurator-color__ring" style={ringStyle(color)}>
+      <span className="configurator-color__ring">
         {swatchSrc ? (
           <img
             src={swatchSrc}
@@ -170,7 +157,7 @@ function SelectionChip({ label, color }: { label: string; color?: ConfigColor })
     color?.swatch && !broken ? withBasePath(color.swatch) : undefined;
 
   const dotStyle: CSSProperties | undefined = color?.hexSecondary && color.hex
-    ? { background: `linear-gradient(135deg, ${color.hex} 50%, ${color.hexSecondary} 50%)` }
+    ? { background: twoToneBackground(color.hex, color.hexSecondary) }
     : color?.hex
       ? { backgroundColor: color.hex }
       : undefined;
