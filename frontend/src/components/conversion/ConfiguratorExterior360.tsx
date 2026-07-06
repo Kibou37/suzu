@@ -1,7 +1,7 @@
 'use client';
 
 import { preload } from 'react-dom';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ConfigColor } from '@/data/demo-configurator';
 import {
   getSuzukiViewerIframeUrl,
@@ -24,14 +24,11 @@ type ViewMode = 'loading' | 'spin' | 'iframe' | 'empty';
 
 type DragState = {
   active: boolean;
-  /** X position of the last pointer-move event (NOT the pointer-down origin). */
   lastX: number;
-  /** Accumulated sub-frame pixels so small movements aren't lost. */
   remainder: number;
 };
 
 type Exterior360ViewProps = {
-  modelSlug: string;
   modelName: string;
   bodyColor?: ConfigColor;
   localFrames: string[] | undefined;
@@ -44,51 +41,55 @@ function Exterior360View({
   localFrames,
   iframeUrl,
 }: Exterior360ViewProps) {
-  const dragRef = useRef<DragState>({ active: false, lastX: 0, remainder: 0 });
-  const [frameIndex, setFrameIndex] = useState(0);
   const [spinReady, setSpinReady] = useState(false);
   const [mode, setMode] = useState<ViewMode>(() =>
     localFrames?.length ? 'loading' : iframeUrl ? 'iframe' : 'empty',
   );
 
-  // Preload first frame and wait for it to confirm the URL is reachable.
+  // Direct refs — frame updates bypass React render cycle for maximum smoothness.
+  const imgRef = useRef<HTMLImageElement>(null);
+  const frameIndexRef = useRef(0);
+  const rafRef = useRef<number>(0);
+  const dragRef = useRef<DragState>({ active: false, lastX: 0, remainder: 0 });
+
+  // Load first frame; when ready switch to spin mode and preload the rest.
   useEffect(() => {
     if (!localFrames?.length) return;
 
     preload(localFrames[0], { as: 'image' });
 
-    const img = document.createElement('img');
-    img.onload = () => {
+    const first = new Image();
+    first.onload = () => {
       setSpinReady(true);
       setMode('spin');
+
+      // Preload remaining frames in background so dragging is instant.
+      for (let i = 1; i < localFrames.length; i++) {
+        const img = new Image();
+        img.src = localFrames[i];
+      }
     };
-    img.onerror = () => {
+    first.onerror = () => {
       setSpinReady(true);
       setMode(iframeUrl ? 'iframe' : 'empty');
     };
-    img.src = localFrames[0];
+    first.src = localFrames[0];
 
     return () => {
-      img.onload = null;
-      img.onerror = null;
+      first.onload = null;
+      first.onerror = null;
+      cancelAnimationFrame(rafRef.current);
     };
   }, [iframeUrl, localFrames]);
 
-  const currentFrameUrl = useMemo(() => {
-    if (mode !== 'spin' || !localFrames?.length) return null;
+  // Commit a new frame index to the DOM without triggering React re-render.
+  const commitFrame = (index: number) => {
+    if (!localFrames?.length || !imgRef.current) return;
     const total = localFrames.length;
-    const index = ((frameIndex % total) + total) % total;
-    return localFrames[index] ?? null;
-  }, [frameIndex, localFrames, mode]);
-
-  const advanceFrames = useCallback(
-    (steps: number) => {
-      if (!localFrames?.length) return;
-      const total = localFrames.length;
-      setFrameIndex((current) => ((current - steps) % total + total * 100) % total);
-    },
-    [localFrames],
-  );
+    const safeIndex = ((index % total) + total) % total;
+    frameIndexRef.current = safeIndex;
+    imgRef.current.src = localFrames[safeIndex];
+  };
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (mode !== 'spin') return;
@@ -98,20 +99,21 @@ function Exterior360View({
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
-    if (!drag.active) return;
+    if (!drag.active || !localFrames?.length) return;
 
-    // Only the incremental delta since the last event.
     const delta = event.clientX - drag.lastX;
     drag.lastX = event.clientX;
-
     drag.remainder += delta;
 
-    // Whole frames to advance (sub-frame remainder is kept for next event).
     const steps = Math.trunc(drag.remainder / PIXELS_PER_FRAME);
-    if (steps !== 0) {
-      drag.remainder -= steps * PIXELS_PER_FRAME;
-      advanceFrames(steps);
-    }
+    if (steps === 0) return;
+
+    drag.remainder -= steps * PIXELS_PER_FRAME;
+    const nextIndex = frameIndexRef.current - steps;
+
+    // Throttle DOM updates to animation frame rate.
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => commitFrame(nextIndex));
   };
 
   const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -122,6 +124,7 @@ function Exterior360View({
 
   const colorLabel = bodyColor?.name ?? '';
   const showLoader = mode === 'loading' || (mode === 'spin' && !spinReady);
+  const firstFrameUrl = localFrames?.[0] ?? null;
 
   return (
     <div
@@ -133,7 +136,7 @@ function Exterior360View({
         </div>
       )}
 
-      {mode === 'spin' && spinReady && currentFrameUrl && (
+      {mode === 'spin' && spinReady && firstFrameUrl && (
         <>
           <div
             className="configurator-360__spin"
@@ -144,9 +147,10 @@ function Exterior360View({
             role="img"
             aria-label={`360 degree view of Suzuki ${modelName}${colorLabel ? ` in ${colorLabel}` : ''}. Drag horizontally to rotate.`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- external 360 frame sequence */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- 360 frame sequence; src managed via ref */}
             <img
-              src={currentFrameUrl}
+              ref={imgRef}
+              src={firstFrameUrl}
               alt=""
               className="configurator-360__frame"
               draggable={false}
@@ -191,13 +195,11 @@ export function ConfiguratorExterior360({
   );
 
   const iframeUrl = getSuzukiViewerIframeUrl(modelSlug);
-  // key forces a clean re-mount (reset frameIndex, loader) when colour changes.
   const viewKey = `${modelSlug}:${bodyColor?.id ?? 'default'}`;
 
   return (
     <Exterior360View
       key={viewKey}
-      modelSlug={modelSlug}
       modelName={modelName}
       bodyColor={bodyColor}
       localFrames={localFrames}

@@ -92,6 +92,30 @@ export const BODY_COLOR_HEX_MAP: Record<string, Record<string, string>> = {
     BC_Z2S:    '#8b8b8b', // Silky Silver Metallic
     BC_26U:    '#d2d2d2', // White
   },
+  swift: {
+    BC_E6L:    '#2870a0', // Frontier Blue Pearl Metallic × Super Black Pearl
+    BC_D7Z:    '#c03040', // Burning Red Pearl Metallic × Super Black Pearl
+    BC_E6P:    '#c8b84a', // Cool Yellow Metallic × Mineral Gray Metallic
+    BC_DYH:    '#d5d5d5', // Pure White Pearl × Mineral Gray Metallic
+    BC_WB1_R:  '#2870a0', // Frontier Blue Pearl Metallic
+    BC_WB2_R:  '#c8b84a', // Cool Yellow Metallic
+    BC_ZWP_R:  '#c03040', // Burning Red Pearl Metallic
+    BC_ZWD_R:  '#e07840', // Flame Orange Pearl Metallic
+    BC_ZYL_R:  '#cfc0a8', // Caravan Ivory Pearl Metallic
+    BC_ZVR_R:  '#d5d5d5', // Pure White Pearl
+    BC_ZNC_R:  '#8b8b8b', // Premium Silver Metallic
+    BC_ZMW_R:  '#666870', // Mineral Gray Metallic
+    BC_ZMV_R:  '#1c1c1e', // Super Black Pearl
+  },
+  's-cross': {
+    BC_ZNL:  '#a3a3a3', // Cool White Pearl
+    BC_ZCC:  '#c2c2c2', // Silky Silver Metallic
+    BC_ZCE:  '#292929', // Cosmic Black Pearl Metallic
+    BC_ZQ5:  '#c03040', // Energetic Red Pearl
+    BC_ZQ3:  '#8b6752', // Canyon Brown Pearl Metallic
+    BC_ZQ4:  '#3864a0', // Sphere Blue Pearl
+    BC_26U:  '#d2d2d2', // White
+  },
 };
 
 /** Models that support Suzuki iframe 360 when local frames are missing. */
