@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { BookingDateField } from '@/components/conversion/BookingDateField';
+import { ConversionFormRecaptchaNotice } from '@/components/conversion/ConversionFormRecaptchaNotice';
 import type { CarListItem } from '@/lib/api';
 import { getConfiguratorData } from '@/data/demo-configurator';
 import {
@@ -12,6 +13,7 @@ import {
   isValidPhone,
   submitTestDrive,
 } from '@/lib/bookings';
+import { getRecaptchaToken, isRecaptchaEnabled } from '@/lib/recaptcha';
 
 type TestDriveFormProps = {
   cars: CarListItem[];
@@ -103,6 +105,17 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
       return;
     }
 
+    let recaptchaToken: string | undefined;
+
+    if (isRecaptchaEnabled()) {
+      try {
+        recaptchaToken = await getRecaptchaToken('test_drive_booking');
+      } catch {
+        setError('Security check failed. Please refresh the page and try again.');
+        return;
+      }
+    }
+
     setSubmitting(true);
 
     try {
@@ -113,6 +126,7 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
         customerPhone,
         customerEmail: customerEmail || undefined,
         notes: notes || undefined,
+        recaptchaToken,
       });
 
       setSuccess(
@@ -229,6 +243,8 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
       {success && (
         <p className="conversion-form__message conversion-form__message--success">{success}</p>
       )}
+
+      <ConversionFormRecaptchaNotice />
 
       <div className="conversion-form__actions">
         <button type="submit" className="btn btn-primary" disabled={submitting}>

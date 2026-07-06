@@ -6,6 +6,7 @@ import { AssetPathStyles } from '@/components/layout/AssetPathStyles';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { RecaptchaScript } from '@/components/layout/RecaptchaScript';
 import './globals.css';
 
 const suzukiPro = localFont({
@@ -54,6 +55,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <CookieBanner />
+        <RecaptchaScript />
       </body>
     </html>
   );

@@ -5,6 +5,7 @@ export type TestDrivePayload = {
   customerPhone: string;
   customerEmail?: string;
   notes?: string;
+  recaptchaToken?: string;
 };
 
 export type TestDriveResult = {
@@ -22,6 +23,7 @@ export type ServicePayload = {
   vin?: string;
   mileage?: number;
   notes?: string;
+  recaptchaToken?: string;
 };
 
 export const SERVICE_TYPES = [

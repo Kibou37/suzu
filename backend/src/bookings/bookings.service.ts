@@ -1,6 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { BookingType } from '@prisma/client';
+import { MailService } from '../mail/mail.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { RecaptchaService } from '../recaptcha/recaptcha.service';
 
 export type CreateTestDriveInput = {
   carSlug?: string;
@@ -9,6 +11,7 @@ export type CreateTestDriveInput = {
   customerPhone: string;
   customerEmail?: string;
   notes?: string;
+  recaptchaToken?: string;
 };
 
 export type CreateServiceInput = {
@@ -21,6 +24,7 @@ export type CreateServiceInput = {
   vin?: string;
   mileage?: number;
   notes?: string;
+  recaptchaToken?: string;
 };
 
 const SLOT_HOURS_WEEKDAY = [10, 11, 12, 13, 14, 15, 16, 17];
@@ -30,7 +34,11 @@ const MAX_BOOKINGS_PER_SLOT = 1;
 
 @Injectable()
 export class BookingsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly recaptchaService: RecaptchaService,
+    private readonly mailService: MailService,
+  ) {}
 
   async getAvailableSlots(
     date: string,
@@ -68,6 +76,11 @@ export class BookingsService {
   }
 
   async createTestDrive(input: CreateTestDriveInput) {
+    await this.recaptchaService.verify(
+      input.recaptchaToken,
+      'test_drive_booking',
+    );
+
     const scheduledAt = new Date(input.scheduledAt);
     if (Number.isNaN(scheduledAt.getTime())) {
       throw new BadRequestException('Invalid date or time');
@@ -125,6 +138,15 @@ export class BookingsService {
       },
     });
 
+    void this.mailService.sendBookingConfirmationSafe({
+      type: BookingType.TEST_DRIVE,
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: booking.customerEmail,
+      scheduledAt: booking.scheduledAt,
+      notes: booking.notes,
+    });
+
     return {
       id: booking.id,
       scheduledAt: booking.scheduledAt.toISOString(),
@@ -132,6 +154,8 @@ export class BookingsService {
   }
 
   async createService(input: CreateServiceInput) {
+    await this.recaptchaService.verify(input.recaptchaToken, 'service_booking');
+
     const scheduledAt = new Date(input.scheduledAt);
     if (Number.isNaN(scheduledAt.getTime())) {
       throw new BadRequestException('Invalid date or time');
@@ -186,6 +210,15 @@ export class BookingsService {
         customerEmail: input.customerEmail?.trim() || null,
         notes: notesParts.join('\n'),
       },
+    });
+
+    void this.mailService.sendBookingConfirmationSafe({
+      type: BookingType.SERVICE,
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: booking.customerEmail,
+      scheduledAt: booking.scheduledAt,
+      notes: booking.notes,
     });
 
     return {

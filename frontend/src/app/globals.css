@@ -1370,6 +1370,18 @@ body {
   color: #1a7f37;
 }
 
+.conversion-form__recaptcha {
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--suzuki-muted);
+}
+
+.conversion-form__recaptcha a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 /* Service booking page */
 .service-page {
   display: grid;

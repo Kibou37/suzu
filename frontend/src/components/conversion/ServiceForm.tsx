@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { BookingDateField } from '@/components/conversion/BookingDateField';
 import { ConversionFormSection } from '@/components/conversion/ConversionFormSection';
 import { SERVICE_VEHICLES, getServiceVehicleLabel } from '@/data/service-vehicles';
+import { ConversionFormRecaptchaNotice } from '@/components/conversion/ConversionFormRecaptchaNotice';
 import {
   SERVICE_TYPES,
   formatBookingSlot,
@@ -14,6 +15,7 @@ import {
   isValidVin,
   submitService,
 } from '@/lib/bookings';
+import { getRecaptchaToken, isRecaptchaEnabled } from '@/lib/recaptcha';
 
 const OTHER_VEHICLE = '__other__';
 
@@ -97,6 +99,17 @@ export function ServiceForm() {
       return;
     }
 
+    let recaptchaToken: string | undefined;
+
+    if (isRecaptchaEnabled()) {
+      try {
+        recaptchaToken = await getRecaptchaToken('service_booking');
+      } catch {
+        setError('Security check failed. Please refresh the page and try again.');
+        return;
+      }
+    }
+
     setSubmitting(true);
 
     try {
@@ -110,6 +123,7 @@ export function ServiceForm() {
         vin: vin || undefined,
         mileage: mileage != null && !Number.isNaN(mileage) ? mileage : undefined,
         notes: notes || undefined,
+        recaptchaToken,
       });
 
       setSuccess(
@@ -289,6 +303,8 @@ export function ServiceForm() {
       {success && (
         <p className="conversion-form__message conversion-form__message--success">{success}</p>
       )}
+
+      <ConversionFormRecaptchaNotice />
 
       <div className="conversion-form__actions">
         <button type="submit" className="btn btn-primary" disabled={submitting}>
