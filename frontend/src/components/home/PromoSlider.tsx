@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export type PromoSlide = {
   id: string;
@@ -18,41 +18,104 @@ type PromoSliderProps = {
   slides: PromoSlide[];
 };
 
+type LoopSlide = PromoSlide & {
+  loopKey: string;
+};
+
 const SWIPE_THRESHOLD_PX = 48;
 const DRAG_START_PX = 10;
 const AUTO_PLAY_MS = 8000;
 
+function buildLoopSlides(slides: PromoSlide[]): LoopSlide[] {
+  if (slides.length <= 1) {
+    return slides.map((slide) => ({ ...slide, loopKey: slide.id }));
+  }
+
+  const last = slides[slides.length - 1];
+  const first = slides[0];
+
+  return [
+    { ...last, loopKey: `${last.id}-loop-start` },
+    ...slides.map((slide) => ({ ...slide, loopKey: slide.id })),
+    { ...first, loopKey: `${first.id}-loop-end` },
+  ];
+}
+
+function getActiveSlideIndex(position: number, slideCount: number): number {
+  if (slideCount <= 1) return 0;
+  if (position === 0) return slideCount - 1;
+  if (position === slideCount + 1) return 0;
+  return position - 1;
+}
+
 export function PromoSlider({ slides }: PromoSliderProps) {
-  const [index, setIndex] = useState(0);
+  const slideCount = slides.length;
+  const hasMultipleSlides = slideCount > 1;
+  const loopSlides = useMemo(() => buildLoopSlides(slides), [slides]);
+
+  const [position, setPosition] = useState(hasMultipleSlides ? 1 : 0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+
   const dragStartX = useRef(0);
   const isDragActive = useRef(false);
   const sliderRef = useRef<HTMLElement>(null);
 
-  const slideCount = slides.length;
-  const hasMultipleSlides = slideCount > 1;
+  const activeIndex = getActiveSlideIndex(position, slideCount);
 
-  const goTo = useCallback(
-    (nextIndex: number) => {
+  const goNext = useCallback(() => {
+    if (!hasMultipleSlides) return;
+    setTransitionEnabled(true);
+    setPosition((current) => current + 1);
+  }, [hasMultipleSlides]);
+
+  const goPrev = useCallback(() => {
+    if (!hasMultipleSlides) return;
+    setTransitionEnabled(true);
+    setPosition((current) => current - 1);
+  }, [hasMultipleSlides]);
+
+  const goToSlide = useCallback(
+    (slideIndex: number) => {
       if (!hasMultipleSlides) return;
-      setIndex(((nextIndex % slideCount) + slideCount) % slideCount);
+      setTransitionEnabled(true);
+      setPosition(slideIndex + 1);
     },
-    [hasMultipleSlides, slideCount],
+    [hasMultipleSlides],
   );
-
-  const goNext = useCallback(() => goTo(index + 1), [goTo, index]);
-  const goPrev = useCallback(() => goTo(index - 1), [goTo, index]);
 
   useEffect(() => {
     if (!hasMultipleSlides || isDragging) return;
 
-    const timer = window.setInterval(() => {
-      setIndex((current) => (current + 1) % slideCount);
-    }, AUTO_PLAY_MS);
-
+    const timer = window.setInterval(goNext, AUTO_PLAY_MS);
     return () => window.clearInterval(timer);
-  }, [hasMultipleSlides, isDragging, slideCount]);
+  }, [goNext, hasMultipleSlides, isDragging]);
+
+  const handleTrackTransitionEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
+    if (event.target !== event.currentTarget || event.propertyName !== 'transform') {
+      return;
+    }
+
+    if (!hasMultipleSlides) return;
+
+    if (position === 0) {
+      setTransitionEnabled(false);
+      setPosition(slideCount);
+    } else if (position === slideCount + 1) {
+      setTransitionEnabled(false);
+      setPosition(1);
+    }
+  };
+
+  useEffect(() => {
+    if (!transitionEnabled) {
+      const frame = window.requestAnimationFrame(() => {
+        setTransitionEnabled(true);
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+  }, [transitionEnabled, position]);
 
   const finishDrag = useCallback(
     (clientX: number) => {
@@ -140,23 +203,24 @@ export function PromoSlider({ slides }: PromoSliderProps) {
     >
       <div
         className="hero-slider__track"
+        onTransitionEnd={handleTrackTransitionEnd}
         style={{
-          transform: `translate3d(calc(${-index * 100}% + ${dragOffset}px), 0, 0)`,
-          transition: isDragging ? 'none' : 'transform 0.45s ease',
+          transform: `translate3d(calc(${-position * 100}% + ${dragOffset}px), 0, 0)`,
+          transition: isDragging || !transitionEnabled ? 'none' : 'transform 0.45s ease',
         }}
       >
-        {slides.map((item, slideIndex) => (
+        {loopSlides.map((item, slideIndex) => (
           <div
-            key={item.id}
+            key={item.loopKey}
             className="hero-slide"
-            aria-hidden={slideIndex !== index}
+            aria-hidden={hasMultipleSlides ? slideIndex !== position : slideIndex !== 0}
           >
             <div className="hero-slide__media">
               <Image
                 src={item.imageUrl}
                 alt=""
                 fill
-                priority={slideIndex === 0}
+                priority={item.id === slides[0]?.id}
                 sizes="100vw"
                 className="object-cover"
                 draggable={false}
@@ -190,9 +254,9 @@ export function PromoSlider({ slides }: PromoSliderProps) {
                   <button
                     type="button"
                     aria-label={`Slide ${slideIndex + 1}`}
-                    aria-current={slideIndex === index ? 'true' : undefined}
-                    onClick={() => setIndex(slideIndex)}
-                    className={`hero-slider__dot ${slideIndex === index ? 'hero-slider__dot--active' : ''}`}
+                    aria-current={slideIndex === activeIndex ? 'true' : undefined}
+                    onClick={() => goToSlide(slideIndex)}
+                    className={`hero-slider__dot ${slideIndex === activeIndex ? 'hero-slider__dot--active' : ''}`}
                   />
                 </li>
               ))}
