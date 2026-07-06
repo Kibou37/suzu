@@ -22,7 +22,11 @@ export function MobileNav() {
         aria-expanded={open}
         aria-label={open ? 'Close menu' : 'Open menu'}
         onClick={() => setOpen((v) => !v)}
-      />
+      >
+        <span className="site-header__burger-line" aria-hidden="true" />
+        <span className="site-header__burger-line" aria-hidden="true" />
+        <span className="site-header__burger-line" aria-hidden="true" />
+      </button>
 
       {open && (
         <>
