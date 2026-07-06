@@ -1,9 +1,10 @@
 'use client';
 
-import { ConfiguratorExterior360 } from '@/components/conversion/ConfiguratorExterior360';
+import { ConfiguratorStagePreview } from '@/components/conversion/ConfiguratorStagePreview';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
+import { dealer } from '@suzuki/shared';
 import type { CarListItem } from '@/lib/api';
 import {
   calculateConfiguratorTotal,
@@ -13,6 +14,10 @@ import {
 } from '@/data/demo-configurator';
 import { formatPrice } from '@/lib/format';
 import { withBasePath } from '@/lib/base-path';
+import {
+  buildConfiguratorQuery,
+  formatConfiguratorSummary,
+} from '@/lib/configurator-query';
 
 type ConfiguratorFormProps = {
   cars: CarListItem[];
@@ -25,6 +30,49 @@ const STEPS = [
   { id: 3, label: 'Options' },
   { id: 4, label: 'Summary' },
 ] as const;
+
+function SwatchDot({ color }: { color: ConfigColor }) {
+  if (color.hexSecondary && color.hex) {
+    const clipId = `swatch-${color.id}`;
+    return (
+      <svg className="configurator-color__dot-svg" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <clipPath id={`${clipId}-left`}>
+            <rect x="0" y="0" width="20" height="40" />
+          </clipPath>
+          <clipPath id={`${clipId}-right`}>
+            <rect x="20" y="0" width="20" height="40" />
+          </clipPath>
+        </defs>
+        <circle cx="20" cy="20" r="18" fill={color.hex} clipPath={`url(#${clipId}-left)`} />
+        <circle
+          cx="20"
+          cy="20"
+          r="18"
+          fill={color.hexSecondary}
+          clipPath={`url(#${clipId}-right)`}
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <span
+      className="configurator-color__dot"
+      style={{ backgroundColor: color.hex ?? '#c8cdd2' }}
+    />
+  );
+}
+
+function ringStyle(color: ConfigColor): CSSProperties | undefined {
+  if (color.hexSecondary && color.hex) {
+    return { background: `linear-gradient(135deg, ${color.hex} 50%, ${color.hexSecondary} 50%)` };
+  }
+  if (color.hex) {
+    return { backgroundColor: color.hex };
+  }
+  return undefined;
+}
 
 function ColorSwatch({
   color,
@@ -47,10 +95,7 @@ function ColorSwatch({
       aria-pressed={selected}
       aria-label={`${color.name}${color.price > 0 ? `, +${formatPrice(color.price)}` : ', included'}`}
     >
-      <span
-        className="configurator-color__ring"
-        style={color.hex ? { backgroundColor: color.hex } : undefined}
-      >
+      <span className="configurator-color__ring" style={ringStyle(color)}>
         {swatchSrc ? (
           <img
             src={swatchSrc}
@@ -60,10 +105,7 @@ function ColorSwatch({
             onError={() => setSwatchBroken(true)}
           />
         ) : (
-          <span
-            className="configurator-color__dot"
-            style={{ backgroundColor: color.hex ?? '#c8cdd2' }}
-          />
+          <SwatchDot color={color} />
         )}
       </span>
       <span className="configurator-color__meta">
@@ -115,29 +157,38 @@ function OptionCard({
           <span className="configurator-option__desc">{option.description}</span>
         )}
       </span>
-      <span className="configurator-option__price">+{formatPrice(option.price)}</span>
+      <span className="configurator-option__price">
+        {option.price > 0 ? `+${formatPrice(option.price)}` : 'Included'}
+      </span>
     </label>
   );
 }
 
-function SelectionChip({ label, swatch, hex }: { label: string; swatch?: string; hex?: string }) {
+function SelectionChip({ label, color }: { label: string; color?: ConfigColor }) {
+  const [broken, setBroken] = useState(false);
+  const swatchSrc =
+    color?.swatch && !broken ? withBasePath(color.swatch) : undefined;
+
+  const dotStyle: CSSProperties | undefined = color?.hexSecondary && color.hex
+    ? { background: `linear-gradient(135deg, ${color.hex} 50%, ${color.hexSecondary} 50%)` }
+    : color?.hex
+      ? { backgroundColor: color.hex }
+      : undefined;
+
   return (
     <span className="configurator-chip">
-      {(swatch || hex) && (
-        swatch ? (
+      {color && (
+        swatchSrc ? (
           <img
-            src={withBasePath(swatch)}
+            src={swatchSrc}
             alt=""
             className="configurator-chip__swatch"
             aria-hidden="true"
+            onError={() => setBroken(true)}
           />
-        ) : (
-          <span
-            className="configurator-chip__dot"
-            style={{ backgroundColor: hex }}
-            aria-hidden="true"
-          />
-        )
+        ) : dotStyle ? (
+          <span className="configurator-chip__dot" style={dotStyle} aria-hidden="true" />
+        ) : null
       )}
       {label}
     </span>
@@ -218,6 +269,19 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
   const stepTitle = STEPS.find((item) => item.id === step)?.label ?? '';
   const progress = ((step - 1) / (STEPS.length - 1)) * 100;
 
+  const selections = {
+    modelSlug: selected.slug,
+    modelName: selected.name,
+    bodyColor,
+    interiorColor,
+    options: selectedOptions.map((o) => ({ id: o.id, name: o.name })),
+    totalPrice,
+  };
+
+  const configQuery = buildConfiguratorQuery(selections);
+  const configSummary = formatConfiguratorSummary(selections);
+  const quoteMailto = `mailto:${dealer.email}?subject=${encodeURIComponent(`Quote request — Suzuki ${selected.name}`)}&body=${encodeURIComponent(configSummary)}`;
+
   return (
     <div className="configurator">
       <div className="configurator__shell">
@@ -243,9 +307,10 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
           </header>
 
           <div className="configurator__visual">
-            <ConfiguratorExterior360
+            <ConfiguratorStagePreview
               modelSlug={selected.slug}
               modelName={selected.name}
+              step={step}
               bodyColor={bodyColor ?? configData.bodyColors[0]}
             />
           </div>
@@ -254,14 +319,10 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
             {(bodyColor || interiorColor) && (
               <div className="configurator__chips" aria-label="Current selections">
                 {bodyColor && (
-                  <SelectionChip label={bodyColor.name} swatch={bodyColor.swatch} hex={bodyColor.hex} />
+                  <SelectionChip label={bodyColor.name} color={bodyColor} />
                 )}
                 {interiorColor && (
-                  <SelectionChip
-                    label={`Interior: ${interiorColor.name}`}
-                    swatch={interiorColor.swatch}
-                    hex={interiorColor.hex}
-                  />
+                  <SelectionChip label={`Interior: ${interiorColor.name}`} color={interiorColor} />
                 )}
               </div>
             )}
@@ -408,12 +469,23 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
                   {selectedOptions.map((option) => (
                     <div key={option.id} className="configurator__breakdown-row">
                       <dt>{option.name}</dt>
-                      <dd>+{formatPrice(option.price)}</dd>
+                      <dd>{option.price > 0 ? `+${formatPrice(option.price)}` : 'Included'}</dd>
                     </div>
                   ))}
                   <div className="configurator__breakdown-row configurator__breakdown-row--total">
                     <dt>Estimated total</dt>
                     <dd>{totalPrice > 0 ? formatPrice(totalPrice) : 'On request'}</dd>
+                  </div>
+                  <div className="configurator__summary-actions">
+                    <a href={quoteMailto} className="configurator__btn configurator__btn--outline">
+                      Request quote
+                    </a>
+                    <Link
+                      href={`/test-drive?${configQuery}`}
+                      className="configurator__btn configurator__btn--primary"
+                    >
+                      Book test drive
+                    </Link>
                   </div>
                 </dl>
               )}
@@ -448,26 +520,18 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
                 Continue
               </button>
             ) : (
-              <div className="configurator__footer-actions">
-                <Link
-                  href={`/test-drive?model=${selected.slug}`}
-                  className="configurator__btn configurator__btn--primary"
-                >
-                  Book test drive
-                </Link>
-                <Link
-                  href={`/catalog/${selected.slug}`}
-                  className="configurator__btn configurator__btn--outline"
-                >
-                  View model
-                </Link>
-              </div>
+              <Link
+                href={`/test-drive?${configQuery}`}
+                className="configurator__btn configurator__btn--primary"
+              >
+                Book test drive
+              </Link>
             )}
           </footer>
         </section>
       </div>
 
-      {step < 4 && (
+      {step < 4 ? (
         <div className="configurator__mobile-bar" aria-hidden={false}>
           <div className="configurator__mobile-bar-inner">
             <div>
@@ -484,6 +548,23 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
             >
               Continue
             </button>
+          </div>
+        </div>
+      ) : (
+        <div className="configurator__mobile-bar configurator__mobile-bar--summary">
+          <div className="configurator__mobile-bar-inner">
+            <div>
+              <p className="configurator__mobile-bar-label">Estimated total</p>
+              <p className="configurator__mobile-bar-price">
+                {totalPrice > 0 ? formatPrice(totalPrice) : 'On request'}
+              </p>
+            </div>
+            <Link
+              href={`/test-drive?${configQuery}`}
+              className="configurator__btn configurator__btn--primary"
+            >
+              Book test drive
+            </Link>
           </div>
         </div>
       )}

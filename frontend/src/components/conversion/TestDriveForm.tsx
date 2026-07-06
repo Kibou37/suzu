@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import type { CarListItem } from '@/lib/api';
+import { getConfiguratorData } from '@/data/demo-configurator';
 import {
   formatBookingSlot,
   formatSlotTime,
@@ -24,6 +25,33 @@ function minBookingDate(): string {
 export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
   const searchParams = useSearchParams();
   const modelSlug = initialModelSlug ?? searchParams.get('model') ?? undefined;
+  const bodyColorId = searchParams.get('body') ?? undefined;
+  const interiorColorId = searchParams.get('interior') ?? undefined;
+  const optionIds = useMemo(
+    () => searchParams.get('options')?.split(',').filter(Boolean) ?? [],
+    [searchParams],
+  );
+
+  const configNotes = useMemo(() => {
+    if (!modelSlug || (!bodyColorId && !interiorColorId && optionIds.length === 0)) {
+      return '';
+    }
+
+    const config = getConfiguratorData(modelSlug);
+    const car = cars.find((item) => item.slug === modelSlug);
+    const body = config.bodyColors.find((color) => color.id === bodyColorId);
+    const interior = config.interiorColors.find((color) => color.id === interiorColorId);
+    const options = config.options.filter((option) => optionIds.includes(option.id));
+
+    const lines = [
+      car ? `Model: Suzuki ${car.name}` : null,
+      body ? `Exterior: ${body.name}` : null,
+      interior ? `Interior: ${interior.name}` : null,
+      options.length > 0 ? `Options: ${options.map((o) => o.name).join(', ')}` : null,
+    ];
+
+    return lines.filter(Boolean).join('\n');
+  }, [bodyColorId, cars, interiorColorId, modelSlug, optionIds]);
 
   const newCars = useMemo(
     () => cars.filter((car) => car.condition === 'NEW'),
@@ -198,6 +226,7 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
             name="notes"
             className="conversion-form__textarea"
             rows={3}
+            defaultValue={configNotes}
             placeholder="Preferred contact method, questions about the model…"
           />
         </label>

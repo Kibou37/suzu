@@ -11,6 +11,8 @@ export type ConfigColor = {
   swatch?: string;
   /** Fallback when swatch image is unavailable. */
   hex?: string;
+  /** Second tone for two-tone paint finishes. */
+  hexSecondary?: string;
   price: number;
 };
 

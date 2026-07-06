@@ -1,0 +1,41 @@
+'use client';
+
+import type { ConfigColor } from '@/data/demo-configurator';
+import { ConfiguratorExterior360 } from '@/components/conversion/ConfiguratorExterior360';
+import { ConfiguratorInteriorPanorama } from '@/components/conversion/ConfiguratorInteriorPanorama';
+import { getInteriorPanorama } from '@/lib/car-interior-panorama';
+import { resolveExterior360Frames } from '@/lib/car-exterior-360';
+
+type ConfiguratorStagePreviewProps = {
+  modelSlug: string;
+  modelName: string;
+  step: number;
+  bodyColor?: ConfigColor;
+};
+
+export function ConfiguratorStagePreview({
+  modelSlug,
+  modelName,
+  step,
+  bodyColor,
+}: ConfiguratorStagePreviewProps) {
+  const interiorPanorama = getInteriorPanorama(modelSlug);
+  const showInterior = step === 2 && Boolean(interiorPanorama);
+
+  if (showInterior && interiorPanorama) {
+    return (
+      <ConfiguratorInteriorPanorama modelName={modelName} panorama={interiorPanorama} />
+    );
+  }
+
+  const hasLocalFrames = Boolean(resolveExterior360Frames(modelSlug, bodyColor)?.length);
+
+  return (
+    <ConfiguratorExterior360
+      modelSlug={modelSlug}
+      modelName={modelName}
+      bodyColor={bodyColor}
+      preferIframe={!hasLocalFrames}
+    />
+  );
+}

@@ -118,6 +118,50 @@ export const BODY_COLOR_HEX_MAP: Record<string, Record<string, string>> = {
   },
 };
 
+/**
+ * Two-tone paint: BC_* thumbnail → [body hex, roof/second hex].
+ * Extracted from car-model-content.raw.json dual-colour sets.
+ */
+export const TWO_TONE_HEX_MAP: Record<string, Record<string, [string, string]>> = {
+  vitara: {
+    BC_DBH_R: ['#9b6c2a', '#292929'],
+    BC_A9G_R:  ['#626264', '#272727'],
+    BC_A9L_R:  ['#006e81', '#292929'],
+    BC_A9N_R:  ['#8f8376', '#282828'],
+    BC_A9H_R:  ['#d73a4a', '#000000'],
+    BC_DBF_R:  ['#5d6d72', '#282828'],
+    BC_A6H_R:  ['#007081', '#d2d2d2'],
+  },
+  jimny: {
+    BC_DG52_R: ['#a2ac31', '#262628'],
+    BC_2BW2_R: ['#c3b689', '#262628'],
+    BC_CZW2_R: ['#2c72a3', '#252527'],
+  },
+  swift: {
+    BC_E6L: ['#2870a0', '#1c1c1e'],
+    BC_D7Z: ['#c03040', '#1c1c1e'],
+    BC_E6P: ['#c8b84a', '#666870'],
+    BC_DYH: ['#d5d5d5', '#666870'],
+  },
+};
+
+/** Interior trim swatch hex when PNG is missing. */
+export const INTERIOR_COLOR_HEX_MAP: Record<string, Record<string, string>> = {
+  vitara: {
+    INTBASE_001: '#2e2822',
+    INTBASE_002: '#3a3530',
+  },
+  jimny: {
+    INTBASE_001: '#2a2520',
+  },
+  swift: {
+    INTBASE_001: '#2c2c2e',
+  },
+  's-cross': {
+    INTBASE_001: '#2a2a2c',
+  },
+};
+
 /** Models that support Suzuki iframe 360 when local frames are missing. */
 export const SUZUKI_360_MODELS = new Set(['vitara', 'jimny', 'swift', 's-cross']);
 

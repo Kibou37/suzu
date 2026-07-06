@@ -12,6 +12,8 @@ type ConfiguratorExterior360Props = {
   modelSlug: string;
   modelName: string;
   bodyColor?: ConfigColor;
+  /** Skip local spin attempt and show Suzuki iframe immediately (Swift, S-Cross). */
+  preferIframe?: boolean;
 };
 
 /**
@@ -33,6 +35,7 @@ type Exterior360ViewProps = {
   bodyColor?: ConfigColor;
   localFrames: string[] | undefined;
   iframeUrl: string | undefined;
+  preferIframe?: boolean;
 };
 
 function Exterior360View({
@@ -40,11 +43,15 @@ function Exterior360View({
   bodyColor,
   localFrames,
   iframeUrl,
+  preferIframe,
 }: Exterior360ViewProps) {
   const [spinReady, setSpinReady] = useState(false);
-  const [mode, setMode] = useState<ViewMode>(() =>
-    localFrames?.length ? 'loading' : iframeUrl ? 'iframe' : 'empty',
-  );
+  const [mode, setMode] = useState<ViewMode>(() => {
+    if (preferIframe && iframeUrl) return 'iframe';
+    if (localFrames?.length) return 'loading';
+    if (iframeUrl) return 'iframe';
+    return 'empty';
+  });
 
   // Direct refs — frame updates bypass React render cycle for maximum smoothness.
   const imgRef = useRef<HTMLImageElement>(null);
@@ -54,7 +61,7 @@ function Exterior360View({
 
   // Load first frame; when ready switch to spin mode and preload the rest.
   useEffect(() => {
-    if (!localFrames?.length) return;
+    if (preferIframe || !localFrames?.length) return;
 
     preload(localFrames[0], { as: 'image' });
 
@@ -80,7 +87,7 @@ function Exterior360View({
       first.onerror = null;
       cancelAnimationFrame(rafRef.current);
     };
-  }, [iframeUrl, localFrames]);
+  }, [iframeUrl, localFrames, preferIframe]);
 
   // Commit a new frame index to the DOM without triggering React re-render.
   const commitFrame = (index: number) => {
@@ -188,14 +195,15 @@ export function ConfiguratorExterior360({
   modelSlug,
   modelName,
   bodyColor,
+  preferIframe = false,
 }: ConfiguratorExterior360Props) {
   const localFrames = useMemo(
-    () => resolveExterior360Frames(modelSlug, bodyColor),
-    [modelSlug, bodyColor],
+    () => (preferIframe ? undefined : resolveExterior360Frames(modelSlug, bodyColor)),
+    [modelSlug, bodyColor, preferIframe],
   );
 
   const iframeUrl = getSuzukiViewerIframeUrl(modelSlug);
-  const viewKey = `${modelSlug}:${bodyColor?.id ?? 'default'}`;
+  const viewKey = `${modelSlug}:${bodyColor?.id ?? 'default'}:${preferIframe ? 'iframe' : 'spin'}`;
 
   return (
     <Exterior360View
@@ -204,6 +212,7 @@ export function ConfiguratorExterior360({
       bodyColor={bodyColor}
       localFrames={localFrames}
       iframeUrl={iframeUrl}
+      preferIframe={preferIframe}
     />
   );
 }
