@@ -47,7 +47,10 @@ function ColorSwatch({
       aria-pressed={selected}
       aria-label={`${color.name}${color.price > 0 ? `, +${formatPrice(color.price)}` : ', included'}`}
     >
-      <span className="configurator-color__ring">
+      <span
+        className="configurator-color__ring"
+        style={color.hex ? { backgroundColor: color.hex } : undefined}
+      >
         {swatchSrc ? (
           <img
             src={swatchSrc}

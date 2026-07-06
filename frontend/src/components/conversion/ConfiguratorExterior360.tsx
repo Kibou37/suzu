@@ -14,9 +14,21 @@ type ConfiguratorExterior360Props = {
   bodyColor?: ConfigColor;
 };
 
-const DRAG_PIXELS_PER_FRAME = 14;
+/**
+ * Pixels of horizontal drag required to advance one frame.
+ * Higher = slower / more deliberate rotation feel.
+ */
+const PIXELS_PER_FRAME = 20;
 
 type ViewMode = 'loading' | 'spin' | 'iframe' | 'empty';
+
+type DragState = {
+  active: boolean;
+  /** X position of the last pointer-move event (NOT the pointer-down origin). */
+  lastX: number;
+  /** Accumulated sub-frame pixels so small movements aren't lost. */
+  remainder: number;
+};
 
 type Exterior360ViewProps = {
   modelSlug: string;
@@ -32,13 +44,14 @@ function Exterior360View({
   localFrames,
   iframeUrl,
 }: Exterior360ViewProps) {
-  const dragRef = useRef({ active: false, startX: 0 });
+  const dragRef = useRef<DragState>({ active: false, lastX: 0, remainder: 0 });
   const [frameIndex, setFrameIndex] = useState(0);
   const [spinReady, setSpinReady] = useState(false);
   const [mode, setMode] = useState<ViewMode>(() =>
     localFrames?.length ? 'loading' : iframeUrl ? 'iframe' : 'empty',
   );
 
+  // Preload first frame and wait for it to confirm the URL is reachable.
   useEffect(() => {
     if (!localFrames?.length) return;
 
@@ -63,29 +76,42 @@ function Exterior360View({
 
   const currentFrameUrl = useMemo(() => {
     if (mode !== 'spin' || !localFrames?.length) return null;
-    const index = ((frameIndex % localFrames.length) + localFrames.length) % localFrames.length;
+    const total = localFrames.length;
+    const index = ((frameIndex % total) + total) % total;
     return localFrames[index] ?? null;
   }, [frameIndex, localFrames, mode]);
 
-  const updateFrameFromDelta = useCallback(
-    (deltaX: number) => {
-      const step = Math.round(deltaX / DRAG_PIXELS_PER_FRAME);
-      if (step === 0 || !localFrames?.length) return;
-
-      setFrameIndex((current) => (current - step + localFrames.length * 16) % localFrames.length);
+  const advanceFrames = useCallback(
+    (steps: number) => {
+      if (!localFrames?.length) return;
+      const total = localFrames.length;
+      setFrameIndex((current) => ((current - steps) % total + total * 100) % total);
     },
     [localFrames],
   );
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (mode !== 'spin') return;
-    dragRef.current = { active: true, startX: event.clientX };
+    dragRef.current = { active: true, lastX: event.clientX, remainder: 0 };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragRef.current.active) return;
-    updateFrameFromDelta(event.clientX - dragRef.current.startX);
+    const drag = dragRef.current;
+    if (!drag.active) return;
+
+    // Only the incremental delta since the last event.
+    const delta = event.clientX - drag.lastX;
+    drag.lastX = event.clientX;
+
+    drag.remainder += delta;
+
+    // Whole frames to advance (sub-frame remainder is kept for next event).
+    const steps = Math.trunc(drag.remainder / PIXELS_PER_FRAME);
+    if (steps !== 0) {
+      drag.remainder -= steps * PIXELS_PER_FRAME;
+      advanceFrames(steps);
+    }
   };
 
   const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -165,6 +191,7 @@ export function ConfiguratorExterior360({
   );
 
   const iframeUrl = getSuzukiViewerIframeUrl(modelSlug);
+  // key forces a clean re-mount (reset frameIndex, loader) when colour changes.
   const viewKey = `${modelSlug}:${bodyColor?.id ?? 'default'}`;
 
   return (

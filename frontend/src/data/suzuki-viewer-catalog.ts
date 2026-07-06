@@ -757,6 +757,21 @@ export const suzukiViewerCatalog: Record<string, ConfiguratorData> = {
   }
 } as const;
 
+import { BODY_COLOR_HEX_MAP } from './exterior-360-color-map';
+
 export function getSuzukiViewerData(modelSlug: string): ConfiguratorData | undefined {
-  return suzukiViewerCatalog[modelSlug];
+  const data = suzukiViewerCatalog[modelSlug];
+  if (!data) return undefined;
+
+  const hexMap = BODY_COLOR_HEX_MAP[modelSlug];
+  if (!hexMap) return data;
+
+  return {
+    ...data,
+    bodyColors: data.bodyColors.map((color) =>
+      color.hex || !color.thumbnail
+        ? color
+        : { ...color, hex: hexMap[color.thumbnail] },
+    ),
+  };
 }
