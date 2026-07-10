@@ -352,7 +352,6 @@ body {
   background: #000;
   overflow: hidden;
   touch-action: pan-y;
-  cursor: grab;
   user-select: none;
 }
 

@@ -60,6 +60,7 @@ export function PromoSlider({ slides }: PromoSliderProps) {
 
   const dragStartX = useRef(0);
   const isDragActive = useRef(false);
+  const activePointerId = useRef<number | null>(null);
   const sliderRef = useRef<HTMLElement>(null);
 
   const activeIndex = getActiveSlideIndex(position, slideCount);
@@ -117,6 +118,13 @@ export function PromoSlider({ slides }: PromoSliderProps) {
     }
   }, [transitionEnabled, position]);
 
+  const resetDrag = useCallback(() => {
+    activePointerId.current = null;
+    isDragActive.current = false;
+    setIsDragging(false);
+    setDragOffset(0);
+  }, []);
+
   const finishDrag = useCallback(
     (clientX: number) => {
       const delta = clientX - dragStartX.current;
@@ -127,10 +135,9 @@ export function PromoSlider({ slides }: PromoSliderProps) {
         goPrev();
       }
 
-      setDragOffset(0);
-      setIsDragging(false);
+      resetDrag();
     },
-    [goNext, goPrev],
+    [goNext, goPrev, resetDrag],
   );
 
   const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
@@ -142,6 +149,7 @@ export function PromoSlider({ slides }: PromoSliderProps) {
       return;
     }
 
+    activePointerId.current = event.pointerId;
     dragStartX.current = event.clientX;
     isDragActive.current = false;
     setIsDragging(false);
@@ -149,6 +157,15 @@ export function PromoSlider({ slides }: PromoSliderProps) {
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
+    if (activePointerId.current === null || event.pointerId !== activePointerId.current) {
+      return;
+    }
+
+    if (event.pointerType === 'mouse' && event.buttons !== 1) {
+      resetDrag();
+      return;
+    }
+
     const delta = event.clientX - dragStartX.current;
 
     if (!isDragActive.current) {
@@ -165,7 +182,7 @@ export function PromoSlider({ slides }: PromoSliderProps) {
   };
 
   const handlePointerUp = (event: React.PointerEvent<HTMLElement>) => {
-    if (!isDragActive.current) {
+    if (activePointerId.current !== event.pointerId) {
       return;
     }
 
@@ -173,12 +190,15 @@ export function PromoSlider({ slides }: PromoSliderProps) {
       sliderRef.current.releasePointerCapture(event.pointerId);
     }
 
-    finishDrag(event.clientX);
-    isDragActive.current = false;
+    if (isDragActive.current) {
+      finishDrag(event.clientX);
+    } else {
+      resetDrag();
+    }
   };
 
   const handlePointerCancel = (event: React.PointerEvent<HTMLElement>) => {
-    if (!isDragActive.current) {
+    if (activePointerId.current !== event.pointerId) {
       return;
     }
 
@@ -186,8 +206,11 @@ export function PromoSlider({ slides }: PromoSliderProps) {
       sliderRef.current.releasePointerCapture(event.pointerId);
     }
 
-    finishDrag(event.clientX);
-    isDragActive.current = false;
+    if (isDragActive.current) {
+      finishDrag(event.clientX);
+    } else {
+      resetDrag();
+    }
   };
 
   if (slideCount === 0) return null;
