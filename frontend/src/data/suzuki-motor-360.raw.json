@@ -1,0 +1,18 @@
+{
+  "vitara": {
+    "sourceUrl": "https://suzuki-motor.ru/auto/new-vitara/",
+    "exterior360": [],
+    "interiorPanorama": {
+      "imageUrl": "https://cdn.perxis.ru/originals/d6c6ha0beucc73ce90c0/original",
+      "title": "vitara interior"
+    }
+  },
+  "jimny": {
+    "sourceUrl": "https://suzuki-motor.ru/auto/jimny/",
+    "exterior360": [],
+    "interiorPanorama": {
+      "imageUrl": "https://platform.suzuki-motor.ru/catalog/3df121c2-fc02-41f5-a344-0b4bcd122e74/pano2_hu0fc53407ae41f92affcacb8e525b6d98_9658650_3000x0_resize_q75_lanczos.jpg",
+      "title": "jimny interior"
+    }
+  }
+}

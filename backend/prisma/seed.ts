@@ -1,11 +1,16 @@
 import { PrismaClient } from '@prisma/client';
+import { hash } from 'bcryptjs';
 
-
+const TEST_ACCOUNT = {
+  email: 'demo@suzuki.local',
+  password: 'Demo1234',
+  phone: '+447000900123',
+  firstName: 'James',
+  lastName: 'Smith',
+};
 
 const cars = [
-
   {
-
     slug: 'vitara',
 
     name: 'Vitara',
@@ -363,6 +368,66 @@ async function main() {
 
 
   console.log(`Seeded ${cars.length} cars`);
+
+  const passwordHash = await hash(TEST_ACCOUNT.password, 10);
+  const testUser = await prisma.user.upsert({
+    where: { email: TEST_ACCOUNT.email },
+    update: {
+      passwordHash,
+      phone: TEST_ACCOUNT.phone,
+      firstName: TEST_ACCOUNT.firstName,
+      lastName: TEST_ACCOUNT.lastName,
+      vehicleIdentifierType: 'VIN',
+      vehicleIdentifier: 'JS2ZC63S004123456',
+      dealerId: 'name-name-london',
+      dealerName: 'Name name',
+    },
+    create: {
+      email: TEST_ACCOUNT.email,
+      passwordHash,
+      phone: TEST_ACCOUNT.phone,
+      firstName: TEST_ACCOUNT.firstName,
+      lastName: TEST_ACCOUNT.lastName,
+      vehicleIdentifierType: 'VIN',
+      vehicleIdentifier: 'JS2ZC63S004123456',
+      dealerId: 'name-name-london',
+      dealerName: 'Name name',
+    },
+  });
+
+  await prisma.booking.deleteMany({ where: { userId: testUser.id } });
+
+  const vitara = await prisma.car.findUnique({ where: { slug: 'vitara' } });
+  const inOneWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const inTwoWeeks = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
+
+  await prisma.booking.createMany({
+    data: [
+      {
+        type: 'TEST_DRIVE',
+        status: 'CONFIRMED',
+        userId: testUser.id,
+        carId: vitara?.id ?? null,
+        scheduledAt: inOneWeek,
+        customerName: `${TEST_ACCOUNT.firstName} ${TEST_ACCOUNT.lastName}`,
+        customerPhone: TEST_ACCOUNT.phone,
+        customerEmail: TEST_ACCOUNT.email,
+        notes: 'Interested in Vitara GLX trim',
+      },
+      {
+        type: 'SERVICE',
+        status: 'PENDING',
+        userId: testUser.id,
+        scheduledAt: inTwoWeeks,
+        customerName: `${TEST_ACCOUNT.firstName} ${TEST_ACCOUNT.lastName}`,
+        customerPhone: TEST_ACCOUNT.phone,
+        customerEmail: TEST_ACCOUNT.email,
+        notes: 'Annual service',
+      },
+    ],
+  });
+
+  console.log(`Seeded test account: ${TEST_ACCOUNT.email}`);
 
   await prisma.$disconnect();
 

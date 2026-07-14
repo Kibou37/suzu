@@ -1,5 +1,10 @@
+import { saveDemoBooking } from '@/lib/account';
+import { authHeaders } from '@/lib/auth';
+import { getApiBaseUrl, isDemoDataMode, parseApiError, STORAGE_KEYS } from '@/lib/config';
+
 export type TestDrivePayload = {
   carSlug?: string;
+  carName?: string;
   scheduledAt: string;
   customerName: string;
   customerPhone: string;
@@ -35,17 +40,6 @@ export const SERVICE_TYPES = [
   'Other',
 ] as const;
 
-function isDemoDataMode(): boolean {
-  return process.env.NEXT_PUBLIC_USE_DEMO_DATA === 'true';
-}
-
-function getApiBaseUrl(): string {
-  if (typeof window === 'undefined') {
-    return process.env.API_INTERNAL_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
-  }
-
-  return process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
-}
 
 function demoStorageKey(type: 'TEST_DRIVE' | 'SERVICE'): string {
   return `suzuki-demo-bookings-${type}`;
@@ -110,24 +104,58 @@ export async function getBookingSlots(
   }
 }
 
+function persistDemoAccountBooking(
+  type: 'TEST_DRIVE' | 'SERVICE',
+  payload: TestDrivePayload | ServicePayload,
+  result: TestDriveResult,
+  carName?: string,
+  carSlug?: string,
+): void {
+  const sessionId =
+    typeof window !== 'undefined'
+      ? localStorage.getItem(STORAGE_KEYS.demoSession)
+      : null;
+
+  if (!sessionId) return;
+
+  saveDemoBooking(sessionId, {
+    id: result.id,
+    type,
+    status: 'PENDING',
+    scheduledAt: result.scheduledAt,
+    customerName: payload.customerName,
+    customerPhone: payload.customerPhone,
+    customerEmail: payload.customerEmail ?? null,
+    notes: 'notes' in payload ? payload.notes ?? null : null,
+    carName: carName ?? null,
+    carSlug: carSlug ?? null,
+    createdAt: new Date().toISOString(),
+  });
+}
+
 export async function submitTestDrive(payload: TestDrivePayload): Promise<TestDriveResult> {
   if (isDemoDataMode()) {
     recordDemoBooking('TEST_DRIVE', payload.scheduledAt);
-    return {
-      id: 'demo-booking',
+    const result = {
+      id: `demo-booking-${Date.now()}`,
       scheduledAt: payload.scheduledAt,
     };
+    persistDemoAccountBooking('TEST_DRIVE', payload, result, payload.carName, payload.carSlug);
+    return result;
   }
 
   const res = await fetch(`${getApiBaseUrl()}/api/bookings/test-drive`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeaders(),
+    },
     body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
-    const message = await res.text();
-    throw new Error(message || 'Booking failed');
+    const text = await res.text();
+    throw new Error(parseApiError(text, 'Booking failed'));
   }
 
   return res.json();
@@ -136,21 +164,26 @@ export async function submitTestDrive(payload: TestDrivePayload): Promise<TestDr
 export async function submitService(payload: ServicePayload): Promise<TestDriveResult> {
   if (isDemoDataMode()) {
     recordDemoBooking('SERVICE', payload.scheduledAt);
-    return {
-      id: 'demo-service-booking',
+    const result = {
+      id: `demo-service-booking-${Date.now()}`,
       scheduledAt: payload.scheduledAt,
     };
+    persistDemoAccountBooking('SERVICE', payload, result, payload.vehicle);
+    return result;
   }
 
   const res = await fetch(`${getApiBaseUrl()}/api/bookings/service`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeaders(),
+    },
     body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
-    const message = await res.text();
-    throw new Error(message || 'Booking failed');
+    const text = await res.text();
+    throw new Error(parseApiError(text, 'Booking failed'));
   }
 
   return res.json();

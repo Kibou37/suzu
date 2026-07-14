@@ -1,28 +1,27 @@
 'use client';
 
 import { preload } from 'react-dom';
+import NextImage from 'next/image';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ConfigColor } from '@/data/demo-configurator';
 import {
-  getSuzukiViewerIframeUrl,
+  getSuzukiViewerUrl,
+  hasExterior360Stub,
   resolveExterior360Frames,
+  resolveExterior360Preview,
 } from '@/lib/car-exterior-360';
+import { getLineupCarImage } from '@/lib/lineup-assets';
+import { has360Support } from '@/data/exterior-360-color-map';
 
 type ConfiguratorExterior360Props = {
   modelSlug: string;
   modelName: string;
   bodyColor?: ConfigColor;
-  /** Skip local spin attempt and show Suzuki iframe immediately (Swift, S-Cross). */
-  preferIframe?: boolean;
 };
 
-/**
- * Pixels of horizontal drag required to advance one frame.
- * Higher = slower / more deliberate rotation feel.
- */
 const PIXELS_PER_FRAME = 20;
 
-type ViewMode = 'loading' | 'spin' | 'iframe' | 'empty';
+type ViewMode = 'loading' | 'spin' | 'static' | 'empty';
 
 type DragState = {
   active: boolean;
@@ -31,54 +30,53 @@ type DragState = {
 };
 
 type Exterior360ViewProps = {
+  modelSlug: string;
   modelName: string;
   bodyColor?: ConfigColor;
   localFrames: string[] | undefined;
-  iframeUrl: string | undefined;
-  preferIframe?: boolean;
 };
 
 function Exterior360View({
+  modelSlug,
   modelName,
   bodyColor,
   localFrames,
-  iframeUrl,
-  preferIframe,
 }: Exterior360ViewProps) {
   const [spinReady, setSpinReady] = useState(false);
   const [mode, setMode] = useState<ViewMode>(() => {
-    if (preferIframe && iframeUrl) return 'iframe';
     if (localFrames?.length) return 'loading';
-    if (iframeUrl) return 'iframe';
-    return 'empty';
+    return 'static';
   });
 
-  // Direct refs — frame updates bypass React render cycle for maximum smoothness.
   const imgRef = useRef<HTMLImageElement>(null);
   const frameIndexRef = useRef(0);
   const rafRef = useRef<number>(0);
   const dragRef = useRef<DragState>({ active: false, lastX: 0, remainder: 0 });
 
-  // Load first frame; when ready switch to spin mode and preload the rest.
+  const staticImage = resolveExterior360Preview(modelSlug, bodyColor) ?? getLineupCarImage(modelSlug);
+  const viewerUrl = getSuzukiViewerUrl(modelSlug);
+
   useEffect(() => {
-    if (preferIframe || !localFrames?.length) return;
+    if (!localFrames?.length) {
+      setMode('static');
+      return;
+    }
 
     preload(localFrames[0], { as: 'image' });
 
-    const first = new Image();
+    const first = document.createElement('img');
     first.onload = () => {
       setSpinReady(true);
       setMode('spin');
 
-      // Preload remaining frames in background so dragging is instant.
       for (let i = 1; i < localFrames.length; i++) {
-        const img = new Image();
+        const img = document.createElement('img');
         img.src = localFrames[i];
       }
     };
     first.onerror = () => {
       setSpinReady(true);
-      setMode(iframeUrl ? 'iframe' : 'empty');
+      setMode('static');
     };
     first.src = localFrames[0];
 
@@ -87,9 +85,8 @@ function Exterior360View({
       first.onerror = null;
       cancelAnimationFrame(rafRef.current);
     };
-  }, [iframeUrl, localFrames, preferIframe]);
+  }, [localFrames]);
 
-  // Commit a new frame index to the DOM without triggering React re-render.
   const commitFrame = (index: number) => {
     if (!localFrames?.length || !imgRef.current) return;
     const total = localFrames.length;
@@ -118,7 +115,6 @@ function Exterior360View({
     drag.remainder -= steps * PIXELS_PER_FRAME;
     const nextIndex = frameIndexRef.current - steps;
 
-    // Throttle DOM updates to animation frame rate.
     cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => commitFrame(nextIndex));
   };
@@ -167,17 +163,38 @@ function Exterior360View({
         </>
       )}
 
-      {mode === 'iframe' && iframeUrl && (
+      {mode === 'static' && (
         <>
-          <iframe
-            title={`Suzuki ${modelName} official 360° viewer`}
-            src={iframeUrl}
-            className="configurator-360__iframe"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          <div className="configurator-360__static">
+            <NextImage
+              src={staticImage}
+              alt={`Suzuki ${modelName}`}
+              width={800}
+              height={450}
+              className="configurator-360__fallback"
+              priority
+            />
+          </div>
           <p className="configurator-360__hint">
-            Official Suzuki 360° viewer · select colour inside the viewer
+            {hasExterior360Stub(modelSlug)
+              ? 'Exterior preview'
+              : localFrames?.length
+                ? '360° preview unavailable for this colour'
+                : has360Support(modelSlug) && viewerUrl
+                  ? (
+                      <>
+                        Exterior preview ·{' '}
+                        <a
+                          href={viewerUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="configurator-360__viewer-link"
+                        >
+                          Open official 360° viewer
+                        </a>
+                      </>
+                    )
+                  : 'Exterior preview · 360° spin available for Vitara and Jimny'}
           </p>
         </>
       )}
@@ -195,24 +212,21 @@ export function ConfiguratorExterior360({
   modelSlug,
   modelName,
   bodyColor,
-  preferIframe = false,
 }: ConfiguratorExterior360Props) {
   const localFrames = useMemo(
-    () => (preferIframe ? undefined : resolveExterior360Frames(modelSlug, bodyColor)),
-    [modelSlug, bodyColor, preferIframe],
+    () => resolveExterior360Frames(modelSlug, bodyColor),
+    [modelSlug, bodyColor],
   );
 
-  const iframeUrl = getSuzukiViewerIframeUrl(modelSlug);
-  const viewKey = `${modelSlug}:${bodyColor?.id ?? 'default'}:${preferIframe ? 'iframe' : 'spin'}`;
+  const viewKey = `${modelSlug}:${bodyColor?.id ?? 'default'}`;
 
   return (
     <Exterior360View
       key={viewKey}
+      modelSlug={modelSlug}
       modelName={modelName}
       bodyColor={bodyColor}
       localFrames={localFrames}
-      iframeUrl={iframeUrl}
-      preferIframe={preferIframe}
     />
   );
 }

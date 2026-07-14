@@ -298,7 +298,7 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
               modelSlug={selected.slug}
               modelName={selected.name}
               step={step}
-              bodyColor={bodyColor ?? configData.bodyColors[0]}
+              bodyColor={bodyColor}
             />
           </div>
 

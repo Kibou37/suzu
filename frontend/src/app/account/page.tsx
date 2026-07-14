@@ -1,32 +1,7 @@
-import { PlaceholderPage } from '@/components/ui/PageShell';
-
-
+import { AccountDashboard } from '@/components/account/AccountDashboard';
 
 export const metadata = { title: 'My Account' };
 
-
-
 export default function AccountPage() {
-
-  return (
-
-    <PlaceholderPage
-
-      title="My Account"
-
-      description="Request history, saved configurations and service status."
-
-      breadcrumbs={[
-
-        { label: 'Home', href: '/' },
-
-        { label: 'My Account' },
-
-      ]}
-
-    />
-
-  );
-
+  return <AccountDashboard />;
 }
-

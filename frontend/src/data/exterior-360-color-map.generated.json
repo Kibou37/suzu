@@ -1,0 +1,54 @@
+{
+  "vitara": {
+    "BC_26U": "color_0",
+    "BC_ZCC": "color_1",
+    "BC_ZCD": "color_2",
+    "BC_ZCE": "color_3",
+    "BC_ZCF": "color_4",
+    "BC_ZNL": "color_5",
+    "BC_ZQN": "color_6",
+    "BC_A9G_R": "color_7",
+    "BC_A9H_R": "color_8",
+    "BC_A6H_R": "color_9",
+    "BC_A9L_R": "color_10",
+    "BC_A9N_R": "color_11",
+    "BC_DBH_R": "color_12",
+    "BC_DBG_R": "color_13",
+    "BC_DBF_R": "color_14"
+  },
+  "jimny": {
+    "BC_DG52_R": "color_0",
+    "BC_CZW2_R": "color_1",
+    "BC_2BW2_R": "color_2",
+    "BC_ZZC": "color_3",
+    "BC_ZJ3": "color_4",
+    "BC_ZVL": "color_5",
+    "BC_Z2S": "color_6",
+    "BC_26U": "color_7"
+  },
+  "swift": {
+    "BC_E6L": "color_0",
+    "BC_D7Z": "color_1",
+    "BC_E6P": "color_2",
+    "BC_DYH": "color_3",
+    "BC_WB1_R": "color_4",
+    "BC_WB2_R": "color_5",
+    "BC_ZWP_R": "color_6",
+    "BC_ZWD_R": "color_7",
+    "BC_ZYL_R": "color_8",
+    "BC_ZVR_R": "color_9",
+    "BC_ZNC_R": "color_10",
+    "BC_ZMW_R": "color_11",
+    "BC_ZMV_R": "color_12"
+  },
+  "s-cross": {
+    "BC_ZZZ": "color_0",
+    "BC_26U": "color_1",
+    "BC_ZNL": "color_2",
+    "BC_ZCC": "color_3",
+    "BC_ZCE": "color_4",
+    "BC_ZQ5": "color_5",
+    "BC_ZQ3": "color_6",
+    "BC_ZQ4": "color_7"
+  }
+}

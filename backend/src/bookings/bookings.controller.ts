@@ -1,5 +1,7 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { BookingType } from '@prisma/client';
+import { CurrentUser, type AuthUser } from '../auth/current-user.decorator';
+import { OptionalJwtAuthGuard } from '../auth/optional-jwt-auth.guard';
 import {
   BookingsService,
   type CreateServiceInput,
@@ -19,12 +21,20 @@ export class BookingsController {
   }
 
   @Post('test-drive')
-  createTestDrive(@Body() body: CreateTestDriveInput) {
-    return this.bookingsService.createTestDrive(body);
+  @UseGuards(OptionalJwtAuthGuard)
+  createTestDrive(
+    @Body() body: CreateTestDriveInput,
+    @CurrentUser() user?: AuthUser,
+  ) {
+    return this.bookingsService.createTestDrive(body, user?.sub);
   }
 
   @Post('service')
-  createService(@Body() body: CreateServiceInput) {
-    return this.bookingsService.createService(body);
+  @UseGuards(OptionalJwtAuthGuard)
+  createService(
+    @Body() body: CreateServiceInput,
+    @CurrentUser() user?: AuthUser,
+  ) {
+    return this.bookingsService.createService(body, user?.sub);
   }
 }

@@ -1,4 +1,6 @@
 import rawContent from '@/data/car-model-content.raw.json';
+import viewerAssets from '@/data/car-viewer-assets.json';
+import { withBasePath } from '@/lib/base-path';
 
 export type InteriorPanorama = {
   imageUrl: string;
@@ -10,24 +12,27 @@ type RawModelContent = {
   interiorPanorama?: InteriorPanorama;
 };
 
-const modelContent = rawContent as Record<string, RawModelContent>;
-
-/** Local copies for reliable static hosting (overrides remote CDN when present). */
-const LOCAL_INTERIOR_PANORAMA: Partial<Record<string, string>> = {
-  jimny: '/panoramas/jimny.jpg',
+type ViewerAssetsManifest = {
+  interiorPanorama: Record<string, InteriorPanorama>;
 };
 
-export function getInteriorPanorama(modelSlug: string): InteriorPanorama | undefined {
-  const remote = modelContent[modelSlug]?.interiorPanorama;
-  const localUrl = LOCAL_INTERIOR_PANORAMA[modelSlug];
+const modelContent = rawContent as Record<string, RawModelContent>;
+const localAssets = viewerAssets as ViewerAssetsManifest;
 
-  if (localUrl) {
-    return { imageUrl: localUrl, title: remote?.title };
+export function getInteriorPanorama(modelSlug: string): InteriorPanorama | undefined {
+  const local = localAssets.interiorPanorama[modelSlug];
+  if (local?.imageUrl) {
+    return {
+      imageUrl: withBasePath(local.imageUrl),
+      title: local.title,
+    };
   }
 
-  return remote;
-}
+  const remote = modelContent[modelSlug]?.interiorPanorama;
+  if (!remote?.imageUrl) return undefined;
 
-export function hasInteriorPanorama(modelSlug: string): boolean {
-  return Boolean(getInteriorPanorama(modelSlug));
+  return {
+    imageUrl: remote.imageUrl.startsWith('http') ? remote.imageUrl : withBasePath(remote.imageUrl),
+    title: remote.title,
+  };
 }

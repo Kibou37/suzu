@@ -67,10 +67,6 @@ export function buildCatalogFilterQuery(filters: CatalogFilters): string {
   return params.toString();
 }
 
-export function hasActiveCatalogFilters(filters: CatalogFilters): boolean {
-  return FILTER_KEYS.some((key) => filters[key] !== undefined && filters[key] !== '');
-}
-
 export function countActiveCatalogFilters(filters: CatalogFilters): number {
   return FILTER_KEYS.filter((key) => filters[key] !== undefined && filters[key] !== '').length;
 }

@@ -56,6 +56,31 @@ export const EXTERIOR_360_THUMBNAIL_MAP: Record<string, Record<string, string>> 
     BC_ZVL:    'color_6', // Medium Gray
     BC_ZJ3:    'color_7', // Bluish Black Pearl
   },
+  swift: {
+    BC_E6L:   'color_0', // Frontier Blue Pearl × Super Black Pearl (GLX)
+    BC_D7Z:   'color_1', // Burning Red Pearl × Super Black Pearl
+    BC_E6P:   'color_2', // Cool Yellow × Mineral Gray
+    BC_DYH:   'color_3', // Pure White Pearl × Mineral Gray
+    BC_WB1_R: 'color_4', // Frontier Blue Pearl
+    BC_WB2_R: 'color_5', // Cool Yellow Metallic
+    BC_ZWP_R: 'color_6', // Burning Red Pearl
+    BC_ZWD_R: 'color_7', // Flame Orange Pearl
+    BC_ZYL_R: 'color_8', // Caravan Ivory Pearl
+    BC_ZVR_R: 'color_9', // Pure White Pearl
+    BC_ZNC_R: 'color_10', // Premium Silver Metallic
+    BC_ZMW_R: 'color_11', // Mineral Gray Metallic
+    BC_ZMV_R: 'color_12', // Super Black Pearl
+  },
+  's-cross': {
+    BC_ZZZ: 'color_0', // Titan Dark Gray Pearl (GLX)
+    BC_26U: 'color_1', // White
+    BC_ZNL: 'color_2', // Cool White Pearl
+    BC_ZCC: 'color_3', // Silky Silver Metallic
+    BC_ZCE: 'color_4', // Cosmic Black Pearl Metallic
+    BC_ZQ5: 'color_5', // Energetic Red Pearl
+    BC_ZQ3: 'color_6', // Canyon Brown Pearl Metallic
+    BC_ZQ4: 'color_7', // Sphere Blue Pearl
+  },
 };
 
 /**

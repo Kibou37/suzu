@@ -1,0 +1,1504 @@
+{
+  "generatedAt": "2026-07-13T18:44:43.635Z",
+  "source": "https://www.globalsuzuki.com/automobile/",
+  "summary": {
+    "totalModels": 20,
+    "withViewerArea": 17,
+    "withGradeList": 17,
+    "totalBodyColors": 145,
+    "totalInteriorVariants": 26
+  },
+  "models": {
+    "across": {
+      "lineupSlug": "across",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/across/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "across",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/across/viewer/large/main.html",
+      "defaultGradeId": "GRD_LHDGLX",
+      "gradeFolder": "LHDGLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_WAA",
+          "name": "Sizzling Red Metallic",
+          "thumbnail": "BC_WAA",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WAA"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_WBE",
+          "name": "Splendid Silver Pearl Metallic",
+          "thumbnail": "BC_WBE",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WBE"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_WBS",
+          "name": "Exuberant Blue Pearl Metallic",
+          "thumbnail": "BC_WBS",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WBS"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_WB3",
+          "name": "Bluish Black Pearl",
+          "thumbnail": "BC_WB3",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WB3"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_WCK",
+          "name": "Mystic Green Pearl",
+          "thumbnail": "BC_WCK",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WCK"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZHJ",
+          "name": "Arctic White Pearl",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_Z7Q",
+          "name": "Magma Gray Metallic",
+          "thumbnail": "BC_Z7Q",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_Z7Q"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_E5R",
+          "name": "Sizzling Red Metallic × Bluish Black Pearl",
+          "thumbnail": "BC_E5R",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_E5R"
+        },
+        {
+          "colorSetId": "color_8",
+          "bcCode": "BC_E85",
+          "name": "Splendid Silver Pearl Metallic × Bluish Black Pearl",
+          "thumbnail": "BC_E85",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_E85"
+        },
+        {
+          "colorSetId": "color_9",
+          "bcCode": "BC_FRG",
+          "name": "Exuberant Blue Pearl Metallic × Bluish Black Pearl",
+          "thumbnail": "BC_FRG",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_FRG"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001"
+        },
+        {
+          "variantId": "int_1",
+          "intCode": "INTBASE_002",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_002"
+        }
+      ],
+      "errors": []
+    },
+    "alto": {
+      "lineupSlug": "alto",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/alto/",
+      "hasViewerArea": false,
+      "hasGradeList": false,
+      "viewerSlug": "alto",
+      "viewerUrl": null,
+      "defaultGradeId": null,
+      "gradeFolder": null,
+      "angleStep": 36,
+      "bodyColors": [],
+      "interiorVariants": [],
+      "errors": [
+        "Known model without 360° viewer"
+      ]
+    },
+    "apv": {
+      "lineupSlug": "apv",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/apv/",
+      "hasViewerArea": false,
+      "hasGradeList": false,
+      "viewerSlug": "apv",
+      "viewerUrl": null,
+      "defaultGradeId": null,
+      "gradeFolder": null,
+      "angleStep": 36,
+      "bodyColors": [],
+      "interiorVariants": [],
+      "errors": [
+        "Known model without 360° viewer"
+      ]
+    },
+    "baleno": {
+      "lineupSlug": "baleno",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/baleno/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "baleno",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/baleno/viewer/large/main.html",
+      "defaultGradeId": "GRD_GL",
+      "gradeFolder": "GL",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_WBH",
+          "name": "CELESTIAL BLUE PEARL METALLIC",
+          "thumbnail": "BC_WBH",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBH"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_WBJ",
+          "name": "LUXE BEIGE PEARL METALLIC",
+          "thumbnail": "BC_WBJ",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBJ"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_WBG",
+          "name": "OPULENT RED PEARL METALLIC",
+          "thumbnail": "BC_WBG",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBG"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_WBE",
+          "name": "SPLENDID SILVER PEARL METALLIC",
+          "thumbnail": "BC_WBE",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBE"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_WBF",
+          "name": "GRANDEUR GREY PEARL METALLIC",
+          "thumbnail": "BC_WBF",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBF"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZHJ",
+          "name": "ARCTIC WHITE PEARL",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZAM",
+          "name": "MIDNIGHT BLACK PEARL",
+          "thumbnail": "BC_ZAM",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZAM"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "9inch display audio",
+          "materialKey": "INT-INTBASE_001"
+        }
+      ],
+      "errors": []
+    },
+    "carry": {
+      "lineupSlug": "carry",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/carry/",
+      "hasViewerArea": false,
+      "hasGradeList": false,
+      "viewerSlug": "carry",
+      "viewerUrl": null,
+      "defaultGradeId": null,
+      "gradeFolder": null,
+      "angleStep": 36,
+      "bodyColors": [],
+      "interiorVariants": [],
+      "errors": [
+        "Known model without 360° viewer"
+      ]
+    },
+    "celerio": {
+      "lineupSlug": "celerio",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/celerio/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "celerio",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/celerio/viewer/large/main.html",
+      "defaultGradeId": "GRD_GL",
+      "gradeFolder": "GL",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_Z4Q",
+          "name": "Fire Red",
+          "thumbnail": "BC_Z4Q",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_Z4Q"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_WAJ",
+          "name": "Speedy Blue Metallic",
+          "thumbnail": "BC_WAJ",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WAJ"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_ZTL",
+          "name": "Caffeine Brown Pearl",
+          "thumbnail": "BC_ZTL",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZTL"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_ZHJ",
+          "name": "Artctic White Pearl",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_Z2S",
+          "name": "Silky Silver Metallic",
+          "thumbnail": "BC_Z2S",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_Z2S"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZNZ",
+          "name": "Glistening Grey Metallic",
+          "thumbnail": "BC_ZNZ",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZNZ"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZAM",
+          "name": "Midnight Black Pearl",
+          "thumbnail": "BC_ZAM",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZAM"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GL with display audio",
+          "materialKey": "INT-INTBASE_001"
+        },
+        {
+          "variantId": "int_1",
+          "intCode": "INTBASE_002",
+          "name": "GL",
+          "materialKey": "INT-INTBASE_002"
+        }
+      ],
+      "errors": []
+    },
+    "dzire": {
+      "lineupSlug": "dzire",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/dzire/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "dzire",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/dzire/viewer/large/main.html",
+      "defaultGradeId": "GRD_LHDGLX",
+      "gradeFolder": "LHDGLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_WCE",
+          "name": "Alluring Blue Pearl Metallic",
+          "thumbnail": "BC_WCE",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WCE"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_ZYC",
+          "name": "Gallant Red Pearl Metallic",
+          "thumbnail": "BC_ZYC",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_ZYC"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_ZZF",
+          "name": "Nutmeg Brown Pearl Metallic",
+          "thumbnail": "BC_ZZF",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_ZZF"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_ZHJ",
+          "name": "Arctic White Pearl",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_WBE",
+          "name": "Splendid Silver Pearl Metallic",
+          "thumbnail": "BC_WBE",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WBE"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_Z7Q",
+          "name": "Magma Gray Metallic",
+          "thumbnail": "BC_Z7Q",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_Z7Q"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_WB3",
+          "name": "Bluish Black Pearl",
+          "thumbnail": "BC_WB3",
+          "materialKey": "EXT-GRD_LHDGLX-BG_A-BC_WB3"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001"
+        },
+        {
+          "variantId": "int_1",
+          "intCode": "INTBASE_002",
+          "name": "GL+",
+          "materialKey": "INT-INTBASE_002"
+        },
+        {
+          "variantId": "int_2",
+          "intCode": "INTBASE_003",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_003"
+        },
+        {
+          "variantId": "int_3",
+          "intCode": "INTBASE_004",
+          "name": "GL+",
+          "materialKey": "INT-INTBASE_004"
+        }
+      ],
+      "errors": []
+    },
+    "ertiga": {
+      "lineupSlug": "ertiga",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/ertiga/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "ertiga",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/ertiga/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_WBD",
+          "name": "Mellow Deep Red Pearl",
+          "thumbnail": "BC_WBD",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WBD"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_WAE",
+          "name": "Brave Khaki Pearl",
+          "thumbnail": "BC_WAE",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WAE"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_ZLL",
+          "name": "Burgundy Red Pearl",
+          "thumbnail": "BC_ZLL",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZLL"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_ZQZ",
+          "name": "Snow White Pearl",
+          "thumbnail": "BC_ZQZ",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZQZ"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_Z2S",
+          "name": "Silky Silver Metallic",
+          "thumbnail": "BC_Z2S",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_Z2S"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZYZ-Z7Q",
+          "name": "Magma Gray Metallic",
+          "thumbnail": "BC_ZYZ-Z7Q",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZYZ-Z7Q"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZBD",
+          "name": "Cool Black Pearl Metallic",
+          "thumbnail": "BC_ZBD",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZBD"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001"
+        }
+      ],
+      "errors": []
+    },
+    "evitara": {
+      "lineupSlug": "evitara",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/evitara/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "evitara",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/evitara/viewer/large/main.html",
+      "defaultGradeId": "GRD_P22GLX",
+      "gradeFolder": "P22GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_FDC",
+          "name": "Land Breeze Green Pearl Metallic x Bluish Black Pearl",
+          "thumbnail": "BC_FDC",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_FDC"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_E86",
+          "name": "Opulent Red Pearl Metallic x Bluish Black Pearl",
+          "thumbnail": "BC_E86",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_E86"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_E5G",
+          "name": "Arctic White Pearl x Bluish Black Pearl",
+          "thumbnail": "BC_E5G",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_E5G"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_E85",
+          "name": "Splendid Silver Pearl Metallic x Bluish Black Pearl",
+          "thumbnail": "BC_E85",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_E85"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_FFZ",
+          "name": "Grandeur Grey Pearl Metallic x Bluish Black Pearl",
+          "thumbnail": "BC_FFZ",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_FFZ"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_WA1",
+          "name": "Land Breeze Green Pearl Metallic",
+          "thumbnail": "BC_WA1",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_WA1"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_WBH",
+          "name": "Celestial Blue Pearl Metallic",
+          "thumbnail": "BC_WBH",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_WBH"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_ZHJ",
+          "name": "Arctic White Pearl",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_8",
+          "bcCode": "BC_WBE",
+          "name": "Splendid Silver Pearl Metallic",
+          "thumbnail": "BC_WBE",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_WBE"
+        },
+        {
+          "colorSetId": "color_9",
+          "bcCode": "BC_WBF",
+          "name": "Grandeur Grey Pearl Metallic",
+          "thumbnail": "BC_WBF",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_WBF"
+        },
+        {
+          "colorSetId": "color_10",
+          "bcCode": "BC_WB3",
+          "name": "Bluish Brack Pearl",
+          "thumbnail": "BC_WB3",
+          "materialKey": "EXT-GRD_P22GLX-BG_A-BC_WB3"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001"
+        },
+        {
+          "variantId": "int_1",
+          "intCode": "INTBASE_002",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_002"
+        }
+      ],
+      "errors": []
+    },
+    "fronx": {
+      "lineupSlug": "fronx",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/fronx/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "fronx",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/fronx/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_E85",
+          "name": "Splendid Silver Pearl Metallic × Bluish Black Pearl",
+          "thumbnail": "BC_E85",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E85"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_E88",
+          "name": "Lucent Orange Pearl Metallic × Bluish Black Pearl",
+          "thumbnail": "BC_E88",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E88"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_E86",
+          "name": "Opulent Red Pearl Metallic × Bluish Black Pearl",
+          "thumbnail": "BC_E86",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E86"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_WBE",
+          "name": "Splendid Silver Pearl Metallic",
+          "thumbnail": "BC_WBE",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WBE"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZYE",
+          "name": "Lucent Orange Pearl Metallic",
+          "thumbnail": "BC_ZYE",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZYE"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_WBH",
+          "name": "Celestial Blue Pearl Metallic",
+          "thumbnail": "BC_WBH",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WBH"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZHJ",
+          "name": "Arctic White Pearl",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_WBF",
+          "name": "Grandeur Grey Pearl Metallic",
+          "thumbnail": "BC_WBF",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WBF"
+        },
+        {
+          "colorSetId": "color_8",
+          "bcCode": "BC_WB3",
+          "name": "Bluish Black Pearl",
+          "thumbnail": "BC_WB3",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WB3"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX＋Display audio",
+          "materialKey": "INT-INTBASE_001-BG_A"
+        }
+      ],
+      "errors": []
+    },
+    "grandvitara": {
+      "lineupSlug": "grandvitara",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/grandvitara/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "grandvitara",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/grandvitara/viewer/large/main.html",
+      "defaultGradeId": "GRD_GL",
+      "gradeFolder": "GL",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_WBE",
+          "name": "SPLENDID SILVER PEARL METALLIC",
+          "thumbnail": "BC_WBE",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBE"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_ZQD",
+          "name": "CAVE BLACK PEARL METALLIC",
+          "thumbnail": "BC_ZQD",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZQD"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_WBG",
+          "name": "OPULENT RED PEARL METALLIC",
+          "thumbnail": "BC_WBG",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBG"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_WBH",
+          "name": "CELESTIAL BLUE PEARL METALLIC",
+          "thumbnail": "BC_WBH",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBH"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZHJ",
+          "name": "ARCTIC WHITE PEARL",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_WBF",
+          "name": "GRANDEUR GREY PEARL METALLIC",
+          "thumbnail": "BC_WBF",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_WBF"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZAM",
+          "name": "MIDNIGHT BLACK PEARL",
+          "thumbnail": "BC_ZAM",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZAM"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_002",
+          "name": "GL",
+          "materialKey": "INT-INTBASE_002-BG_A"
+        }
+      ],
+      "errors": []
+    },
+    "ignis": {
+      "lineupSlug": "ignis",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/ignis/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "ignis",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/ignis/viewer/large/main.html",
+      "defaultGradeId": "GRD_GL",
+      "gradeFolder": "GL",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_ZVR",
+          "name": "Pure White Pearl",
+          "thumbnail": "BC_ZVR",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZVR"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_ZNC",
+          "name": "Premium Silver Metallic",
+          "thumbnail": "BC_ZNC",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZNC"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_ZMW",
+          "name": "Mineral Gray Metallic",
+          "thumbnail": "BC_ZMW",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZMW"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_ZWG",
+          "name": "Speedy Blue Metallic",
+          "thumbnail": "BC_ZWG",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZWG"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZWD",
+          "name": "Flame Orange Pearl Metallic",
+          "thumbnail": "BC_ZWD",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZWD"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZWP",
+          "name": "Burning Red Pearl Metallic",
+          "thumbnail": "BC_ZWP",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZWP"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZMV",
+          "name": "Super Black Pearl",
+          "thumbnail": "BC_ZMV",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZMV"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_ZYL",
+          "name": "Caravan Ivory Pearl Metallic",
+          "thumbnail": "BC_ZYL",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZYL"
+        },
+        {
+          "colorSetId": "color_8",
+          "bcCode": "BC_ZZL",
+          "name": "Tough Khaki Pearl Metallic",
+          "thumbnail": "BC_ZZL",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZZL"
+        },
+        {
+          "colorSetId": "color_9",
+          "bcCode": "BC_CA1_R",
+          "name": "Pure White Pearl + Super Black Pearl",
+          "thumbnail": "BC_CA1_R",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_CA1_R"
+        },
+        {
+          "colorSetId": "color_10",
+          "bcCode": "BC_CFK_R",
+          "name": "Flame Orange Pearl Metallic + Super Black Pearl",
+          "thumbnail": "BC_CFK_R",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_CFK_R"
+        },
+        {
+          "colorSetId": "color_11",
+          "bcCode": "BC_D7Z_R",
+          "name": "Burning Red Pearl Metallic + Super Black Pearl",
+          "thumbnail": "BC_D7Z_R",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_D7Z_R"
+        },
+        {
+          "colorSetId": "color_12",
+          "bcCode": "BC_DWY_R",
+          "name": "Caravan Ivory Pearl Metallic + Super Black Pearl",
+          "thumbnail": "BC_DWY_R",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_DWY_R"
+        },
+        {
+          "colorSetId": "color_13",
+          "bcCode": "BC_DWZ_R",
+          "name": "Tough Khaki Pearl Metallic + Super Black Pearl",
+          "thumbnail": "BC_DWZ_R",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_DWZ_R"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX E22 (Navy)",
+          "materialKey": "INT-INTBASE_001-BG_A"
+        },
+        {
+          "variantId": "int_1",
+          "intCode": "INTBASE_002",
+          "name": "GLX E22 (Silver)",
+          "materialKey": "INT-INTBASE_002-BG_A"
+        },
+        {
+          "variantId": "int_2",
+          "intCode": "INTBASE_003",
+          "name": "GLX E96 (Navy)",
+          "materialKey": "INT-INTBASE_003-BG_A"
+        },
+        {
+          "variantId": "int_3",
+          "intCode": "INTBASE_004",
+          "name": "GLX E96 (Silver)",
+          "materialKey": "INT-INTBASE_004-BG_A"
+        }
+      ],
+      "errors": []
+    },
+    "jimny": {
+      "lineupSlug": "jimny",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/jimny/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "jimny",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/jimny/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_DG52_R",
+          "name": "Kinetic Yellow + Bluish Black Pearl 3",
+          "thumbnail": "BC_DG52_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_DG52_R"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_CZW2_R",
+          "name": "Brisk Blue Metallic + Bluish Black Pearl 3",
+          "thumbnail": "BC_CZW2_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_CZW2_R"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_2BW2_R",
+          "name": "Chiffon Ivory Metallic + Bluish Black Pearl 3",
+          "thumbnail": "BC_2BW2_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_2BW2_R"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_ZZC",
+          "name": "Jungle Green",
+          "thumbnail": "BC_ZZC",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZZC"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZJ3",
+          "name": "Bluish Black Pearl 3",
+          "thumbnail": "BC_ZJ3",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZJ3"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZVL",
+          "name": "Medium Gray",
+          "thumbnail": "BC_ZVL",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZVL"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_Z2S",
+          "name": "Silky Silver Metallic",
+          "thumbnail": "BC_Z2S",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_Z2S"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_26U",
+          "name": "White",
+          "thumbnail": "BC_26U",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_26U"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001-BG_A"
+        }
+      ],
+      "errors": []
+    },
+    "jimny5door": {
+      "lineupSlug": "jimny5door",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/jimny5door/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "jimny5door",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/jimny5door/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_WBH",
+          "name": "Celestial Blue Pearl Metallic",
+          "thumbnail": "BC_WBH",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WBH"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_ZHJ",
+          "name": "Arctic White Pearl",
+          "thumbnail": "BC_ZHJ",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZHJ"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_Z2S",
+          "name": "Silky Silver Metallic",
+          "thumbnail": "BC_Z2S",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_Z2S"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_WB3",
+          "name": "Bluish Black Pearl",
+          "thumbnail": "BC_WB3",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WB3"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZTN",
+          "name": "Granite Grey Metallic",
+          "thumbnail": "BC_ZTN",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZTN"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_WA7",
+          "name": "Jungle Green",
+          "thumbnail": "BC_WA7",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WA7"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_E5R",
+          "name": "Sizzling Red Metallic + Bluish Black Pearl",
+          "thumbnail": "BC_E5R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E5R"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_E5H",
+          "name": "Kinetic Yellow + Bluish Black Pearl",
+          "thumbnail": "BC_E5H",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E5H"
+        },
+        {
+          "colorSetId": "color_8",
+          "bcCode": "BC_E5J",
+          "name": "Chiffon Ivory Metallic + Bluish Black Pearl",
+          "thumbnail": "BC_E5J",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E5J"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001-BG_A"
+        }
+      ],
+      "errors": []
+    },
+    "s-cross": {
+      "lineupSlug": "s-cross",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/s-cross/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "s-cross",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/s-cross/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_ZZZ",
+          "name": "Titan Dark Gray Pearl Metallic",
+          "thumbnail": "BC_ZZZ",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZZZ"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_26U",
+          "name": "White",
+          "thumbnail": "BC_26U",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_26U"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_ZNL",
+          "name": "Cool White Pearl",
+          "thumbnail": "BC_ZNL",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZNL"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_ZCC",
+          "name": "Silky Silver Metallic",
+          "thumbnail": "BC_ZCC",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZCC"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZCE",
+          "name": "Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_ZCE",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZCE"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZQ5",
+          "name": "Energetic Red Pearl",
+          "thumbnail": "BC_ZQ5",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZQ5"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZQ3",
+          "name": "Canyon Brown Pearl Metallic",
+          "thumbnail": "BC_ZQ3",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZQ3"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_ZQ4",
+          "name": "Sphere Blue Pearl",
+          "thumbnail": "BC_ZQ4",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZQ4"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001"
+        }
+      ],
+      "errors": []
+    },
+    "s-presso": {
+      "lineupSlug": "s-presso",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/s-presso/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "s-presso",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/s-presso/viewer/large/main.html",
+      "defaultGradeId": "GRD_GL",
+      "gradeFolder": "GL",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_ZZT",
+          "name": "Sizzle Orange",
+          "thumbnail": "BC_ZZT",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZZT"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_ZZS",
+          "name": "Pearl Starry Blue",
+          "thumbnail": "BC_ZZS",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZZS"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_Z4Q",
+          "name": "Fire Red",
+          "thumbnail": "BC_Z4Q",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_Z4Q"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_26U",
+          "name": "White",
+          "thumbnail": "BC_26U",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_26U"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZTN",
+          "name": "Metallic Granite Grey",
+          "thumbnail": "BC_ZTN",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_ZTN"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_Z2S",
+          "name": "Metallic Silky Silver",
+          "thumbnail": "BC_Z2S",
+          "materialKey": "EXT-GRD_GL-BG_A-BC_Z2S"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GL",
+          "materialKey": "INT-INTBASE_001"
+        }
+      ],
+      "errors": []
+    },
+    "swift": {
+      "lineupSlug": "swift",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/swift/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "swift",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/swift/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_E6L",
+          "name": "Frontier Blue Pearl Metallic × Super Black Pearl",
+          "thumbnail": "BC_E6L",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E6L"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_D7Z",
+          "name": "Burning Red Pearl Metallic × Super Black Pearl",
+          "thumbnail": "BC_D7Z",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_D7Z"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_E6P",
+          "name": "Cool Yellow Metallic × Mineral Gray Metallic",
+          "thumbnail": "BC_E6P",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_E6P"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_DYH",
+          "name": "Pure White Pearl × Mineral Gray Metallic",
+          "thumbnail": "BC_DYH",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_DYH"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_WB1_R",
+          "name": "Frontier Blue Pearl Metallic",
+          "thumbnail": "BC_WB1_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WB1_R"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_WB2_R",
+          "name": "Cool Yellow Metallic",
+          "thumbnail": "BC_WB2_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WB2_R"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZWP_R",
+          "name": "Burning Red Pearl Metallic",
+          "thumbnail": "BC_ZWP_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZWP_R"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_ZWD_R",
+          "name": "Flame Orange Pearl Metallic",
+          "thumbnail": "BC_ZWD_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZWD_R"
+        },
+        {
+          "colorSetId": "color_8",
+          "bcCode": "BC_ZYL_R",
+          "name": "Caravan Ivory Pearl Metallic",
+          "thumbnail": "BC_ZYL_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZYL_R"
+        },
+        {
+          "colorSetId": "color_9",
+          "bcCode": "BC_ZVR_R",
+          "name": "Pure White Pearl",
+          "thumbnail": "BC_ZVR_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZVR_R"
+        },
+        {
+          "colorSetId": "color_10",
+          "bcCode": "BC_ZNC_R",
+          "name": "Premium Silver Metallic",
+          "thumbnail": "BC_ZNC_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZNC_R"
+        },
+        {
+          "colorSetId": "color_11",
+          "bcCode": "BC_ZMW_R",
+          "name": "Mineral Gray Metallic",
+          "thumbnail": "BC_ZMW_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZMW_R"
+        },
+        {
+          "colorSetId": "color_12",
+          "bcCode": "BC_ZMV_R",
+          "name": "Super Black Pearl",
+          "thumbnail": "BC_ZMV_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZMV_R"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001"
+        }
+      ],
+      "errors": []
+    },
+    "swiftsport": {
+      "lineupSlug": "swiftsport",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/swiftsport/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "swiftsport",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/swiftsport/viewer/large/main.html",
+      "defaultGradeId": "GRD_S",
+      "gradeFolder": "S",
+      "angleStep": 36,
+      "bodyColors": [],
+      "interiorVariants": [],
+      "errors": [
+        "HTTP 404 for https://www.globalsuzuki.com/automobile/lineup/swiftsport/viewer/assets/setting/S/S_materials.json"
+      ]
+    },
+    "vitara": {
+      "lineupSlug": "vitara",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/vitara/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "vitara",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/vitara/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_26U",
+          "name": "White",
+          "thumbnail": "BC_26U",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_26U"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_ZCC",
+          "name": "Silky Silver Metallic",
+          "thumbnail": "BC_ZCC",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZCC"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_ZCD",
+          "name": "Galactic Gray Metallic",
+          "thumbnail": "BC_ZCD",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZCD"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_ZCE",
+          "name": "Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_ZCE",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZCE"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZCF",
+          "name": "Bright Red",
+          "thumbnail": "BC_ZCF",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZCF"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZNL",
+          "name": "Cool White Pearl",
+          "thumbnail": "BC_ZNL",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZNL"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZQN",
+          "name": "Atlantis Turquoise Pearl Metallic",
+          "thumbnail": "BC_ZQN",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZQN"
+        },
+        {
+          "colorSetId": "color_7",
+          "bcCode": "BC_A9G_R",
+          "name": "Galactic Gray Metallic+ Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_A9G_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_A9G_R"
+        },
+        {
+          "colorSetId": "color_8",
+          "bcCode": "BC_A9H_R",
+          "name": "Bright Red + Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_A9H_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_A9H_R"
+        },
+        {
+          "colorSetId": "color_9",
+          "bcCode": "BC_A6H_R",
+          "name": "Atlantis Turquoise Pearl Metallic + White",
+          "thumbnail": "BC_A6H_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_A6H_R"
+        },
+        {
+          "colorSetId": "color_10",
+          "bcCode": "BC_A9L_R",
+          "name": "Atlantis Turquoise Pearl Metallic + Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_A9L_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_A9L_R"
+        },
+        {
+          "colorSetId": "color_11",
+          "bcCode": "BC_A9N_R",
+          "name": "Savanna Ivory Metallic + Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_A9N_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_A9N_R"
+        },
+        {
+          "colorSetId": "color_12",
+          "bcCode": "BC_DBH_R",
+          "name": "Solar Yellow Pearl Metallic / Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_DBH_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_DBH_R"
+        },
+        {
+          "colorSetId": "color_13",
+          "bcCode": "BC_DBG_R",
+          "name": "Solar Yellow Pearl Metallic / White",
+          "thumbnail": "BC_DBG_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_DBG_R"
+        },
+        {
+          "colorSetId": "color_14",
+          "bcCode": "BC_DBF_R",
+          "name": "Ice Grayish Blue Metallic / Cosmic Black Pearl Metallic",
+          "thumbnail": "BC_DBF_R",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_DBF_R"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX",
+          "materialKey": "INT-INTBASE_001-BG_A"
+        },
+        {
+          "variantId": "int_1",
+          "intCode": "INTBASE_002",
+          "name": "GL+",
+          "materialKey": "INT-INTBASE_002-BG_A"
+        }
+      ],
+      "errors": []
+    },
+    "xl7": {
+      "lineupSlug": "xl7",
+      "lineupUrl": "https://www.globalsuzuki.com/automobile/lineup/xl7/",
+      "hasViewerArea": true,
+      "hasGradeList": true,
+      "viewerSlug": "xl7",
+      "viewerUrl": "https://www.globalsuzuki.com/automobile/lineup/xl7/viewer/large/main.html",
+      "defaultGradeId": "GRD_GLX",
+      "gradeFolder": "GLX",
+      "angleStep": 36,
+      "bodyColors": [
+        {
+          "colorSetId": "color_0",
+          "bcCode": "BC_EYP",
+          "name": "Savanna Ivory Metallic × Cool Black Pearl Metallic",
+          "thumbnail": "BC_EYP",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_EYP"
+        },
+        {
+          "colorSetId": "color_1",
+          "bcCode": "BC_EC4",
+          "name": "Rising Orange Pearl Metallic × Cool Black Pearl Metallic",
+          "thumbnail": "BC_EC4",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_EC4"
+        },
+        {
+          "colorSetId": "color_2",
+          "bcCode": "BC_ET5",
+          "name": "Snow White Pearl × Cool Black Pearl Metallic",
+          "thumbnail": "BC_ET5",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ET5"
+        },
+        {
+          "colorSetId": "color_3",
+          "bcCode": "BC_WAE",
+          "name": "Brave Khaki Pearl",
+          "thumbnail": "BC_WAE",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_WAE"
+        },
+        {
+          "colorSetId": "color_4",
+          "bcCode": "BC_ZQZ",
+          "name": "Snow White Pearl",
+          "thumbnail": "BC_ZQZ",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZQZ"
+        },
+        {
+          "colorSetId": "color_5",
+          "bcCode": "BC_ZYZ",
+          "name": "Magma Gray Metallic",
+          "thumbnail": "BC_ZYZ",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZYZ"
+        },
+        {
+          "colorSetId": "color_6",
+          "bcCode": "BC_ZBD",
+          "name": "Cool Black Pearl Metallic",
+          "thumbnail": "BC_ZBD",
+          "materialKey": "EXT-GRD_GLX-BG_A-BC_ZBD"
+        }
+      ],
+      "interiorVariants": [
+        {
+          "variantId": "int_0",
+          "intCode": "INTBASE_001",
+          "name": "GLX + Display audio",
+          "materialKey": "INT-INTBASE_001-BG_A"
+        }
+      ],
+      "errors": []
+    }
+  }
+}

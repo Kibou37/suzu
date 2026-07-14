@@ -49,18 +49,27 @@ enum ColorType {
   INTERIOR
 }
 
+enum VehicleIdentifierType {
+  VIN
+  CHASSIS
+}
+
 model User {
-  id             String          @id @default(cuid())
-  email          String          @unique
-  phone          String?
-  passwordHash   String
-  firstName      String?
-  lastName       String?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  bookings       Booking[]
-  configurations Configuration[]
-  reviews        Review[]
+  id                    String                  @id @default(cuid())
+  email                 String                  @unique
+  phone                 String?
+  passwordHash          String
+  firstName             String?
+  lastName              String?
+  vehicleIdentifierType VehicleIdentifierType?
+  vehicleIdentifier     String?
+  dealerId              String?
+  dealerName            String?
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  bookings              Booking[]
+  configurations        Configuration[]
+  reviews               Review[]
 }
 
 model Car {

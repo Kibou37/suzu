@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { AccountNavLink } from '@/components/account/AccountNavLink';
 import { SuzukiLogo } from '@/components/brand/SuzukiLogo';
 import { MobileNav } from '@/components/layout/MobileNav';
 import { navItems } from '@suzuki/shared';
@@ -27,9 +28,10 @@ export function Header() {
         </nav>
 
         {accountItem && (
-          <Link href={accountItem.href} className="site-nav__link site-header__account">
-            {accountItem.label}
-          </Link>
+          <AccountNavLink
+            label={accountItem.label}
+            className="site-nav__link site-header__account"
+          />
         )}
 
         <MobileNav />

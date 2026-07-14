@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { AccountNavLink } from '@/components/account/AccountNavLink';
 import { navItems } from '@suzuki/shared';
 
 export function MobileNav() {
@@ -40,9 +41,17 @@ export function MobileNav() {
             <ul className="site-nav__list">
               {navItems.map((item) => (
                 <li key={item.href} className="site-nav__item">
-                  <Link href={item.href} className="site-nav__link" onClick={() => setOpen(false)}>
-                    {item.label}
-                  </Link>
+                  {item.href === '/account' ? (
+                    <AccountNavLink
+                      label={item.label}
+                      className="site-nav__link"
+                      onClick={() => setOpen(false)}
+                    />
+                  ) : (
+                    <Link href={item.href} className="site-nav__link" onClick={() => setOpen(false)}>
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

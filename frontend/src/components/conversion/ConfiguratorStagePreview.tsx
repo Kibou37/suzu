@@ -4,7 +4,6 @@ import type { ConfigColor } from '@/data/demo-configurator';
 import { ConfiguratorExterior360 } from '@/components/conversion/ConfiguratorExterior360';
 import { ConfiguratorInteriorPanorama } from '@/components/conversion/ConfiguratorInteriorPanorama';
 import { getInteriorPanorama } from '@/lib/car-interior-panorama';
-import { resolveExterior360Frames } from '@/lib/car-exterior-360';
 
 type ConfiguratorStagePreviewProps = {
   modelSlug: string;
@@ -28,14 +27,11 @@ export function ConfiguratorStagePreview({
     );
   }
 
-  const hasLocalFrames = Boolean(resolveExterior360Frames(modelSlug, bodyColor)?.length);
-
   return (
     <ConfiguratorExterior360
       modelSlug={modelSlug}
       modelName={modelName}
       bodyColor={bodyColor}
-      preferIframe={!hasLocalFrames}
     />
   );
 }

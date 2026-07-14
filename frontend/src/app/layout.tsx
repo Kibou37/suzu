@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import localFont from 'next/font/local';
 import { brand, dealer } from '@suzuki/shared';
+import { AppProviders } from '@/components/providers/AppProviders';
 import { AssetPathStyles } from '@/components/layout/AssetPathStyles';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { Footer } from '@/components/layout/Footer';
@@ -50,12 +51,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`h-full ${suzukiPro.variable} ${suzukiHeadline.variable}`}>
       <body className="flex min-h-full flex-col antialiased">
-        <AssetPathStyles />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <CookieBanner />
-        <RecaptchaScript />
+        <AppProviders>
+          <AssetPathStyles />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CookieBanner />
+          <RecaptchaScript />
+        </AppProviders>
       </body>
     </html>
   );

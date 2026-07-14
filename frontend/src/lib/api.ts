@@ -1,5 +1,6 @@
 import { demoCars } from '@/data/demo-cars';
 import { applyCarQueryFilters, type CarQueryFilters } from '@/lib/catalog-filters';
+import { getApiBaseUrl, isDemoDataMode } from '@/lib/config';
 
 export type CarListItem = {
   id: string;
@@ -20,18 +21,6 @@ export type CarListItem = {
   description: string | null;
   images: string[];
 };
-
-function isDemoDataMode(): boolean {
-  return process.env.NEXT_PUBLIC_USE_DEMO_DATA === 'true';
-}
-
-function getApiBaseUrl(): string {
-  if (typeof window === 'undefined') {
-    return process.env.API_INTERNAL_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
-  }
-
-  return process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
-}
 
 export async function getCars(params?: CarQueryFilters): Promise<CarListItem[]> {
   if (isDemoDataMode()) {

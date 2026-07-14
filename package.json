@@ -15,6 +15,11 @@
     "docker:logs": "docker compose logs -f",
     "db:migrate": "pnpm --filter @suzuki/backend prisma:migrate",
     "db:seed": "pnpm --filter @suzuki/backend prisma:seed",
+    "assets:viewer-discover": "node scripts/discover-globalsuzuki-viewers.mjs",
+    "assets:viewer-map": "node scripts/generate-exterior-360-map.mjs",
+    "assets:viewer-sync": "node scripts/sync-viewer-assets.mjs",
+    "assets:viewer-sync:all": "node scripts/discover-globalsuzuki-viewers.mjs && node scripts/generate-exterior-360-map.mjs && node scripts/sync-viewer-assets.mjs",
+    "assets:viewer-sync:all-models": "node scripts/sync-viewer-assets.mjs --all",
     "prepare": "husky"
   },
   "devDependencies": {

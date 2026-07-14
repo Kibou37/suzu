@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { withBasePath } from '@/lib/base-path';
+import { EquirectPanoramaViewer } from '@/lib/equirect-pano-webgl';
 import type { InteriorPanorama } from '@/lib/car-interior-panorama';
 
 type ConfiguratorInteriorPanoramaProps = {
@@ -9,29 +10,38 @@ type ConfiguratorInteriorPanoramaProps = {
   panorama: InteriorPanorama;
 };
 
-type ViewState = {
-  /** Horizontal look angle 0–100 (maps to background-position-x). */
-  yaw: number;
-  /** Vertical look angle 0–100 (maps to background-position-y). */
-  pitch: number;
-};
-
 type DragState = {
   active: boolean;
-  lastX: number;
-  lastY: number;
+  startX: number;
+  startY: number;
+  startLon: number;
+  startLat: number;
 };
 
-const INITIAL_VIEW: ViewState = { yaw: 50, pitch: 50 };
+const DRAG_SENSITIVITY = 0.12;
+const LAT_MIN = -85;
+const LAT_MAX = 85;
+const INITIAL_LON = 150;
+/** Vertical FOV; 95° — широкий обзор без «рыбьего глаза» после фикса aspect ratio. */
+const PANORAMA_FOV_DEGREES = 95;
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
 
 export function ConfiguratorInteriorPanorama({
   modelName,
   panorama,
 }: ConfiguratorInteriorPanoramaProps) {
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef<DragState>({ active: false, lastX: 0, lastY: 0 });
-  const viewRef = useRef<ViewState>(INITIAL_VIEW);
-  const rafRef = useRef<number>(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const viewerRef = useRef<EquirectPanoramaViewer | null>(null);
+  const dragRef = useRef<DragState>({
+    active: false,
+    startX: 0,
+    startY: 0,
+    startLon: INITIAL_LON,
+    startLat: 0,
+  });
 
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -41,46 +51,81 @@ export function ConfiguratorInteriorPanorama({
     : withBasePath(panorama.imageUrl);
 
   useEffect(() => {
-    const img = new Image();
-    img.onload = () => setReady(true);
-    img.onerror = () => setFailed(true);
-    img.src = imageUrl;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    let viewer: EquirectPanoramaViewer;
+    try {
+      viewer = new EquirectPanoramaViewer(canvas, {
+        initialLon: INITIAL_LON,
+        initialLat: 0,
+        fovDegrees: PANORAMA_FOV_DEGREES,
+      });
+    } catch {
+      setFailed(true);
+      return;
+    }
+
+    viewerRef.current = viewer;
+    setReady(false);
+    setFailed(false);
+
+    let cancelled = false;
+
+    viewer
+      .loadImage(imageUrl)
+      .then(() => {
+        if (cancelled) return;
+        viewer.resize();
+        setReady(true);
+      })
+      .catch(() => {
+        if (!cancelled) setFailed(true);
+      });
+
+    const observer = new ResizeObserver(() => {
+      viewer.resize();
+    });
+    observer.observe(canvas);
+
     return () => {
-      img.onload = null;
-      img.onerror = null;
-      cancelAnimationFrame(rafRef.current);
+      cancelled = true;
+      observer.disconnect();
+      viewer.destroy();
+      viewerRef.current = null;
     };
   }, [imageUrl]);
 
-  const applyView = () => {
-    if (!canvasRef.current) return;
-    const { yaw, pitch } = viewRef.current;
-    canvasRef.current.style.backgroundPosition = `${yaw}% ${pitch}%`;
-  };
+  const onPointerDown = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    const viewer = viewerRef.current;
+    if (!viewer) return;
 
-  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    dragRef.current = { active: true, lastX: event.clientX, lastY: event.clientY };
+    const view = viewer.getView();
+    dragRef.current = {
+      active: true,
+      startX: event.clientX,
+      startY: event.clientY,
+      startLon: view.lon,
+      startLat: view.lat,
+    };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerMove = (event: React.PointerEvent<HTMLCanvasElement>) => {
     const drag = dragRef.current;
-    if (!drag.active) return;
+    const viewer = viewerRef.current;
+    if (!drag.active || !viewer) return;
 
-    const deltaX = event.clientX - drag.lastX;
-    const deltaY = event.clientY - drag.lastY;
-    drag.lastX = event.clientX;
-    drag.lastY = event.clientY;
+    const deltaX = event.clientX - drag.startX;
+    const deltaY = event.clientY - drag.startY;
 
-    const view = viewRef.current;
-    view.yaw = Math.min(100, Math.max(0, view.yaw - deltaX * 0.12));
-    view.pitch = Math.min(82, Math.max(18, view.pitch - deltaY * 0.1));
-
-    cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(applyView);
+    viewer.setView({
+      lon: drag.startLon - deltaX * DRAG_SENSITIVITY,
+      lat: clamp(drag.startLat + deltaY * DRAG_SENSITIVITY, LAT_MIN, LAT_MAX),
+    });
   };
 
-  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerUp = (event: React.PointerEvent<HTMLCanvasElement>) => {
     if (!dragRef.current.active) return;
     dragRef.current.active = false;
     event.currentTarget.releasePointerCapture(event.pointerId);
@@ -104,24 +149,20 @@ export function ConfiguratorInteriorPanorama({
         </div>
       )}
 
+      <canvas
+        ref={canvasRef}
+        className="configurator-pano__canvas"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        role="img"
+        aria-label={`360 degree interior view of Suzuki ${modelName}. Drag to look around.`}
+        aria-hidden={!ready}
+      />
+
       {ready && (
-        <>
-          <div
-            ref={canvasRef}
-            className="configurator-pano__canvas"
-            style={{
-              backgroundImage: `url(${imageUrl})`,
-              backgroundPosition: `${INITIAL_VIEW.yaw}% ${INITIAL_VIEW.pitch}%`,
-            }}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
-            role="img"
-            aria-label={`360 degree interior view of Suzuki ${modelName}. Drag to look around.`}
-          />
-          <p className="configurator-360__hint">Drag to look around · Interior 360°</p>
-        </>
+        <p className="configurator-360__hint">Drag to look around · Interior 360°</p>
       )}
     </div>
   );

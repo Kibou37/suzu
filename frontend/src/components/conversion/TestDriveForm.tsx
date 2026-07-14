@@ -118,9 +118,12 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
 
     setSubmitting(true);
 
+    const carName = newCars.find((c) => c.slug === carSlug)?.name;
+
     try {
       const result = await submitTestDrive({
         carSlug,
+        carName,
         scheduledAt,
         customerName,
         customerPhone,

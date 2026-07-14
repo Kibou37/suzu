@@ -75,7 +75,7 @@ export class BookingsService {
       .map((hour) => this.formatSlotLabel(day, hour));
   }
 
-  async createTestDrive(input: CreateTestDriveInput) {
+  async createTestDrive(input: CreateTestDriveInput, userId?: string) {
     await this.recaptchaService.verify(
       input.recaptchaToken,
       'test_drive_booking',
@@ -130,6 +130,7 @@ export class BookingsService {
       data: {
         type: BookingType.TEST_DRIVE,
         carId,
+        userId: userId ?? null,
         scheduledAt,
         customerName: name,
         customerPhone: phone,
@@ -153,7 +154,7 @@ export class BookingsService {
     };
   }
 
-  async createService(input: CreateServiceInput) {
+  async createService(input: CreateServiceInput, userId?: string) {
     await this.recaptchaService.verify(input.recaptchaToken, 'service_booking');
 
     const scheduledAt = new Date(input.scheduledAt);
@@ -204,6 +205,7 @@ export class BookingsService {
     const booking = await this.prisma.booking.create({
       data: {
         type: BookingType.SERVICE,
+        userId: userId ?? null,
         scheduledAt,
         customerName: name,
         customerPhone: phone,
