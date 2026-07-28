@@ -11,6 +11,21 @@ export function getGoogleMapsPlaceUrl(location: GeoLocation): string {
   return `https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}`;
 }
 
+export type GoogleMap = {
+  fitBounds: (bounds: GoogleLatLngBounds, padding?: number) => void;
+  panTo: (pos: GeoLocation) => void;
+  setZoom: (zoom: number) => void;
+};
+
+export type GoogleMarker = {
+  setMap: (map: GoogleMap | null) => void;
+  addListener: (name: string, handler: () => void) => void;
+};
+
+export type GoogleLatLngBounds = {
+  extend: (pos: GeoLocation) => void;
+};
+
 type GoogleMapsWindow = Window & {
   google?: {
     maps: {
@@ -37,21 +52,6 @@ type GoogleMapsWindow = Window & {
     };
   };
   __suzukiMapsReady?: Promise<void>;
-};
-
-type GoogleMap = {
-  fitBounds: (bounds: GoogleLatLngBounds, padding?: number) => void;
-  panTo: (pos: GeoLocation) => void;
-  setZoom: (zoom: number) => void;
-};
-
-type GoogleMarker = {
-  setMap: (map: GoogleMap | null) => void;
-  addListener: (name: string, handler: () => void) => void;
-};
-
-type GoogleLatLngBounds = {
-  extend: (pos: GeoLocation) => void;
 };
 
 export function loadGoogleMapsScript(apiKey: string): Promise<void> {

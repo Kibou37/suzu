@@ -109,7 +109,7 @@ export function resolveExterior360Frames(
     }
 
     const remoteSet = getExterior360Colors(modelSlug).find((set) => set.id === setId);
-    if (remoteSet?.frames?.length >= MIN_EXTERIOR_360_SPIN_FRAMES) {
+    if (remoteSet?.frames && remoteSet.frames.length >= MIN_EXTERIOR_360_SPIN_FRAMES) {
       return remoteSet.frames;
     }
   }

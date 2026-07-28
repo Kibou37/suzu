@@ -14,22 +14,15 @@ import {
   getGoogleMapsApi,
   getGoogleMapsPlaceUrl,
   loadGoogleMapsScript,
+  type GoogleMap,
+  type GoogleMarker,
 } from '@/lib/google-maps';
-
-type MarkerHandle = {
-  setMap: (map: unknown) => void;
-  addListener: (name: string, handler: () => void) => void;
-};
 
 export function DealersPanel() {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<{
-    map: {
-      fitBounds: (bounds: unknown, padding?: number) => void;
-      panTo: (pos: { lat: number; lng: number }) => void;
-      setZoom: (zoom: number) => void;
-    };
-    markers: MarkerHandle[];
+    map: GoogleMap;
+    markers: GoogleMarker[];
   } | null>(null);
 
   const [city, setCity] = useState('');
@@ -117,10 +110,10 @@ export function DealersPanel() {
     const bounds = new google.maps.LatLngBounds();
     for (const dealer of filtered) {
       const marker = new google.maps.Marker({
-        map: instance.map as never,
+        map: instance.map,
         position: dealer.location,
         title: dealer.name,
-      }) as unknown as MarkerHandle;
+      });
 
       marker.addListener('click', () => {
         setSelectedId(dealer.id);
