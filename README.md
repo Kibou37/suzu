@@ -139,8 +139,72 @@ Vitara и Jimny — полный 360° spin (Perxis). Swift / S‑Cross — од
 
 Sync (`pnpm assets:viewer-sync`) сохраняет `exterior360Stub` при обновлении манифеста.
 
+## Доступы и проверка сайта
+
+Полный чек-лист для приёмки/проверки после `docker compose up -d --build` + `pnpm db:seed`.
+
+### Публичный сайт
+
+| Что проверить | URL |
+|---|---|
+| Главная | http://localhost:3000 |
+| Каталог / модель / б.у. / акции | http://localhost:3000/catalog, `/catalog/vitara`, `/catalog/used`, `/catalog/offers` |
+| Конфигуратор | http://localhost:3000/configurator |
+| Тест-драйв / сервис / финансы | http://localhost:3000/test-drive, `/service`, `/finance` |
+| Дилеры / контакты / о нас / FAQ / блог | http://localhost:3000/dealers, `/contacts`, `/about`, `/faq`, `/blog` |
+| Личный кабинет | http://localhost:3000/account/login |
+| Чат-бот | иконка в правом нижнем углу на публичных страницах (отсутствует в `/admin`) |
+| `robots.txt` / `sitemap.xml` | http://localhost:3000/robots.txt, `/sitemap.xml` |
+
+### Backend API
+
+| Что проверить | URL |
+|---|---|
+| Health check | http://localhost:4000/api/health |
+| Swagger UI (полная схема API) | http://localhost:4000/api/docs — включён по умолчанию вне `NODE_ENV=production`; в проде требует `SWAGGER_ENABLED=true` |
+| Список авто / FAQ / тарифы кредита | http://localhost:4000/api/cars, `/api/faq`, `/api/finance/rates` |
+
+### Админ-панель (`/admin`)
+
+Тестовые аккаунты после `pnpm db:seed` (см. также [Admin user guide](docs/admin-user-guide.md)):
+
+| Роль | Email | Пароль | Доступ |
+|------|-------|--------|--------|
+| Administrator | `admin@suzuki.local` | `Admin1234` | полный доступ, включая пользователей |
+| Content manager | `content@suzuki.local` | `Content1234` | контент (баннеры/блог/FAQ/акции), без операций |
+| Dealer manager | `dealer@suzuki.local` | `Dealer1234` | бронирования/заявки, контент — только чтение |
+| Тестовый клиент (личный кабинет) | `demo@suzuki.local` | `Demo1234` | обычный пользователь, не админ |
+
+> Для прод-БД обязательно смените эти пароли или пересидируйте с `SEED_ALLOW_PROD=true` и собственными значениями — сид с публично известными паролями предназначен только для demo/staging.
+
+### Автоматизированная проверка
+
+```powershell
+node scripts/phase6-smoke.mjs
+# API_URL / SITE_URL можно переопределить env-переменными для стейджа/прода
+```
+
+Проверяет: `/api/health`, каталог, тарифы, чат, FAQ, `robots.txt`, `sitemap.xml`, главную страницу.
+
+### Ограничения, о которых нужно знать при приёмке
+
+- Без реальных ключей (`OPENAI_API_KEY`, `BITRIX24_WEBHOOK_URL`, `SMSRU_API_KEY`, Gmail, Google Maps, GA4, reCAPTCHA) соответствующие интеграции работают в safe-fallback режиме (AI-чат — на локальной эвристике, письма/SMS/CRM — no-op с логированием). Подробности — [integrations-env.md](docs/integrations-env.md).
+- Сайт **только на английском** — RU/EN i18n сознательно не реализовывался (см. [decisions.md](docs/kickoff/decisions.md)).
+- Rate-limit по IP не защищён на 100% при отсутствии доверенного reverse-proxy — см. `TRUST_PROXY` в [runbook.md](docs/runbook.md).
+
 ## Документация
 
-- [Kickoff-решения](docs/kickoff/decisions.md)
+- [Kickoff-решения](docs/kickoff/decisions.md) — **English only**
 - [Контакты-заглушки](docs/kickoff/contacts.md)
-- [План эпиков](epics/README.md)
+- [План эпиков и прогресс](epics/STATUS.md)
+- [Runbook / prod prep](docs/runbook.md)
+- [Test plan](docs/test-plan.md)
+- [Support plan](docs/support-plan.md)
+- [Integrations env](docs/integrations-env.md)
+- [Admin user guide](docs/admin-user-guide.md)
+
+Smoke:
+
+```powershell
+node scripts/phase6-smoke.mjs
+```

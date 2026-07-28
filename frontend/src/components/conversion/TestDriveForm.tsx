@@ -23,6 +23,7 @@ type TestDriveFormProps = {
 export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
   const searchParams = useSearchParams();
   const modelSlug = initialModelSlug ?? searchParams.get('model') ?? undefined;
+  const configurationId = searchParams.get('configId') ?? undefined;
   const bodyColorId = searchParams.get('body') ?? undefined;
   const interiorColorId = searchParams.get('interior') ?? undefined;
   const optionIds = useMemo(
@@ -119,11 +120,13 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
     setSubmitting(true);
 
     const carName = newCars.find((c) => c.slug === carSlug)?.name;
+    const formEl = event.currentTarget;
 
     try {
       const result = await submitTestDrive({
         carSlug,
         carName,
+        configurationId,
         scheduledAt,
         customerName,
         customerPhone,
@@ -135,10 +138,15 @@ export function TestDriveForm({ cars, initialModelSlug }: TestDriveFormProps) {
       setSuccess(
         `Thank you! Your test drive is booked for ${formatBookingSlot(result.scheduledAt)}. We will confirm by email.`,
       );
+      const { trackEvent } = await import('@/lib/analytics');
+      trackEvent('generate_lead', {
+        lead_type: 'test_drive',
+        car_slug: carSlug || undefined,
+      });
       setDate('');
       setScheduledAt('');
       setSlots([]);
-      event.currentTarget.reset();
+      formEl.reset();
     } catch {
       setError('Unable to complete the booking. Please try again or call the dealer.');
     } finally {

@@ -1,11 +1,17 @@
 import { CatalogLayout } from '@/components/catalog/CatalogLayout';
 import { CatalogWithFilters } from '@/components/catalog/CatalogWithFilters';
-import { getCars } from '@/lib/api';
+import { getCars, getCatalogFacets } from '@/lib/api';
 
-export const metadata = { title: 'Used Vehicles' };
+export const metadata = {
+  title: 'Used Vehicles',
+  description: 'Pre-owned Suzuki vehicles with transparent mileage and pricing.',
+};
 
 export default async function UsedCatalogPage() {
-  const cars = await getCars({ condition: 'USED' });
+  const [cars, serverFacets] = await Promise.all([
+    getCars({ condition: 'USED' }),
+    getCatalogFacets({ condition: 'USED' }),
+  ]);
 
   return (
     <CatalogLayout
@@ -16,7 +22,12 @@ export default async function UsedCatalogPage() {
         { label: 'Used' },
       ]}
     >
-      <CatalogWithFilters cars={cars} activeTab="/catalog/used" showMileage />
+      <CatalogWithFilters
+        cars={cars}
+        activeTab="/catalog/used"
+        showMileage
+        serverFacets={serverFacets}
+      />
     </CatalogLayout>
   );
 }

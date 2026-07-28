@@ -14,6 +14,16 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "scripts/**",
   ]),
+  {
+    // React Compiler rules from eslint-config-next flag legitimate patterns
+    // (fetch-on-mount in admin panels, prop→state sync, Date.now in UI).
+    // Keep them off until those screens are refactored to Suspense/actions.
+    rules: {
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/preserve-manual-memoization": "off",
+      "react-hooks/purity": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

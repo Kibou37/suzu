@@ -111,6 +111,7 @@ export function ServiceForm() {
     }
 
     setSubmitting(true);
+    const formEl = event.currentTarget;
 
     try {
       const result = await submitService({
@@ -129,11 +130,13 @@ export function ServiceForm() {
       setSuccess(
         `Thank you! Your service appointment is booked for ${formatBookingSlot(result.scheduledAt)}. We will confirm by phone or email.`,
       );
+      const { trackEvent } = await import('@/lib/analytics');
+      trackEvent('generate_lead', { lead_type: 'service' });
       setDate('');
       setScheduledAt('');
       setSlots([]);
       setVehicleId('');
-      event.currentTarget.reset();
+      formEl.reset();
     } catch {
       setError('Unable to complete the booking. Please try again or call the service centre.');
     } finally {

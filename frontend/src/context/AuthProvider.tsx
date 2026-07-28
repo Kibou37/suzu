@@ -66,11 +66,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(async (payload: LoginPayload) => {
     const response = await loginRequest(payload);
     setUser(response.user);
+    void import('@/lib/analytics').then(({ trackEvent }) => {
+      trackEvent('login', { method: payload.login.includes('@') ? 'email' : 'phone' });
+    });
   }, []);
 
   const register = useCallback(async (payload: RegisterPayload) => {
     const response = await registerRequest(payload);
     setUser(response.user);
+    void import('@/lib/analytics').then(({ trackEvent }) => {
+      trackEvent('sign_up', { method: payload.phone ? 'phone' : 'email' });
+    });
   }, []);
 
   const logout = useCallback(() => {

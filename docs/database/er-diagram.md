@@ -1,44 +1,29 @@
-# ER-диаграмма базы данных
+# ER-диаграмма (краткая)
 
-**СУБД:** MySQL 8  
-**ORM:** Prisma
+Схема Prisma: `backend/prisma/schema.prisma`
 
 ## Основные сущности
 
-```mermaid
-erDiagram
-    User ||--o{ Booking : creates
-    User ||--o{ Configuration : saves
-    Car ||--o{ CarVariant : has
-    Car ||--o{ Booking : for
-    Car ||--o{ Review : about
-    CarVariant ||--o{ Configuration : used_in
-    CarVariant ||--o{ CarVariantOption : includes
-    Option ||--o{ CarVariantOption : linked
-    User ||--o{ Review : writes
+```
+User ──┬── Booking
+       ├── Configuration ── CarVariant ── Car
+       └── Review ── Car
+
+Car ── CarVariant ── CarVariantOption ── Option
+Color (standalone, referenced by Configuration IDs)
+
+ServiceSlot (расписание слотов)
+BlogPost, FAQ, Promotion (контент)
 ```
 
-## Таблицы
+## Связи
 
-| Модель | Назначение |
-|--------|------------|
-| `User` | Клиенты, личный кабинет |
-| `Car` | Автомобили (новые / б/у / акции) |
-| `CarVariant` | Комплектации |
-| `Color` | Цвета кузова и салона |
-| `Option` | Опции и пакеты |
-| `Configuration` | Сохранённые конфигурации |
-| `Booking` | Запись на ТД и ТО |
-| `ServiceSlot` | Слоты расписания |
-| `Review` | Отзывы клиентов |
-| `BlogPost` | Статьи блога |
-| `FAQ` | Частые вопросы |
-| `Promotion` | Акции и спецпредложения |
+| Модель | Связи |
+|--------|--------|
+| **User** | bookings, configurations, reviews |
+| **Car** | variants, bookings, reviews |
+| **CarVariant** | car, options (M:N), configurations |
+| **Configuration** | user?, variant, bodyColorId, interiorColorId, selectedOptions JSON |
+| **Booking** | user?, car?, type (TEST_DRIVE/SERVICE), status, scheduledAt |
 
-## Миграции
-
-```bash
-cd backend
-pnpm prisma:migrate   # prisma migrate dev
-pnpm prisma:seed      # seed-данные
-```
+Полная схема с индексами и enum — в `schema.prisma`.

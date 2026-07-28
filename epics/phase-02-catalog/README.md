@@ -1,24 +1,28 @@
 # Фаза 2: Каталог (недели 3–4)
 
-**Milestone:** demo — главная + каталог с фильтрами + карточка авто.
+**Milestone:** demo — главная + каталог + фильтрами + карточка авто.
 
-## Эпики фазы
+**Прогресс:** **100%** (code-complete; Lighthouse audit — фаза 6)
 
-| Эпик | Папка | Приоритет |
-|------|-------|-----------|
-| E3 — Frontend: базовая оболочка | [E3-frontend-shell](./E3-frontend-shell/) | P0 |
-| E4 — Каталог и фильтрация | [E4-catalog](./E4-catalog/) | P0 |
-| E13 — Статика и блог (старт) | [E13-content-start](./E13-content-start/) | P0 |
+## Эпики
+
+| Эпик | Папка | Статус |
+|------|-------|--------|
+| E3 — Frontend shell | [E3-frontend-shell](./E3-frontend-shell/) | ✅ |
+| E4 — Каталог | [E4-catalog](./E4-catalog/) | ✅ |
+| E13 — Главная | [E13-content-start](./E13-content-start/) | ✅ |
 
 ## Критерии завершения фазы
 
-- [ ] Все URL из ТЗ открываются (placeholder-контент допустим)
-- [ ] Фильтры работают < 300 ms
-- [ ] Главная страница свёрстана по макету
-
-## Зависимости
-
-- E1 (макеты), E2 (API каталога)
+- [x] Все URL из ТЗ открываются
+- [x] Фильтры + shareable URL
+- [x] Redis-кэш агрегатов (`GET /api/cars/facets`)
+- [x] Grid + list view каталога
+- [x] Бейджи б/у и акций
+- [x] Header: CTA Test Drive + lang switcher (placeholder)
+- [x] Главная: hero, модели, promo strip, news
+- [x] Карточка: gallery + metadata
+- [ ] Lighthouse Performance ≥ 85 (перенесено в E15)
 
 ## Следующая фаза
 

@@ -1,10 +1,11 @@
 import { saveDemoBooking } from '@/lib/account';
 import { authHeaders } from '@/lib/auth';
-import { getApiBaseUrl, isDemoDataMode, parseApiError, STORAGE_KEYS } from '@/lib/config';
+import { apiUrl, isDemoDataMode, parseApiError, STORAGE_KEYS } from '@/lib/config';
 
 export type TestDrivePayload = {
   carSlug?: string;
   carName?: string;
+  configurationId?: string;
   scheduledAt: string;
   customerName: string;
   customerPhone: string;
@@ -94,7 +95,7 @@ export async function getBookingSlots(
 
   try {
     const res = await fetch(
-      `${getApiBaseUrl()}/api/bookings/slots?date=${encodeURIComponent(date)}&type=${type}`,
+      apiUrl(`/api/bookings/slots?date=${encodeURIComponent(date)}&type=${type}`),
       { cache: 'no-store' },
     );
     if (!res.ok) return [];
@@ -144,7 +145,7 @@ export async function submitTestDrive(payload: TestDrivePayload): Promise<TestDr
     return result;
   }
 
-  const res = await fetch(`${getApiBaseUrl()}/api/bookings/test-drive`, {
+  const res = await fetch(apiUrl('/api/bookings/test-drive'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -172,7 +173,7 @@ export async function submitService(payload: ServicePayload): Promise<TestDriveR
     return result;
   }
 
-  const res = await fetch(`${getApiBaseUrl()}/api/bookings/service`, {
+  const res = await fetch(apiUrl('/api/bookings/service'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

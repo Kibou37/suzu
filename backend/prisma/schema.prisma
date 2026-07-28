@@ -12,6 +12,13 @@ enum CarCondition {
   USED
 }
 
+enum Role {
+  CUSTOMER
+  ADMIN
+  CONTENT_MANAGER
+  DEALER_MANAGER
+}
+
 enum BodyType {
   SEDAN
   SUV
@@ -54,11 +61,25 @@ enum VehicleIdentifierType {
   CHASSIS
 }
 
+enum QuoteContactMethod {
+  PHONE
+  EMAIL
+  EITHER
+}
+
+enum QuoteStatus {
+  PENDING
+  CONTACTED
+  CLOSED
+}
+
 model User {
   id                    String                  @id @default(cuid())
   email                 String                  @unique
   phone                 String?
+  phoneVerifiedAt       DateTime?
   passwordHash          String
+  role                  Role                    @default(CUSTOMER)
   firstName             String?
   lastName              String?
   vehicleIdentifierType VehicleIdentifierType?
@@ -69,6 +90,7 @@ model User {
   updatedAt             DateTime                @updatedAt
   bookings              Booking[]
   configurations        Configuration[]
+  quoteRequests         QuoteRequest[]
   reviews               Review[]
 }
 
@@ -139,37 +161,71 @@ model CarVariantOption {
 }
 
 model Configuration {
-  id              String     @id @default(cuid())
+  id              String         @id @default(cuid())
   userId          String?
-  user            User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  user            User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
   variantId       String
-  variant         CarVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  variant         CarVariant     @relation(fields: [variantId], references: [id], onDelete: Cascade)
   bodyColorId     String?
   interiorColorId String?
-  selectedOptions Json       @default("[]")
-  totalPrice      Decimal    @db.Decimal(12, 2)
-  shareToken      String?    @unique
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  selectedOptions Json           @default("[]")
+  snapshot        Json           @default("{}")
+  totalPrice      Decimal        @db.Decimal(12, 2)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  bookings        Booking[]
+  quoteRequests   QuoteRequest[]
+
+  @@index([userId, createdAt])
+}
+
+model QuoteRequest {
+  id              String             @id @default(cuid())
+  status          QuoteStatus        @default(PENDING)
+  userId          String?
+  user            User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
+  configurationId String?
+  configuration   Configuration?     @relation(fields: [configurationId], references: [id], onDelete: SetNull)
+  carSlug         String
+  modelName       String
+  summary         String             @db.Text
+  snapshot        Json               @default("{}")
+  totalPrice      Decimal            @db.Decimal(12, 2)
+  customerName    String
+  customerPhone   String
+  customerEmail   String
+  notes           String?            @db.Text
+  dealerId        String
+  dealerName      String
+  contactMethod   QuoteContactMethod @default(EITHER)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@index([createdAt])
+  @@index([userId, createdAt])
+  @@index([configurationId])
 }
 
 model Booking {
-  id            String        @id @default(cuid())
-  type          BookingType
-  status        BookingStatus @default(PENDING)
-  userId        String?
-  user          User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
-  carId         String?
-  car           Car?          @relation(fields: [carId], references: [id], onDelete: SetNull)
-  scheduledAt   DateTime
-  customerName  String
-  customerPhone String
-  customerEmail String?
-  notes         String?       @db.Text
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id              String         @id @default(cuid())
+  type            BookingType
+  status          BookingStatus  @default(PENDING)
+  userId          String?
+  user            User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  carId           String?
+  car             Car?           @relation(fields: [carId], references: [id], onDelete: SetNull)
+  configurationId String?
+  configuration   Configuration? @relation(fields: [configurationId], references: [id], onDelete: SetNull)
+  scheduledAt     DateTime
+  customerName    String
+  customerPhone   String
+  customerEmail   String?
+  notes           String?        @db.Text
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   @@index([scheduledAt, type])
+  @@index([configurationId])
 }
 
 model ServiceSlot {
@@ -179,6 +235,9 @@ model ServiceSlot {
   type        BookingType
   maxBookings Int         @default(1)
   isBlocked   Boolean     @default(false)
+
+  @@index([type, startsAt])
+  @@unique([startsAt, type])
 }
 
 model Review {
@@ -221,9 +280,43 @@ model FAQ {
 model Promotion {
   id          String    @id @default(cuid())
   title       String
+  subtitle    String?
   description String?   @db.Text
   image       String?
+  linkUrl     String?
   startsAt    DateTime?
   endsAt      DateTime?
   isActive    Boolean   @default(true)
+}
+
+/// Homepage hero slides — edited in /admin/banners (desktop + mobile uploads)
+model HomeBanner {
+  id           String  @id @default(cuid())
+  title        String
+  subtitle     String?
+  description  String? @db.Text
+  linkUrl      String?
+  linkLabel    String?
+  imageDesktop String
+  imageMobile  String?
+  sortOrder    Int     @default(0)
+  isActive     Boolean @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+/// Uploaded images registry for admin media library / picker
+model MediaAsset {
+  id           String   @id @default(cuid())
+  url          String
+  filename     String
+  originalName String?
+  folder       String
+  mimeType     String
+  size         Int
+  alt          String?
+  createdAt    DateTime @default(now())
+
+  @@index([folder])
+  @@index([createdAt])
 }

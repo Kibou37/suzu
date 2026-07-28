@@ -1,23 +1,35 @@
 'use client';
 
 import { ConfiguratorStagePreview } from '@/components/conversion/ConfiguratorStagePreview';
+import { QuoteRequestModal } from '@/components/conversion/QuoteRequestModal';
+import { ResumeConfigurationModal } from '@/components/conversion/ResumeConfigurationModal';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useMemo, useState, type CSSProperties } from 'react';
-import { dealer } from '@suzuki/shared';
+import { useMemo, useState, useEffect, useRef, useCallback, type CSSProperties } from 'react';
 import type { CarListItem } from '@/lib/api';
+import { useAuth } from '@/context/AuthProvider';
 import {
   calculateConfiguratorTotal,
   getConfiguratorData,
+  normalizeSelectedOptionIds,
+  toggleExclusiveOption,
   type ConfigColor,
   type ConfigOption,
 } from '@/data/demo-configurator';
 import { formatPrice } from '@/lib/format';
 import { withBasePath } from '@/lib/base-path';
 import {
-  buildConfiguratorQuery,
-  formatConfiguratorSummary,
-} from '@/lib/configurator-query';
+  AUTO_SAVE_INTERVAL_MS,
+  buildTestDriveHref,
+  clearConfiguratorSessionId,
+  fetchConfiguration,
+  fetchLatestConfiguration,
+  getConfiguratorSessionId,
+  saveSessionConfiguration,
+  setConfiguratorSessionId,
+  type SaveConfigurationPayload,
+  type SavedConfiguration,
+} from '@/lib/configurations';
 
 type ConfiguratorFormProps = {
   cars: CarListItem[];
@@ -184,6 +196,7 @@ function SelectionChip({ label, color }: { label: string; color?: ConfigColor })
 
 export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormProps) {
   const searchParams = useSearchParams();
+  const { user, loading: authLoading } = useAuth();
   const modelSlug = initialModelSlug ?? searchParams.get('model') ?? undefined;
 
   const newCars = useMemo(
@@ -199,6 +212,17 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
   const [bodyColorId, setBodyColorId] = useState('');
   const [interiorColorId, setInteriorColorId] = useState('');
   const [selectedOptionIds, setSelectedOptionIds] = useState<string[]>([]);
+  const [savedConfigurationId, setSavedConfigurationId] = useState<string | null>(null);
+  const [autoSaveState, setAutoSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [draftLoaded, setDraftLoaded] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const [resumeCandidate, setResumeCandidate] = useState<SavedConfiguration | null>(null);
+  const saveInFlightRef = useRef(false);
+  const configIdRef = useRef<string | null>(null);
+  const selectionsRef = useRef<SaveConfigurationPayload | null>(null);
+  const loadedDraftKeyRef = useRef<string | null>(null);
+  const resumeChoiceRef = useRef<'continue' | 'new' | null>(null);
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const configData = getConfiguratorData(modelSlug ?? '');
   const basePrice = selected ? Number(selected.price) : 0;
@@ -218,9 +242,7 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
 
   const toggleOption = (optionId: string) => {
     setSelectedOptionIds((current) =>
-      current.includes(optionId)
-        ? current.filter((id) => id !== optionId)
-        : [...current, optionId],
+      toggleExclusiveOption(current, optionId, configData.options),
     );
   };
 
@@ -236,7 +258,308 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
     }
   };
 
-  if (!modelSlug || !selected) {
+  const selections = useMemo(
+    () =>
+      selected
+        ? {
+            modelSlug: selected.slug,
+            modelName: selected.name,
+            bodyColor,
+            interiorColor,
+            options: selectedOptions.map((o) => ({ id: o.id, name: o.name })),
+            totalPrice,
+          }
+        : null,
+    [selected, bodyColor, interiorColor, selectedOptions, totalPrice],
+  );
+
+  useEffect(() => {
+    configIdRef.current = savedConfigurationId;
+    selectionsRef.current = selections;
+  }, [savedConfigurationId, selections]);
+
+  const persistConfiguration = useCallback(async (): Promise<SavedConfiguration | null> => {
+    if (!user || !modelSlug || !selectionsRef.current) return null;
+
+    const currentSelections = selectionsRef.current;
+    const hasSelection =
+      Boolean(currentSelections.bodyColor) ||
+      Boolean(currentSelections.interiorColor) ||
+      currentSelections.options.length > 0;
+
+    if (!hasSelection || saveInFlightRef.current) return null;
+
+    saveInFlightRef.current = true;
+    setAutoSaveState('saving');
+
+    try {
+      const configId =
+        configIdRef.current ?? getConfiguratorSessionId(user.id, modelSlug);
+
+      const saved = await saveSessionConfiguration(
+        configId,
+        currentSelections,
+        user.id,
+      );
+
+      configIdRef.current = saved.id;
+      setSavedConfigurationId(saved.id);
+      setConfiguratorSessionId(user.id, modelSlug, saved.id);
+      setAutoSaveState('saved');
+      void import('@/lib/analytics').then(({ trackEvent }) => {
+        trackEvent('save_configuration', {
+          car_slug: modelSlug,
+          value: currentSelections.totalPrice,
+        });
+      });
+      return saved;
+    } catch {
+      setAutoSaveState('error');
+      return null;
+    } finally {
+      saveInFlightRef.current = false;
+    }
+  }, [user, modelSlug]);
+
+  useEffect(() => {
+    if (authLoading) return;
+
+    if (!user) {
+      setDraftLoaded(true);
+      setResumeCandidate(null);
+      return;
+    }
+
+    if (!modelSlug || !selected) return;
+
+    const configIdParam = searchParams.get('configId');
+    const visitKey = `${user.id}:${modelSlug}:${configIdParam ?? 'catalog'}`;
+
+    if (loadedDraftKeyRef.current === visitKey && resumeChoiceRef.current) {
+      setDraftLoaded(true);
+      return;
+    }
+
+    if (loadedDraftKeyRef.current === visitKey && configIdParam) {
+      setDraftLoaded(true);
+      return;
+    }
+
+    let cancelled = false;
+
+    const applyDraft = (draft: {
+      id: string;
+      carSlug: string;
+      bodyColorId: string | null;
+      interiorColorId: string | null;
+      selectedOptions: string[];
+    }) => {
+      configIdRef.current = draft.id;
+      setSavedConfigurationId(draft.id);
+      setConfiguratorSessionId(user.id, modelSlug, draft.id);
+      if (draft.bodyColorId) setBodyColorId(draft.bodyColorId);
+      if (draft.interiorColorId) setInteriorColorId(draft.interiorColorId);
+      if (draft.selectedOptions.length > 0) {
+        setSelectedOptionIds(
+          normalizeSelectedOptionIds(draft.selectedOptions, configData.options),
+        );
+      } else {
+        setSelectedOptionIds([]);
+      }
+
+      if (draft.interiorColorId) {
+        setStep(3);
+      } else if (draft.bodyColorId) {
+        setStep(2);
+      } else {
+        setStep(1);
+      }
+
+      setAutoSaveState('saved');
+    };
+
+    const startFresh = () => {
+      clearConfiguratorSessionId(user.id, modelSlug);
+      configIdRef.current = null;
+      setSavedConfigurationId(null);
+      setBodyColorId('');
+      setInteriorColorId('');
+      setSelectedOptionIds([]);
+      setStep(1);
+      setAutoSaveState('idle');
+    };
+
+    const finishLoad = (key: string) => {
+      if (cancelled) return;
+      loadedDraftKeyRef.current = key;
+      setDraftLoaded(true);
+    };
+
+    const loadDraft = async () => {
+      setDraftLoaded(false);
+      setResumeCandidate(null);
+
+      // Explicit open from account (or shared link) — load without asking
+      if (configIdParam) {
+        resumeChoiceRef.current = 'continue';
+        try {
+          const draft = await fetchConfiguration(configIdParam);
+          if (!cancelled && draft.carSlug === modelSlug) {
+            applyDraft(draft);
+          } else if (!cancelled) {
+            startFresh();
+          }
+        } catch {
+          if (!cancelled) startFresh();
+        } finally {
+          finishLoad(visitKey);
+        }
+        return;
+      }
+
+      // Same catalog visit already resolved — keep current state
+      if (resumeChoiceRef.current === 'new') {
+        finishLoad(visitKey);
+        return;
+      }
+
+      if (resumeChoiceRef.current === 'continue') {
+        const sessionConfigId = getConfiguratorSessionId(user.id, modelSlug);
+        if (sessionConfigId) {
+          try {
+            const draft = await fetchConfiguration(sessionConfigId);
+            if (!cancelled && draft.carSlug === modelSlug) {
+              applyDraft(draft);
+              finishLoad(visitKey);
+              return;
+            }
+          } catch {
+            // fall through to latest prompt
+          }
+        }
+      }
+
+      // Fresh entry from catalog — offer latest save if one exists
+      resumeChoiceRef.current = null;
+      try {
+        const latest = await fetchLatestConfiguration(modelSlug);
+        if (cancelled) return;
+
+        if (latest) {
+          setResumeCandidate(latest);
+          return;
+        }
+
+        startFresh();
+        finishLoad(visitKey);
+      } catch {
+        if (!cancelled) {
+          startFresh();
+          finishLoad(visitKey);
+        }
+      }
+    };
+
+    void loadDraft();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [authLoading, user, modelSlug, selected, searchParams, configData.options]);
+
+  // Next catalog entry should ask again after leaving the configurator page
+  useEffect(() => {
+    return () => {
+      resumeChoiceRef.current = null;
+      loadedDraftKeyRef.current = null;
+    };
+  }, []);
+
+  const handleResumeContinue = () => {
+    if (!user || !modelSlug || !resumeCandidate) return;
+
+    resumeChoiceRef.current = 'continue';
+    configIdRef.current = resumeCandidate.id;
+    setSavedConfigurationId(resumeCandidate.id);
+    setConfiguratorSessionId(user.id, modelSlug, resumeCandidate.id);
+    if (resumeCandidate.bodyColorId) setBodyColorId(resumeCandidate.bodyColorId);
+    if (resumeCandidate.interiorColorId) setInteriorColorId(resumeCandidate.interiorColorId);
+    if (resumeCandidate.selectedOptions.length > 0) {
+      setSelectedOptionIds(
+        normalizeSelectedOptionIds(resumeCandidate.selectedOptions, configData.options),
+      );
+    } else {
+      setSelectedOptionIds([]);
+    }
+
+    if (resumeCandidate.interiorColorId) {
+      setStep(3);
+    } else if (resumeCandidate.bodyColorId) {
+      setStep(2);
+    } else {
+      setStep(1);
+    }
+
+    setAutoSaveState('saved');
+    setResumeCandidate(null);
+    loadedDraftKeyRef.current = `${user.id}:${modelSlug}:catalog`;
+    setDraftLoaded(true);
+  };
+
+  const handleResumeStartNew = () => {
+    if (!user || !modelSlug) return;
+
+    resumeChoiceRef.current = 'new';
+    clearConfiguratorSessionId(user.id, modelSlug);
+    configIdRef.current = null;
+    setSavedConfigurationId(null);
+    setBodyColorId('');
+    setInteriorColorId('');
+    setSelectedOptionIds([]);
+    setStep(1);
+    setAutoSaveState('idle');
+    setResumeCandidate(null);
+    loadedDraftKeyRef.current = `${user.id}:${modelSlug}:catalog`;
+    setDraftLoaded(true);
+  };
+
+  useEffect(() => {
+    if (!user || !draftLoaded) return;
+
+    const interval = window.setInterval(() => {
+      void persistConfiguration();
+    }, AUTO_SAVE_INTERVAL_MS);
+
+    return () => window.clearInterval(interval);
+  }, [user, draftLoaded, persistConfiguration]);
+
+  // Debounced save: fires 3 s after the user changes a selection
+  useEffect(() => {
+    if (!user || !draftLoaded) return;
+
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      void persistConfiguration();
+    }, 3000);
+
+    return () => {
+      if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    };
+  }, [user, draftLoaded, bodyColorId, interiorColorId, selectedOptionIds, persistConfiguration]);
+
+  const goToNextStep = () => {
+    if (!canProceed()) return;
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+    setStep((current) => current + 1);
+    if (user && draftLoaded) {
+      void persistConfiguration();
+    }
+  };
+
+  if (!modelSlug || !selected || !selections) {
     return (
       <div className="configurator configurator--empty">
         <div className="configurator__empty">
@@ -256,18 +579,16 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
   const stepTitle = STEPS.find((item) => item.id === step)?.label ?? '';
   const progress = ((step - 1) / (STEPS.length - 1)) * 100;
 
-  const selections = {
-    modelSlug: selected.slug,
-    modelName: selected.name,
-    bodyColor,
-    interiorColor,
-    options: selectedOptions.map((o) => ({ id: o.id, name: o.name })),
-    totalPrice,
-  };
+  const testDriveHref = buildTestDriveHref(selections, savedConfigurationId ?? undefined);
 
-  const configQuery = buildConfiguratorQuery(selections);
-  const configSummary = formatConfiguratorSummary(selections);
-  const quoteMailto = `mailto:${dealer.email}?subject=${encodeURIComponent(`Quote request — Suzuki ${selected.name}`)}&body=${encodeURIComponent(configSummary)}`;
+  const autoSaveLabel =
+    autoSaveState === 'saving'
+      ? 'Saving to your account…'
+      : autoSaveState === 'saved'
+        ? 'Saved to your account'
+        : autoSaveState === 'error'
+          ? 'Could not save — try again later'
+          : null;
 
   return (
     <div className="configurator">
@@ -275,6 +596,22 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
         <section className="configurator__stage" aria-label="Vehicle preview">
           <div className="configurator__stage-bg" aria-hidden="true" />
           <div className="configurator__stage-grid" aria-hidden="true" />
+
+          <div className="configurator__stage-status" aria-live="polite">
+            {user && autoSaveLabel && (
+              <p className={`configurator__autosave configurator__autosave--${autoSaveState}`}>
+                {autoSaveLabel}
+              </p>
+            )}
+            {!user && !authLoading && (
+              <p className="configurator__autosave configurator__autosave--hint">
+                <Link href={`/account/login?next=${encodeURIComponent(`/configurator?model=${selected.slug}`)}`}>
+                  Sign in
+                </Link>{' '}
+                to auto-save
+              </p>
+            )}
+          </div>
 
           <header className="configurator__stage-header">
             <nav className="configurator__breadcrumb" aria-label="Breadcrumb">
@@ -464,15 +801,16 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
                     <dd>{totalPrice > 0 ? formatPrice(totalPrice) : 'On request'}</dd>
                   </div>
                   <div className="configurator__summary-actions">
-                    <a href={quoteMailto} className="configurator__btn configurator__btn--outline">
-                      Request quote
-                    </a>
-                    <Link
-                      href={`/test-drive?${configQuery}`}
-                      className="configurator__btn configurator__btn--primary"
+                    <button
+                      type="button"
+                      className="configurator__btn configurator__btn--outline"
+                      onClick={() => {
+                        if (user && draftLoaded) void persistConfiguration();
+                        setQuoteOpen(true);
+                      }}
                     >
-                      Book test drive
-                    </Link>
+                      Request quote
+                    </button>
                   </div>
                 </dl>
               )}
@@ -502,14 +840,17 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
                 type="button"
                 className="configurator__btn configurator__btn--primary"
                 disabled={!canProceed()}
-                onClick={() => setStep(step + 1)}
+                onClick={() => goToNextStep()}
               >
                 Continue
               </button>
             ) : (
               <Link
-                href={`/test-drive?${configQuery}`}
+                href={testDriveHref}
                 className="configurator__btn configurator__btn--primary"
+                onClick={() => {
+                  if (user && draftLoaded) void persistConfiguration();
+                }}
               >
                 Book test drive
               </Link>
@@ -531,7 +872,7 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
               type="button"
               className="configurator__btn configurator__btn--primary"
               disabled={!canProceed()}
-              onClick={() => setStep(step + 1)}
+              onClick={() => goToNextStep()}
             >
               Continue
             </button>
@@ -547,14 +888,33 @@ export function ConfiguratorForm({ cars, initialModelSlug }: ConfiguratorFormPro
               </p>
             </div>
             <Link
-              href={`/test-drive?${configQuery}`}
+              href={testDriveHref}
               className="configurator__btn configurator__btn--primary"
+              onClick={() => {
+                if (user && draftLoaded) void persistConfiguration();
+              }}
             >
               Book test drive
             </Link>
           </div>
         </div>
       )}
+
+      {resumeCandidate && (
+        <ResumeConfigurationModal
+          open
+          configuration={resumeCandidate}
+          onContinue={handleResumeContinue}
+          onStartNew={handleResumeStartNew}
+        />
+      )}
+
+      <QuoteRequestModal
+        open={quoteOpen}
+        onClose={() => setQuoteOpen(false)}
+        selections={selections}
+        configurationId={savedConfigurationId}
+      />
     </div>
   );
 }

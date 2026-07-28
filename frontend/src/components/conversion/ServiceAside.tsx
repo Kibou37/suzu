@@ -26,7 +26,7 @@ export function ServiceAside() {
           <li>VIN helps us prepare parts in advance — you can find it on the windscreen or door frame.</li>
           <li>For warranty work, mention it in the notes field.</li>
         </ul>
-        <Link href="/contacts" className="service-aside__cta">
+        <Link href="/dealers" className="service-aside__cta">
           Contact service centre
         </Link>
       </div>

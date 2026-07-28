@@ -1,21 +1,29 @@
 # Фаза 4: ЛК и интеграции (недели 7–8)
 
-**Milestone:** 🎯 **MVP** — личный кабинет, CRM, карты, аналитика.
+**Milestone:** 🎯 **MVP** — личный кабинет, CRM, карты, аналитика, **админка сайта**.
 
-## Эпики фазы
+**Прогресс:** **~95%** — см. [STATUS.md](../STATUS.md)
 
-| Эпик | Папка | Приоритет |
-|------|-------|-----------|
-| E11 — Личный кабинет | [E11-account](./E11-account/) | P0 |
-| E12 — Интеграции (CRM, Maps, GA) | [E12-integrations](./E12-integrations/) | P0 |
-| E13 — Статика и блог (продолжение) | [E13-content](./E13-content/) | P0 |
+## Эпики
+
+| Эпик | Папка | Статус |
+|------|-------|--------|
+| E11 — Личный кабинет | [E11-account](./E11-account/) | ✅ ~90% (история CRM — later) |
+| E12 — Интеграции | [E12-integrations](./E12-integrations/) | ✅ ~70% (payments post-MVP) |
+| E13 — Контент | [E13-content](./E13-content/) | ✅ ~75% MVP |
+| **E19 — Admin CMS** | **[E19-admin-cms](./E19-admin-cms/)** | ✅ **100% v1** |
 
 ## Критерии завершения MVP
 
-- [ ] Регистрация / login, история заявок в ЛК
-- [ ] Каждая заявка → lead в amoCRM
-- [ ] Google Maps на контактах
-- [ ] GA4 events на ключевых CTA
+- [x] Register / login (JWT)
+- [x] История заявок в ЛК (+ отмена тест-драйва)
+- [x] SMS verify при регистрации (SMS.ru env-ready)
+- [x] Сохранённые конфигурации (list / open / delete)
+- [x] Каждая заявка → lead в Битрикс24 (env-ready, keys on prod)
+- [x] Google Maps на дилерах
+- [x] GA4 events на CTA (env-ready)
+- [x] **Admin CMS v1** — **E19**
+- [x] About / Contacts / FAQ (минимум)
 
 ## Следующая фаза
 

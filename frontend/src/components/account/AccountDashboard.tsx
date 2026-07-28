@@ -3,11 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AccountBookingsList } from '@/components/account/AccountBookingsList';
+import { AccountConfigurationsList } from '@/components/account/AccountConfigurationsList';
 import { AccountProfileForm } from '@/components/account/AccountProfileForm';
 import { PageHeader } from '@/components/ui/PageShell';
 import { useAuth } from '@/context/AuthProvider';
 
-type DashboardTab = 'bookings' | 'profile';
+type DashboardTab = 'bookings' | 'configurations' | 'profile';
 
 export function AccountDashboard() {
   const { user, loading, logout } = useAuth();
@@ -45,7 +46,7 @@ export function AccountDashboard() {
       <div className="container-suzuki">
         <PageHeader
           title={displayName}
-          description="View your bookings and manage your profile."
+          description="View your bookings, saved configurations and manage your profile."
           breadcrumbs={[
             { label: 'Home', href: '/' },
             { label: 'My Account' },
@@ -64,6 +65,13 @@ export function AccountDashboard() {
               </button>
               <button
                 type="button"
+                className={`account-dashboard__tab${tab === 'configurations' ? ' account-dashboard__tab--active' : ''}`}
+                onClick={() => setTab('configurations')}
+              >
+                Saved configs
+              </button>
+              <button
+                type="button"
                 className={`account-dashboard__tab${tab === 'profile' ? ' account-dashboard__tab--active' : ''}`}
                 onClick={() => setTab('profile')}
               >
@@ -76,7 +84,9 @@ export function AccountDashboard() {
           </div>
 
           <section className="account-panel">
-            {tab === 'bookings' ? <AccountBookingsList /> : <AccountProfileForm key={user.id} />}
+            {tab === 'bookings' && <AccountBookingsList />}
+            {tab === 'configurations' && <AccountConfigurationsList />}
+            {tab === 'profile' && <AccountProfileForm key={user.id} />}
           </section>
         </div>
       </div>

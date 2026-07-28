@@ -3,57 +3,35 @@ import { NewsSection } from '@/components/home/NewsSection';
 import { OwnersSection } from '@/components/home/OwnersSection';
 import { PromoSlider } from '@/components/home/PromoSlider';
 import { getCars } from '@/lib/api';
-import { getCarImageUrl } from '@/lib/car-images';
+import type { CarListItem } from '@/lib/api';
+import { getBlogPosts } from '@/lib/blog';
+import { getHomePromoSlides } from '@/lib/home-banners';
 
-const promoSlides = [
-  {
-    id: 'warranty-1',
-    eyebrow: 'Warranty Service',
-    title: 'at official dealers',
-    description: 'Current manufacturer warranty obligations.',
-    href: '/service',
-    imageUrl:
-      'https://img.perxis.ru/unsafe/2200x0/prxs/originals/cnpdfranifss73cb3u9g/original',
-  },
-  {
-    id: 'warranty-2',
-    eyebrow: 'Warranty Service',
-    title: 'at official dealers',
-    description: 'Current manufacturer warranty obligations.',
-    href: '/service',
-    imageUrl:
-      'https://img.perxis.ru/unsafe/2200x0/prxs/originals/cnpdgj2nifss73cb3udg/original',
-  },
-  {
-    id: 'warranty-3',
-    eyebrow: 'Warranty Service',
-    title: 'at official dealers',
-    description: 'Current manufacturer warranty obligations.',
-    href: '/service',
-    imageUrl:
-      'https://img.perxis.ru/unsafe/1660x0/prxs/originals/cnpdfranifss73cb3ua0/original',
-  },
-] as const;
+const HOME_LINEUP_SLUGS = ['vitara', 'jimny', 'swift', 's-cross'] as const;
+const HOME_NEWS_LIMIT = 3;
+
+function pickHomeLineup(cars: CarListItem[]): CarListItem[] {
+  return HOME_LINEUP_SLUGS.flatMap((slug) => {
+    const car = cars.find((item) => item.slug === slug);
+    return car ? [car] : [];
+  });
+}
 
 export default async function HomePage() {
-  const cars = await getCars({ condition: 'NEW' });
-  const featured = cars.filter((car) => car.isFeatured);
-  const lineup = featured.length > 0 ? featured : cars.slice(0, 4);
-
-  const slidesWithImages = promoSlides.map((slide, index) => {
-    const car = lineup[index];
-    return {
-      ...slide,
-      imageUrl: car ? getCarImageUrl(car.images, car.name) : slide.imageUrl,
-    };
-  });
+  const [cars, slides, blogPosts] = await Promise.all([
+    getCars({ condition: 'NEW' }),
+    getHomePromoSlides(),
+    getBlogPosts(),
+  ]);
+  const lineup = pickHomeLineup(cars);
+  const news = blogPosts.slice(0, HOME_NEWS_LIMIT);
 
   return (
     <div>
-      <PromoSlider slides={slidesWithImages} />
+      {slides.length > 0 ? <PromoSlider slides={slides} /> : null}
       <ModelRange cars={lineup} />
       <OwnersSection />
-      <NewsSection />
+      <NewsSection posts={news} />
     </div>
   );
 }

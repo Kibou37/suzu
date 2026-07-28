@@ -8,6 +8,7 @@ import { AccountLkShell } from '@/components/account/AccountLkShell';
 import { AccountPhoneField, buildFullPhone } from '@/components/account/AccountPhoneField';
 import { useAuth } from '@/context/AuthProvider';
 import type { VehicleIdentifierType } from '@/lib/auth';
+import { sendSmsCode, verifySmsCode } from '@/lib/auth';
 import { isValidVin } from '@/lib/bookings';
 
 const PASSWORD_RULES = [
@@ -17,7 +18,7 @@ const PASSWORD_RULES = [
 ];
 
 type RegisterMethod = 'phone' | 'email';
-type RegisterStep = 1 | 2 | 3;
+type RegisterStep = 1 | 'sms' | 2 | 3;
 
 type Step1Data = {
   method: RegisterMethod;
@@ -103,6 +104,8 @@ export function AccountRegisterForm() {
   const [step2Data, setStep2Data] = useState<Step2Data | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [smsHint, setSmsHint] = useState<string | null>(null);
+  const [resendIn, setResendIn] = useState(0);
 
   useEffect(() => {
     if (!loading && user) {
@@ -110,13 +113,20 @@ export function AccountRegisterForm() {
     }
   }, [loading, user, router]);
 
+  useEffect(() => {
+    if (resendIn <= 0) return;
+    const timer = window.setTimeout(() => setResendIn((value) => value - 1), 1000);
+    return () => window.clearTimeout(timer);
+  }, [resendIn]);
+
   if (loading || user) {
     return null;
   }
 
-  const handleStep1Submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleStep1Submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
+    setSmsHint(null);
 
     const result = parseStep1Form(new FormData(event.currentTarget), method);
     if (!result.ok) {
@@ -125,7 +135,69 @@ export function AccountRegisterForm() {
     }
 
     setStep1Data(result.data);
+
+    if (result.data.method === 'phone' && result.data.phone) {
+      setSubmitting(true);
+      try {
+        const response = await sendSmsCode(result.data.phone);
+        setResendIn(60);
+        if (response.devCode) {
+          setSmsHint(`Dev code: ${response.devCode}`);
+        }
+        setStep('sms');
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Unable to send SMS code.');
+      } finally {
+        setSubmitting(false);
+      }
+      return;
+    }
+
     setStep(2);
+  };
+
+  const handleSmsSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+
+    if (!step1Data?.phone) {
+      setStep(1);
+      return;
+    }
+
+    const form = new FormData(event.currentTarget);
+    const code = String(form.get('smsCode') ?? '').trim();
+    if (!/^\d{6}$/.test(code)) {
+      setError('Enter the 6-digit code from the SMS.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await verifySmsCode(step1Data.phone, code);
+      setStep(2);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Invalid verification code.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleResendSms = async () => {
+    if (!step1Data?.phone || resendIn > 0) return;
+    setError(null);
+    setSubmitting(true);
+    try {
+      const response = await sendSmsCode(step1Data.phone);
+      setResendIn(60);
+      if (response.devCode) {
+        setSmsHint(`Dev code: ${response.devCode}`);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to resend SMS code.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleStep2Submit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -227,6 +299,10 @@ export function AccountRegisterForm() {
           ))}
         </ul>
       </div>
+    ) : step === 'sms' ? (
+      <p className="account-lk__lead">
+        Enter the 6-digit code we sent by SMS to confirm your phone number.
+      </p>
     ) : step === 2 ? (
       <p className="account-lk__lead">
         Tell us your name so we can personalise your account and booking experience.
@@ -237,6 +313,19 @@ export function AccountRegisterForm() {
         personalised offers in your account.
       </p>
     );
+
+  const stepLabel =
+    step === 1
+      ? 'Step 1 of 4'
+      : step === 'sms'
+        ? 'Step 2 of 4'
+        : step === 2
+          ? method === 'phone'
+            ? 'Step 3 of 4'
+            : 'Step 2 of 3'
+          : method === 'phone'
+            ? 'Step 4 of 4'
+            : 'Step 3 of 3';
 
   return (
     <AccountLkShell
@@ -258,7 +347,7 @@ export function AccountRegisterForm() {
         </>
       }
     >
-      <p className="account-lk__step">Step {step} of 3</p>
+      <p className="account-lk__step">{stepLabel}</p>
 
       {step === 1 && (
         <>
@@ -273,7 +362,7 @@ export function AccountRegisterForm() {
                   required
                   defaultCountry={step1Data?.phoneCountry}
                   defaultPhone={step1Data?.phoneLocal}
-                  hint="An SMS confirmation message will be sent to this number when SMS verification is enabled."
+                  hint="We will send an SMS verification code to this number."
                 />
                 <button type="button" className="account-lk__switch" onClick={() => setMethod('email')}>
                   Register with email instead
@@ -342,7 +431,7 @@ export function AccountRegisterForm() {
               <input type="checkbox" name="acceptTerms" required />
               <span>
                 I accept the{' '}
-                <Link href="/contacts" className="account-lk__link">
+                <Link href="/dealers" className="account-lk__link">
                   Account Terms of Use
                 </Link>
                 . *
@@ -357,8 +446,70 @@ export function AccountRegisterForm() {
             {error && <p className="account-lk__error">{error}</p>}
 
             <div className="account-lk__actions">
-              <button type="submit" className="btn btn-primary account-lk__submit">
-                Continue
+              <button
+                type="submit"
+                className="btn btn-primary account-lk__submit"
+                disabled={submitting}
+              >
+                {submitting
+                  ? 'Please wait…'
+                  : method === 'phone'
+                    ? 'Send SMS code'
+                    : 'Continue'}
+              </button>
+            </div>
+          </form>
+        </>
+      )}
+
+      {step === 'sms' && (
+        <>
+          <h2 className="account-lk__title">Verify your phone</h2>
+          <blockquote className="account-lk__quote">
+            Code sent to {step1Data?.phone}
+          </blockquote>
+          <form className="account-lk__form" onSubmit={handleSmsSubmit}>
+            <div className="account-lk__field account-lk__field--full">
+              <label className="account-lk__label" htmlFor="register-sms-code">
+                SMS code *
+              </label>
+              <input
+                id="register-sms-code"
+                type="text"
+                name="smsCode"
+                className="account-lk__input"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                maxLength={6}
+                pattern="\d{6}"
+                required
+              />
+              {smsHint ? <p className="account-lk__hint">{smsHint}</p> : null}
+            </div>
+
+            {error && <p className="account-lk__error">{error}</p>}
+
+            <div className="account-lk__actions account-lk__actions--split">
+              <button
+                type="button"
+                className="btn btn-secondary account-lk__submit"
+                onClick={() => {
+                  setError(null);
+                  setStep(1);
+                }}
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary account-lk__submit"
+                disabled={submitting || resendIn > 0}
+                onClick={() => void handleResendSms()}
+              >
+                {resendIn > 0 ? `Resend in ${resendIn}s` : 'Resend code'}
+              </button>
+              <button type="submit" className="btn btn-primary account-lk__submit" disabled={submitting}>
+                {submitting ? 'Please wait…' : 'Verify'}
               </button>
             </div>
           </form>
@@ -367,7 +518,7 @@ export function AccountRegisterForm() {
 
       {step === 2 && (
         <>
-          <h2 className="account-lk__title">Step 2: Personal details</h2>
+          <h2 className="account-lk__title">Personal details</h2>
           <blockquote className="account-lk__quote">
             {loginPreview ? `Your login: ${loginPreview}` : 'Please enter your name to continue.'}
           </blockquote>
@@ -410,7 +561,7 @@ export function AccountRegisterForm() {
                 className="btn btn-secondary account-lk__submit"
                 onClick={() => {
                   setError(null);
-                  setStep(1);
+                  setStep(step1Data?.method === 'phone' ? 'sms' : 1);
                 }}
               >
                 Back
@@ -425,7 +576,7 @@ export function AccountRegisterForm() {
 
       {step === 3 && (
         <>
-          <h2 className="account-lk__title">Step 3: Your vehicle</h2>
+          <h2 className="account-lk__title">Your vehicle</h2>
           <blockquote className="account-lk__quote">
             Enter your VIN or chassis number and choose the dealer where you purchased or
             service your Suzuki.

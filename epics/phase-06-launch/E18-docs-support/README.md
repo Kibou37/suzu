@@ -1,13 +1,13 @@
 # E18 — Документация и поддержка
 
-**Приоритет:** P0 | **Фаза:** 6 + post-launch
+**Приоритет:** P0 | **Фаза:** 6 | **Статус:** ✅ baseline
 
 ## Задачи
 
-| ID | Задача | Файл | Статус |
-|----|--------|------|--------|
-| E18.1 | Документация | [E18.1-documentation.md](./E18.1-documentation.md) | ⬜ |
-| E18.2 | Support plan | [E18.2-support-plan.md](./E18.2-support-plan.md) | ⬜ |
+| ID | Задача | Статус |
+|----|--------|--------|
+| E18.1 | Документация | ✅ README, admin guide, integrations-env, runbook, Swagger |
+| E18.2 | Support plan | ✅ `docs/support-plan.md` (черновик SLA) |
 
 ## Из ТЗ (п.8)
 

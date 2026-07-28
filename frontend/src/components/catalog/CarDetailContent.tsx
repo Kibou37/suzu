@@ -1,5 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import { CarGallery } from '@/components/catalog/CarGallery';
+import { ViewItemTracker } from '@/components/catalog/ViewItemTracker';
+import { FinanceCalculator } from '@/components/finance/FinanceCalculator';
 import { carTechByModel } from '@/data/car-tech';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import type { CarDetail } from '@/lib/api';
@@ -40,10 +42,12 @@ const techItems = (car: CarDetail): [string, string][] => {
 
 export function CarDetailContent({ car }: CarDetailContentProps) {
   const imageUrl = getCarImageUrl(car.images, car.name, car.slug);
+  const galleryImages = car.images.map((src) => getCarImageUrl([src], car.name, car.slug));
   const price = Number(car.price);
 
   return (
     <article className="model-page">
+      <ViewItemTracker itemId={car.slug} itemName={car.name} price={price} />
       <div className="showroom-bg">
         <div className="container-suzuki">
           <Breadcrumbs
@@ -60,15 +64,10 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
         <div className="container-suzuki">
           <div className="showroom-model__row">
             <div className="showroom-model__pic-block">
-              <Image
-                src={imageUrl}
-                alt={car.name}
-                width={470}
-                height={282}
-                priority
-                sizes="(max-width:991px) 100vw, 470px"
-                className="showroom-model__pic-image"
-              />
+              <CarGallery images={galleryImages} alt={car.name} fallback={imageUrl} />
+              {car.condition === 'USED' && (
+                <span className="catalog-badge catalog-badge--used showroom-model__badge">Pre-owned</span>
+              )}
             </div>
 
             <div className="showroom-model__info">
@@ -100,12 +99,29 @@ export function CarDetailContent({ car }: CarDetailContentProps) {
                 <Link href={`/test-drive?model=${car.slug}`} className="btn btn-secondary">
                   Test Drive
                 </Link>
-                <Link href="/contacts" className="link-action">
+                <Link
+                  href={`/finance?price=${Math.round(price)}&model=${encodeURIComponent(car.slug)}`}
+                  className="btn btn-secondary"
+                >
+                  Finance
+                </Link>
+                <Link href="/dealers" className="link-action">
                   Contact Dealer
                 </Link>
               </div>
             </div>
           </div>
+
+          {price > 0 ? (
+            <div className="model-page__finance">
+              <FinanceCalculator
+                compact
+                initialPrice={price}
+                carSlug={car.slug}
+                carName={car.name}
+              />
+            </div>
+          ) : null}
         </div>
       </section>
     </article>

@@ -72,6 +72,11 @@ export function CatalogToolbar({ activeTab, facets, showMileage = false }: Catal
 
   const applyFilters = (next: CatalogFilters) => {
     const query = buildCatalogFilterQuery(next);
+    void import('@/lib/analytics').then(({ trackEvent }) => {
+      trackEvent('catalog_filter', {
+        active_count: countActiveCatalogFilters(next),
+      });
+    });
     router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
     setOpen(false);
   };

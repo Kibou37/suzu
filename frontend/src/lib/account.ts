@@ -4,7 +4,7 @@ import {
   type UserProfile,
 } from '@/lib/auth';
 import {
-  getApiBaseUrl,
+  apiUrl,
   isDemoDataMode,
   parseApiError,
   STORAGE_KEYS,
@@ -42,18 +42,77 @@ function readDemoBookings(userId: string): AccountBooking[] {
   }
 }
 
-export function saveDemoBooking(userId: string, booking: AccountBooking): void {
+function writeDemoBookings(userId: string, bookings: AccountBooking[]): void {
   if (typeof window === 'undefined') return;
 
   const raw = localStorage.getItem(STORAGE_KEYS.demoBookings);
   const all = raw ? (JSON.parse(raw) as Record<string, AccountBooking[]>) : {};
-  const current = all[userId] ?? [];
+  all[userId] = bookings;
+  localStorage.setItem(STORAGE_KEYS.demoBookings, JSON.stringify(all));
+}
 
+export function saveDemoBooking(userId: string, booking: AccountBooking): void {
+  if (typeof window === 'undefined') return;
+
+  const current = readDemoBookings(userId);
   const alreadyExists = current.some((b) => b.id === booking.id);
   if (!alreadyExists) {
-    all[userId] = [booking, ...current];
-    localStorage.setItem(STORAGE_KEYS.demoBookings, JSON.stringify(all));
+    writeDemoBookings(userId, [booking, ...current]);
   }
+}
+
+export async function cancelAccountBooking(bookingId: string): Promise<AccountBooking> {
+  const token = getAuthToken();
+  if (!token) {
+    throw new Error('Sign in to manage bookings');
+  }
+
+  if (isDemoDataMode()) {
+    const sessionId = localStorage.getItem(STORAGE_KEYS.demoSession);
+    if (!sessionId) {
+      throw new Error('Session expired');
+    }
+
+    const bookings = readDemoBookings(sessionId);
+    const index = bookings.findIndex((booking) => booking.id === bookingId);
+
+    if (index === -1) {
+      throw new Error('Booking not found');
+    }
+
+    if (bookings[index].type !== 'TEST_DRIVE') {
+      throw new Error('Only test drive bookings can be cancelled here');
+    }
+
+    if (bookings[index].status === 'CANCELLED' || bookings[index].status === 'COMPLETED') {
+      throw new Error('This booking cannot be cancelled');
+    }
+
+    const updated: AccountBooking = {
+      ...bookings[index],
+      status: 'CANCELLED',
+    };
+
+    bookings[index] = updated;
+    writeDemoBookings(sessionId, bookings);
+    return updated;
+  }
+
+  const res = await fetch(apiUrl('/api/account/bookings/cancel'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeaders(),
+    },
+    body: JSON.stringify({ id: bookingId }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(parseApiError(text, 'Unable to cancel booking'));
+  }
+
+  return res.json();
 }
 
 export async function fetchAccountBookings(): Promise<AccountBooking[]> {
@@ -65,7 +124,7 @@ export async function fetchAccountBookings(): Promise<AccountBooking[]> {
     return sessionId ? readDemoBookings(sessionId) : [];
   }
 
-  const res = await fetch(`${getApiBaseUrl()}/api/account/bookings`, {
+  const res = await fetch(apiUrl('/api/account/bookings'), {
     headers: authHeaders(),
     cache: 'no-store',
   });
@@ -130,7 +189,7 @@ export async function updateProfile(
     };
   }
 
-  const res = await fetch(`${getApiBaseUrl()}/api/account/profile`, {
+  const res = await fetch(apiUrl('/api/account/profile'), {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

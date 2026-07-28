@@ -7,8 +7,10 @@ const footerGroups = [
     title: 'Company',
     links: [
       { href: '/about', label: 'About Us' },
-      { href: '/contacts', label: 'Dealers' },
+      { href: '/contacts', label: 'Contacts' },
+      { href: '/dealers', label: 'Dealers' },
       { href: '/service', label: 'Service' },
+      { href: '/faq', label: 'FAQ' },
     ],
   },
   {

@@ -1,21 +1,27 @@
-# Фаза 6: Качество и релиз (недели 11–12)
+# Фаза 6: Качество и релиз
 
-**Milestone:** 🚀 **Production release** — SEO, i18n, QA, контент, документация.
+**Прогресс:** **~55%** (без боевых ключей / VPS / контента дилера)
 
-## Эпики фазы
+## Эпики
 
-| Эпик | Папка | Приоритет |
-|------|-------|-----------|
-| E14 — Мультиязычность | [E14-i18n](./E14-i18n/) | P1 |
-| E15 — SEO, perf, a11y | [E15-seo-performance](./E15-seo-performance/) | P0 |
-| E16 — Security, QA, deploy | [E16-qa-deploy](./E16-qa-deploy/) | P0 |
-| E17 — Контент и запуск | [E17-content-launch](./E17-content-launch/) | P0 |
-| E18 — Документация и поддержка | [E18-docs-support](./E18-docs-support/) | P0 |
+| Эпик | Статус |
+|------|--------|
+| E14 — i18n | ❌ cancelled — **English only** |
+| E15 — SEO / perf / a11y | ✅ baseline (OG, JSON-LD, robots, sitemap) |
+| E16 — QA / deploy | 🟡 headers, rate limit, smoke, runbook; VPS/Sentry — later |
+| E17 — Контент | 🟡 seed FAQ×20 + blog×6; реальный контент дилера — later |
+| E18 — Документация | ✅ runbook, test plan, support plan, admin guide |
 
-## Критерии приёмки (из ТЗ п.7)
+## Что сделано без ключей
 
-- [ ] Все функции работают без ошибок
-- [ ] Адаптив под мобильные
-- [ ] Скорость: главная ≤ 2 с, внутренние ≤ 1,5 с
-- [ ] Тесты безопасности пройдены
-- [ ] Доступы к admin, хостингу, доменам переданы
+- EN-only зафиксирован (kickoff + E14 cancelled)
+- SEO: metadataBase, OG/Twitter, Organization/Car/Article JSON-LD, `robots.ts`, `sitemap.ts`
+- Security: response headers, API rate limit, stricter ValidationPipe
+- QA: `docs/test-plan.md`, `scripts/phase6-smoke.mjs`, CI `pnpm audit`
+- Docs: `docs/runbook.md`, `docs/support-plan.md`
+
+## Ждёт доступов
+
+- Prod VPS / DNS / HTTPS
+- Bitrix / SMS / GA / OpenAI / mail keys
+- UAT с заказчиком, реальный контент, Sentry/uptime

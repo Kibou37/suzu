@@ -12,6 +12,7 @@ export type PromoSlide = {
   href: string;
   linkLabel?: string;
   imageUrl: string;
+  imageMobileUrl?: string;
 };
 
 type PromoSliderProps = {
@@ -245,7 +246,16 @@ export function PromoSlider({ slides }: PromoSliderProps) {
                 fill
                 priority={item.id === slides[0]?.id}
                 sizes="100vw"
-                className="object-cover"
+                className="object-cover hero-slide__img hero-slide__img--desktop"
+                draggable={false}
+              />
+              <Image
+                src={item.imageMobileUrl ?? item.imageUrl}
+                alt=""
+                fill
+                priority={item.id === slides[0]?.id}
+                sizes="100vw"
+                className="object-cover hero-slide__img hero-slide__img--mobile"
                 draggable={false}
               />
             </div>

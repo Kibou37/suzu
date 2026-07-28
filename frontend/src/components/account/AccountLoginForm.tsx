@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AccountLkShell } from '@/components/account/AccountLkShell';
 import { AccountPhoneField, buildFullPhone } from '@/components/account/AccountPhoneField';
@@ -13,15 +13,17 @@ type LoginMethod = 'phone' | 'email';
 export function AccountLoginForm() {
   const { login, user, loading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextPath = searchParams.get('next');
   const [method, setMethod] = useState<LoginMethod>('phone');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!loading && user) {
-      router.replace('/account');
+      router.replace(nextPath && nextPath.startsWith('/') ? nextPath : '/account');
     }
-  }, [loading, user, router]);
+  }, [loading, user, router, nextPath]);
 
   if (loading || user) {
     return null;
@@ -51,7 +53,7 @@ export function AccountLoginForm() {
 
     try {
       await login({ login: loginValue, password });
-      router.push('/account');
+      router.push(nextPath && nextPath.startsWith('/') ? nextPath : '/account');
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to sign in.');
@@ -156,8 +158,8 @@ export function AccountLoginForm() {
         </p>
         <p>
           Forgot your password?{' '}
-          <Link href="/account/login" className="account-lk__link account-lk__link--muted">
-            Password recovery coming soon
+          <Link href="/account/forgot-password" className="account-lk__link">
+            Reset it here
           </Link>
         </p>
         {process.env.NEXT_PUBLIC_USE_DEMO_DATA === 'true' && (

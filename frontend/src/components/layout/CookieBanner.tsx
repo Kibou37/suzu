@@ -20,7 +20,7 @@ export function CookieBanner() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-suzuki-border bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.08)]">
+    <div className="cookie-banner fixed inset-x-0 bottom-0 z-50 border-t border-suzuki-border bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.08)]">
       <div className="container-suzuki flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-3xl text-xs leading-relaxed text-suzuki-muted sm:text-sm">
           By using this site, you agree to our{' '}

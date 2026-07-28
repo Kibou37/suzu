@@ -44,3 +44,4 @@ tmp-*.html
 tmp/
 .tmp-suzuki/
 frontend/scripts/
+backend/uploads/

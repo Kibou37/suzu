@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+export CI=true
+export HUSKY=0
+
 # Ждём, пока backend установит node_modules
 until [ -f node_modules/.docker-ready ]; do
   echo ">>> Waiting for backend to install dependencies..."

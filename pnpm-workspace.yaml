@@ -3,9 +3,14 @@ packages:
   - "backend"
   - "packages/*"
 
+# pnpm 11: node-linker и прочие настройки — только здесь, не в .npmrc
+nodeLinker: hoisted
+confirmModulesPurge: false
+
 allowBuilds:
   "@prisma/client": true
   "@prisma/engines": true
+  "@scarf/scarf": false
   prisma: true
   sharp: true
   unrs-resolver: true

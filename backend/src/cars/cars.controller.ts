@@ -1,4 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { BodyType, CarCondition, FuelType, Transmission } from '@prisma/client';
 import { CarsService } from './cars.service';
 
@@ -8,9 +9,22 @@ function readNumber(value?: string): number | undefined {
   return Number.isFinite(parsed) ? parsed : undefined;
 }
 
+@ApiTags('cars')
 @Controller('cars')
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
+
+  @Get('facets')
+  getFacets(
+    @Query('condition') condition?: CarCondition,
+    @Query('isOffer') isOffer?: string,
+  ) {
+    return this.carsService.getFacets({
+      condition,
+      isOffer:
+        isOffer === 'true' ? true : isOffer === 'false' ? false : undefined,
+    });
+  }
 
   @Get()
   findAll(

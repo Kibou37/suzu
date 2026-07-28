@@ -1,74 +1,40 @@
 import { dealer } from '@suzuki/shared';
+import { ContactForm } from '@/components/contacts/ContactForm';
+import { PageHeader } from '@/components/ui/PageShell';
 
-import { PlaceholderPage } from '@/components/ui/PageShell';
-
-
-
-export const metadata = { title: 'Contact' };
-
-
+export const metadata = { title: 'Contacts' };
 
 export default function ContactsPage() {
-
   return (
+    <div className="page-shell">
+      <div className="container-suzuki">
+        <PageHeader
+          title="Contacts"
+          description="Send a message or visit us using the details below."
+          breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Contacts' }]}
+        />
 
-    <PlaceholderPage
+        <div className="contacts-page">
+          <aside className="contacts-page__details">
+            <h2 className="contacts-page__heading">{dealer.name}</h2>
+            <p>{dealer.address}</p>
+            <p>
+              <a href={`tel:${dealer.phone.replace(/\s+/g, '')}`}>{dealer.phone}</a>
+            </p>
+            <p>
+              <a href={`mailto:${dealer.email}`}>{dealer.email}</a>
+            </p>
+            <p>{dealer.workingHours}</p>
+            <p className="contacts-page__note">
+              Details are placeholders from kickoff until the dealership provides final contacts.
+            </p>
+          </aside>
 
-      title="Contact"
-
-      breadcrumbs={[
-
-        { label: 'Home', href: '/' },
-
-        { label: 'Contact' },
-
-      ]}
-
-    >
-
-      <div className="grid gap-6 md:grid-cols-2">
-
-        <div className="rounded-xl bg-white p-6 shadow-sm">
-
-          <h2 className="font-suzuki-bold text-sm uppercase tracking-wide">{dealer.name}</h2>
-
-          <p className="mt-4 text-sm text-suzuki-gray-dark">{dealer.address}</p>
-
-          <p className="mt-2 text-sm">
-
-            <a href={`tel:${dealer.phone}`} className="text-suzuki-blue">
-
-              {dealer.phone}
-
-            </a>
-
-          </p>
-
-          <p className="text-sm">
-
-            <a href={`mailto:${dealer.email}`} className="text-suzuki-blue">
-
-              {dealer.email}
-
-            </a>
-
-          </p>
-
-          <p className="mt-4 text-sm text-suzuki-gray-dark">{dealer.workingHours}</p>
-
+          <div className="contacts-page__form">
+            <ContactForm />
+          </div>
         </div>
-
-        <div className="flex h-64 items-center justify-center rounded-xl bg-suzuki-gray text-sm text-suzuki-gray-dark">
-
-          Map (Google Maps)
-
-        </div>
-
       </div>
-
-    </PlaceholderPage>
-
+    </div>
   );
-
 }
-

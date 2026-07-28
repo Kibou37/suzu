@@ -1,36 +1,35 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { BookingType } from '@prisma/client';
+import { CrmService } from '../crm/crm.service';
 import { MailService } from '../mail/mail.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { RecaptchaService } from '../recaptcha/recaptcha.service';
+import { SmsService } from '../sms/sms.service';
+import {
+  formatDateOnly,
+  formatSlotIso,
+  generateServiceSlotsForDay,
+  getHoursForWeekday,
+  parseDateOnly,
+} from './booking-slots.util';
+import type {
+  CreateServiceDto,
+  CreateTestDriveDto,
+} from './dto/create-booking.dto';
 
-export type CreateTestDriveInput = {
-  carSlug?: string;
-  scheduledAt: string;
-  customerName: string;
-  customerPhone: string;
-  customerEmail?: string;
-  notes?: string;
-  recaptchaToken?: string;
+export type CreateTestDriveInput = CreateTestDriveDto;
+export type CreateServiceInput = CreateServiceDto;
+
+export type UpsertServiceSlotInput = {
+  startsAt: string;
+  type: BookingType;
+  maxBookings?: number;
+  isBlocked?: boolean;
 };
-
-export type CreateServiceInput = {
-  scheduledAt: string;
-  customerName: string;
-  customerPhone: string;
-  customerEmail?: string;
-  serviceType: string;
-  vehicle?: string;
-  vin?: string;
-  mileage?: number;
-  notes?: string;
-  recaptchaToken?: string;
-};
-
-const SLOT_HOURS_WEEKDAY = [10, 11, 12, 13, 14, 15, 16, 17];
-const SLOT_HOURS_SATURDAY = [10, 11, 12, 13, 14, 15, 16];
-const SLOT_HOURS_SUNDAY = [10, 11, 12, 13, 14, 15];
-const MAX_BOOKINGS_PER_SLOT = 1;
 
 @Injectable()
 export class BookingsService {
@@ -38,23 +37,46 @@ export class BookingsService {
     private readonly prisma: PrismaService,
     private readonly recaptchaService: RecaptchaService,
     private readonly mailService: MailService,
+    private readonly smsService: SmsService,
+    private readonly crmService: CrmService,
   ) {}
 
   async getAvailableSlots(
     date: string,
     type: BookingType = BookingType.TEST_DRIVE,
-  ) {
-    const day = this.parseDateOnly(date);
-    const hours = this.getHoursForDay(day);
-
-    if (hours.length === 0) {
-      return [];
+  ): Promise<string[]> {
+    let day: Date;
+    try {
+      day = parseDateOnly(date);
+    } catch {
+      throw new BadRequestException('Invalid date format');
     }
-
     const dayStart = new Date(day);
     dayStart.setHours(0, 0, 0, 0);
     const dayEnd = new Date(day);
     dayEnd.setHours(23, 59, 59, 999);
+
+    const dbSlots = await this.prisma.serviceSlot.findMany({
+      where: {
+        type,
+        startsAt: { gte: dayStart, lte: dayEnd },
+        isBlocked: false,
+      },
+      orderBy: { startsAt: 'asc' },
+    });
+
+    const slots =
+      dbSlots.length > 0
+        ? dbSlots
+        : generateServiceSlotsForDay(day, [type]).map((slot) => ({
+            ...slot,
+            id: '',
+            isBlocked: false,
+          }));
+
+    if (slots.length === 0) {
+      return [];
+    }
 
     const existing = await this.prisma.booking.findMany({
       where: {
@@ -65,14 +87,88 @@ export class BookingsService {
       select: { scheduledAt: true },
     });
 
-    return hours
-      .filter((hour) => {
+    return slots
+      .filter((slot) => {
         const taken = existing.filter(
-          (booking) => booking.scheduledAt.getHours() === hour,
+          (booking) =>
+            booking.scheduledAt.getTime() === slot.startsAt.getTime(),
         ).length;
-        return taken < MAX_BOOKINGS_PER_SLOT;
+        return taken < slot.maxBookings;
       })
-      .map((hour) => this.formatSlotLabel(day, hour));
+      .map((slot) => slot.startsAt.toISOString());
+  }
+
+  async listAdminSlots(from: string, to: string, type?: BookingType) {
+    let fromDate: Date;
+    let toDate: Date;
+    try {
+      fromDate = parseDateOnly(from);
+      toDate = parseDateOnly(to);
+    } catch {
+      throw new BadRequestException('Invalid date range');
+    }
+    toDate.setHours(23, 59, 59, 999);
+
+    return this.prisma.serviceSlot.findMany({
+      where: {
+        startsAt: { gte: fromDate, lte: toDate },
+        ...(type ? { type } : {}),
+      },
+      orderBy: { startsAt: 'asc' },
+    });
+  }
+
+  async upsertAdminSlot(input: UpsertServiceSlotInput) {
+    const startsAt = new Date(input.startsAt);
+    if (Number.isNaN(startsAt.getTime())) {
+      throw new BadRequestException('Invalid startsAt');
+    }
+
+    const endsAt = new Date(startsAt);
+    endsAt.setHours(endsAt.getHours() + 1);
+
+    return this.prisma.serviceSlot.upsert({
+      where: {
+        startsAt_type: {
+          startsAt,
+          type: input.type,
+        },
+      },
+      create: {
+        startsAt,
+        endsAt,
+        type: input.type,
+        maxBookings: input.maxBookings ?? 1,
+        isBlocked: input.isBlocked ?? false,
+      },
+      update: {
+        maxBookings: input.maxBookings ?? 1,
+        isBlocked: input.isBlocked ?? false,
+        endsAt,
+      },
+    });
+  }
+
+  async updateAdminSlot(
+    id: string,
+    input: { maxBookings?: number; isBlocked?: boolean },
+  ) {
+    const slot = await this.prisma.serviceSlot.findUnique({ where: { id } });
+    if (!slot) {
+      throw new NotFoundException('Slot not found');
+    }
+
+    return this.prisma.serviceSlot.update({
+      where: { id },
+      data: {
+        ...(input.maxBookings !== undefined
+          ? { maxBookings: input.maxBookings }
+          : {}),
+        ...(input.isBlocked !== undefined
+          ? { isBlocked: input.isBlocked }
+          : {}),
+      },
+    });
   }
 
   async createTestDrive(input: CreateTestDriveInput, userId?: string) {
@@ -101,17 +197,50 @@ export class BookingsService {
       throw new BadRequestException('Please enter a valid phone number');
     }
 
-    const allowedSlots = await this.getAvailableSlots(
-      this.formatDateOnly(scheduledAt),
-      BookingType.TEST_DRIVE,
-    );
-    const slotLabel = this.formatSlotLabel(scheduledAt, scheduledAt.getHours());
-
-    if (!allowedSlots.includes(slotLabel)) {
-      throw new BadRequestException('This time slot is no longer available');
-    }
+    await this.assertSlotAvailable(scheduledAt, BookingType.TEST_DRIVE);
 
     let carId: string | undefined;
+    let configurationId: string | undefined;
+    let notes = input.notes?.trim() || null;
+
+    if (input.configurationId) {
+      const configuration = await this.prisma.configuration.findUnique({
+        where: { id: input.configurationId },
+        include: {
+          variant: { include: { car: { select: { id: true, slug: true } } } },
+        },
+      });
+
+      if (!configuration) {
+        throw new BadRequestException('Configuration was not found');
+      }
+
+      if (configuration.userId && userId && configuration.userId !== userId) {
+        throw new BadRequestException(
+          'Configuration does not belong to this account',
+        );
+      }
+
+      configurationId = configuration.id;
+      carId = configuration.variant.car.id;
+
+      if (!input.carSlug || input.carSlug === configuration.variant.car.slug) {
+        input.carSlug = configuration.variant.car.slug;
+      }
+
+      const snapshotSummary =
+        typeof configuration.snapshot === 'object' &&
+        configuration.snapshot !== null &&
+        'summary' in configuration.snapshot &&
+        typeof (configuration.snapshot as { summary?: unknown }).summary ===
+          'string'
+          ? (configuration.snapshot as { summary: string }).summary
+          : null;
+
+      if (snapshotSummary) {
+        notes = notes ? `${snapshotSummary}\n\n${notes}` : snapshotSummary;
+      }
+    }
 
     if (input.carSlug) {
       const car = await this.prisma.car.findUnique({
@@ -130,12 +259,13 @@ export class BookingsService {
       data: {
         type: BookingType.TEST_DRIVE,
         carId,
+        configurationId: configurationId ?? null,
         userId: userId ?? null,
         scheduledAt,
         customerName: name,
         customerPhone: phone,
         customerEmail: input.customerEmail?.trim() || null,
-        notes: input.notes?.trim() || null,
+        notes,
       },
     });
 
@@ -146,6 +276,28 @@ export class BookingsService {
       customerEmail: booking.customerEmail,
       scheduledAt: booking.scheduledAt,
       notes: booking.notes,
+    });
+
+    void this.smsService.sendBookingConfirmationSafe({
+      type: BookingType.TEST_DRIVE,
+      customerName: name,
+      customerPhone: phone,
+      scheduledAt: booking.scheduledAt,
+    });
+
+    void this.crmService.sendLeadSafe({
+      type: 'test_drive',
+      title: `Test drive — ${name}`,
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: booking.customerEmail,
+      comments: booking.notes,
+      sourceDescription: 'website_test_drive',
+      fields: {
+        bookingId: booking.id,
+        scheduledAt: booking.scheduledAt.toISOString(),
+        carSlug: input.carSlug ?? null,
+      },
     });
 
     return {
@@ -182,15 +334,7 @@ export class BookingsService {
       throw new BadRequestException('Please select a service type');
     }
 
-    const allowedSlots = await this.getAvailableSlots(
-      this.formatDateOnly(scheduledAt),
-      BookingType.SERVICE,
-    );
-    const slotLabel = this.formatSlotLabel(scheduledAt, scheduledAt.getHours());
-
-    if (!allowedSlots.includes(slotLabel)) {
-      throw new BadRequestException('This time slot is no longer available');
-    }
+    await this.assertSlotAvailable(scheduledAt, BookingType.SERVICE);
 
     const notesParts = [`Service: ${serviceType}`];
     if (input.vehicle?.trim()) {
@@ -223,52 +367,52 @@ export class BookingsService {
       notes: booking.notes,
     });
 
+    void this.smsService.sendBookingConfirmationSafe({
+      type: BookingType.SERVICE,
+      customerName: name,
+      customerPhone: phone,
+      scheduledAt: booking.scheduledAt,
+    });
+
+    void this.crmService.sendLeadSafe({
+      type: 'service',
+      title: `Service — ${name}`,
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: booking.customerEmail,
+      comments: booking.notes,
+      sourceDescription: 'website_service',
+      fields: {
+        bookingId: booking.id,
+        scheduledAt: booking.scheduledAt.toISOString(),
+        serviceType,
+      },
+    });
+
     return {
       id: booking.id,
       scheduledAt: booking.scheduledAt.toISOString(),
     };
   }
 
-  private parseDateOnly(value: string): Date {
-    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
-    if (!match) {
-      throw new BadRequestException('Invalid date format');
+  private async assertSlotAvailable(scheduledAt: Date, type: BookingType) {
+    const allowedSlots = await this.getAvailableSlots(
+      formatDateOnly(scheduledAt),
+      type,
+    );
+
+    if (!allowedSlots.includes(scheduledAt.toISOString())) {
+      throw new BadRequestException('This time slot is no longer available');
     }
-
-    const year = Number(match[1]);
-    const month = Number(match[2]) - 1;
-    const day = Number(match[3]);
-    const date = new Date(year, month, day);
-
-    if (
-      date.getFullYear() !== year ||
-      date.getMonth() !== month ||
-      date.getDate() !== day
-    ) {
-      throw new BadRequestException('Invalid date');
-    }
-
-    return date;
   }
 
-  private formatDateOnly(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  /** @deprecated kept for tests — use booking-slots.util */
+  getHoursForDay(date: Date): number[] {
+    return getHoursForWeekday(date.getDay());
   }
 
-  private getHoursForDay(date: Date): number[] {
-    const weekday = date.getDay();
-
-    if (weekday === 0) return SLOT_HOURS_SUNDAY;
-    if (weekday === 6) return SLOT_HOURS_SATURDAY;
-    return SLOT_HOURS_WEEKDAY;
-  }
-
-  private formatSlotLabel(date: Date, hour: number): string {
-    const slot = new Date(date);
-    slot.setHours(hour, 0, 0, 0);
-    return slot.toISOString();
+  /** @deprecated kept for tests */
+  formatSlotLabel(date: Date, hour: number): string {
+    return formatSlotIso(date, hour);
   }
 }

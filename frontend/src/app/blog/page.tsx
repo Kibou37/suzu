@@ -1,32 +1,24 @@
-import { PlaceholderPage } from '@/components/ui/PageShell';
-
-
+import { NewsGrid } from '@/components/home/NewsGrid';
+import { getBlogPosts } from '@/lib/blog';
 
 export const metadata = { title: 'News' };
 
-
-
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getBlogPosts();
 
   return (
+    <section className="news-section news-section--page">
+      <div className="page-title-center">
+        <h1>News</h1>
+      </div>
 
-    <PlaceholderPage
-
-      title="News"
-
-      description="Suzuki news, reviews and ownership tips."
-
-      breadcrumbs={[
-
-        { label: 'Home', href: '/' },
-
-        { label: 'News' },
-
-      ]}
-
-    />
-
+      <div className="container-suzuki">
+        {posts.length === 0 ? (
+          <div className="placeholder-box">No articles published yet — please check back soon.</div>
+        ) : (
+          <NewsGrid posts={posts} />
+        )}
+      </div>
+    </section>
   );
-
 }
-

@@ -1,4 +1,4 @@
-import { getApiBaseUrl, hashPassword, isDemoDataMode, parseApiError, STORAGE_KEYS } from './config';
+import { apiUrl, hashPassword, isDemoDataMode, parseApiError, STORAGE_KEYS } from './config';
 
 export type VehicleIdentifierType = 'VIN' | 'CHASSIS';
 
@@ -6,6 +6,7 @@ export type UserProfile = {
   id: string;
   email: string;
   phone: string | null;
+  phoneVerifiedAt?: string | null;
   firstName: string | null;
   lastName: string | null;
   vehicleIdentifierType: VehicleIdentifierType | null;
@@ -197,12 +198,87 @@ async function demoMe(): Promise<UserProfile> {
   };
 }
 
+export async function sendSmsCode(
+  phone: string,
+): Promise<{ sent: boolean; devCode?: string }> {
+  if (isDemoDataMode()) {
+    return { sent: true, devCode: '000000' };
+  }
+
+  const res = await fetch(apiUrl('/api/auth/sms/send'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ phone }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(parseApiError(text, 'Unable to send SMS code'));
+  }
+
+  return res.json();
+}
+
+export async function verifySmsCode(
+  phone: string,
+  code: string,
+): Promise<{ verified: boolean }> {
+  if (isDemoDataMode()) {
+    return { verified: true };
+  }
+
+  const res = await fetch(apiUrl('/api/auth/sms/verify'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ phone, code }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(parseApiError(text, 'Invalid verification code'));
+  }
+
+  return res.json();
+}
+
+export async function forgotPassword(email: string): Promise<void> {
+  if (isDemoDataMode()) return;
+
+  const res = await fetch(apiUrl('/api/auth/forgot-password'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(parseApiError(text, 'Unable to start password recovery'));
+  }
+}
+
+export async function resetPassword(token: string, password: string): Promise<void> {
+  if (isDemoDataMode()) {
+    throw new Error('Password reset is not available in demo mode');
+  }
+
+  const res = await fetch(apiUrl('/api/auth/reset-password'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token, password }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(parseApiError(text, 'Unable to reset password'));
+  }
+}
+
 export async function register(payload: RegisterPayload): Promise<AuthResponse> {
   if (isDemoDataMode()) {
     return demoRegister(payload);
   }
 
-  const res = await fetch(`${getApiBaseUrl()}/api/auth/register`, {
+  const res = await fetch(apiUrl('/api/auth/register'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -223,7 +299,7 @@ export async function login(payload: LoginPayload): Promise<AuthResponse> {
     return demoLogin(payload);
   }
 
-  const res = await fetch(`${getApiBaseUrl()}/api/auth/login`, {
+  const res = await fetch(apiUrl('/api/auth/login'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -249,7 +325,7 @@ export async function fetchCurrentUser(): Promise<UserProfile> {
     return demoMe();
   }
 
-  const res = await fetch(`${getApiBaseUrl()}/api/auth/me`, {
+  const res = await fetch(apiUrl('/api/auth/me'), {
     headers: { Authorization: `Bearer ${token}` },
     cache: 'no-store',
   });

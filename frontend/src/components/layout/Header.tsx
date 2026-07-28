@@ -27,12 +27,14 @@ export function Header() {
           </ul>
         </nav>
 
-        {accountItem && (
-          <AccountNavLink
-            label={accountItem.label}
-            className="site-nav__link site-header__account"
-          />
-        )}
+        <div className="site-header__actions">
+          {accountItem && (
+            <AccountNavLink
+              label={accountItem.label}
+              className="site-nav__link site-header__account"
+            />
+          )}
+        </div>
 
         <MobileNav />
       </div>

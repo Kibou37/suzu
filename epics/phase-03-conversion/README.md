@@ -2,22 +2,25 @@
 
 **Milestone:** конфигуратор + онлайн-запись на тест-драйв и ТО.
 
-## Эпики фазы
+**Прогресс:** **100%** ✅ — см. [STATUS.md](../STATUS.md)
 
-| Эпик | Папка | Приоритет |
-|------|-------|-----------|
-| E5 — Конфигуратор | [E5-configurator](./E5-configurator/) | P0 |
-| E6 — Бронирование | [E6-booking](./E6-booking/) | P0 |
+## Эпики
+
+| Эпик | Папка | Статус |
+|------|-------|--------|
+| E5 — Конфигуратор | [E5-configurator](./E5-configurator/) | ✅ |
+| E6 — Бронирование | [E6-booking](./E6-booking/) | ✅ |
 
 ## Критерии завершения фазы
 
-- [ ] Полный flow конфигуратора с расчётом цены
-- [ ] SMS + email подтверждение брони
-- [ ] Слоты блокируются при записи
-
-## Зависимости
-
-- E4 (каталог), E2 (API)
+- [x] Flow конфигуратора с расчётом цены (client-side)
+- [x] Exterior/interior 360° (Vitara/Jimny)
+- [x] Формы ТД и ТО + reCAPTCHA + email
+- [x] Save configuration в БД (auto-save, resume, TTL, delete)
+- [x] Заявка на quote из конфигуратора
+- [x] SMS-подтверждение брони (stub + optional SMS.ru)
+- [ ] CRM webhook (полный Bitrix24; stub есть) → **фаза 4**
+- [ ] ~~Shareable link / PDF quote~~ — ❌ out of scope (не в ТЗ)
 
 ## Следующая фаза
 
