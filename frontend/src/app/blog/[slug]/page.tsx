@@ -16,7 +16,7 @@ export async function generateStaticParams() {
   const posts = await getBlogPosts();
   // `output: 'export'` rejects an empty list (misleading "missing generateStaticParams").
   if (posts.length === 0) {
-    return [{ slug: 'welcome' }];
+    return [{ slug: 'vitara-overview' }];
   }
   return posts.map((post) => ({ slug: post.slug }));
 }

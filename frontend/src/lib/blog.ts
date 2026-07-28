@@ -1,3 +1,4 @@
+import { DEMO_BLOG_POSTS } from '@/data/demo-content';
 import { apiUrl, isDemoDataMode } from '@/lib/config';
 
 export type BlogPostSummary = {
@@ -13,31 +14,20 @@ export type BlogPostDetail = BlogPostSummary & {
   content: string;
 };
 
-const DEMO_POSTS: BlogPostDetail[] = [
-  {
-    id: 'demo-welcome',
-    slug: 'welcome',
-    title: 'Welcome to the Suzuki dealer site',
-    excerpt: 'Browse models, configure your car and book a test drive.',
-    coverImage: null,
-    publishedAt: '2026-01-15T10:00:00.000Z',
-    content:
-      'This is demo content for static preview builds.\n\nExplore the catalog, try the configurator, or book a test drive when you are ready.',
-  },
-];
+function toSummary(post: BlogPostDetail): BlogPostSummary {
+  return {
+    id: post.id,
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    coverImage: post.coverImage,
+    publishedAt: post.publishedAt,
+  };
+}
 
 export async function getBlogPosts(): Promise<BlogPostSummary[]> {
   if (isDemoDataMode()) {
-    return DEMO_POSTS.map(
-      ({ id, slug, title, excerpt, coverImage, publishedAt }) => ({
-        id,
-        slug,
-        title,
-        excerpt,
-        coverImage,
-        publishedAt,
-      }),
-    );
+    return DEMO_BLOG_POSTS.map(toSummary);
   }
 
   try {
@@ -51,7 +41,7 @@ export async function getBlogPosts(): Promise<BlogPostSummary[]> {
 
 export async function getBlogPost(slug: string): Promise<BlogPostDetail | null> {
   if (isDemoDataMode()) {
-    return DEMO_POSTS.find((post) => post.slug === slug) ?? null;
+    return DEMO_BLOG_POSTS.find((post) => post.slug === slug) ?? null;
   }
 
   try {

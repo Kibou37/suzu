@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { sendChatMessage, type ChatHistoryItem } from '@/lib/chat';
 import { trackEvent } from '@/lib/analytics';
+import { withBasePath } from '@/lib/base-path';
 
 const DEFAULT_QUICK = [
   'Which SUVs do you have?',
@@ -218,7 +219,13 @@ export function ChatWidget() {
           </span>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element -- static public icon
-          <img src="/icons/chat.png" alt="" width={28} height={28} className="chat-widget__launcher-icon" />
+          <img
+            src={withBasePath('/icons/chat.png')}
+            alt=""
+            width={28}
+            height={28}
+            className="chat-widget__launcher-icon"
+          />
         )}
       </button>
     </div>

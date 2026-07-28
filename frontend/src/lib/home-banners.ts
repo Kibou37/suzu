@@ -1,5 +1,6 @@
 import { apiUrl, isDemoDataMode } from '@/lib/config';
 import type { PromoSlide } from '@/components/home/PromoSlider';
+import { DEMO_HOME_BANNERS } from '@/data/demo-content';
 import { withBasePath } from '@/lib/base-path';
 
 export type HomeBanner = {
@@ -37,10 +38,14 @@ export function mapBannerToSlide(item: HomeBanner): PromoSlide {
 }
 
 export async function getHomeBanners(): Promise<HomeBanner[]> {
-  if (isDemoDataMode()) return [];
+  if (isDemoDataMode()) {
+    return [...DEMO_HOME_BANNERS].sort((a, b) => a.sortOrder - b.sortOrder);
+  }
 
   try {
-    const res = await fetch(apiUrl('/api/home-banners'), { cache: 'no-store' });
+    const res = await fetch(apiUrl('/api/home-banners'), {
+      next: { revalidate: 300 },
+    });
     if (!res.ok) return [];
     return res.json();
   } catch {

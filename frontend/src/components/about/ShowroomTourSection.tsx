@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { withBasePath } from '@/lib/base-path';
 
 export type ShowroomTourConfig = {
   /** iframe embed (Matterport, Kuula, hosted Pannellum, etc.) */
@@ -37,7 +38,7 @@ export function ShowroomTourSection() {
 
     async function load() {
       try {
-        const res = await fetch('/showroom-tour.json', { cache: 'no-store' });
+        const res = await fetch(withBasePath('/showroom-tour.json'), { cache: 'no-store' });
         if (res.ok) {
           const json = (await res.json()) as ShowroomTourConfig;
           if (!cancelled) setConfig(resolveConfig(json));
