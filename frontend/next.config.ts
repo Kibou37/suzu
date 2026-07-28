@@ -54,45 +54,42 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname, '..'),
   },
-  async rewrites() {
-    if (isGitHubPages) {
-      return [];
-    }
-
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${apiProxyTarget.replace(/\/$/, '')}/api/:path*`,
-      },
-      {
-        source: '/uploads/:path*',
-        destination: `${apiProxyTarget.replace(/\/$/, '')}/uploads/:path*`,
-      },
-    ];
-  },
-  // Static export (GitHub Pages) can't set response headers — the host
-  // (e.g. the reverse proxy in front of the real deployment) must add
-  // these instead.
-  async headers() {
-    if (isGitHubPages) {
-      return [];
-    }
-
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(self)',
-          },
-        ],
-      },
-    ];
-  },
+  // Static export cannot apply rewrites/headers — omit them entirely for Pages.
+  ...(isGitHubPages
+    ? {}
+    : {
+        async rewrites() {
+          return [
+            {
+              source: '/api/:path*',
+              destination: `${apiProxyTarget.replace(/\/$/, '')}/api/:path*`,
+            },
+            {
+              source: '/uploads/:path*',
+              destination: `${apiProxyTarget.replace(/\/$/, '')}/uploads/:path*`,
+            },
+          ];
+        },
+        async headers() {
+          return [
+            {
+              source: '/:path*',
+              headers: [
+                { key: 'X-Content-Type-Options', value: 'nosniff' },
+                { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+                {
+                  key: 'Referrer-Policy',
+                  value: 'strict-origin-when-cross-origin',
+                },
+                {
+                  key: 'Permissions-Policy',
+                  value: 'camera=(), microphone=(), geolocation=(self)',
+                },
+              ],
+            },
+          ];
+        },
+      }),
 };
 
 export default nextConfig;

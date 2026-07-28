@@ -3,6 +3,9 @@ import { getCars } from '@/lib/api';
 import { getBlogPosts } from '@/lib/blog';
 import { absoluteUrl } from '@/lib/seo';
 
+/** Required for `output: 'export'` (GitHub Pages). */
+export const dynamic = 'force-static';
+
 const STATIC_PATHS = [
   '/',
   '/catalog',

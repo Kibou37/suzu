@@ -8,6 +8,10 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+/** Required for `output: 'export'` (GitHub Pages). */
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const cars = await getCars();
   return cars.map((car) => ({ slug: car.slug }));

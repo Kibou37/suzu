@@ -3,6 +3,9 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 export const metadata = { title: 'Finance calculator' };
 
+/** Static export (GitHub Pages): query string is applied client-side only. */
+export const dynamic = 'force-static';
+
 type FinancePageProps = {
   searchParams?: Promise<{ price?: string; model?: string }>;
 };

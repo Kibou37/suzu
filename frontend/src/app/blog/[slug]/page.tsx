@@ -1,12 +1,25 @@
 import { notFound } from 'next/navigation';
 import { PageHeader } from '@/components/ui/PageShell';
-import { getBlogPost } from '@/lib/blog';
+import { getBlogPost, getBlogPosts } from '@/lib/blog';
 import { articleJsonLd, safeJsonLdStringify } from '@/lib/json-ld';
 import { absoluteUrl } from '@/lib/seo';
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+/** Required for `output: 'export'` (GitHub Pages). */
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  // `output: 'export'` rejects an empty list (misleading "missing generateStaticParams").
+  if (posts.length === 0) {
+    return [{ slug: 'welcome' }];
+  }
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
